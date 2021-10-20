@@ -1,0 +1,616 @@
+%======================================================================
+%   D O C U M E N T   P R E A M B L E
+% Specify the document class, default style attributes, and page dimensions, etc.
+% For hyperlinked PDF, suitable for viewing on a computer, use this:
+\documentclass[letterpaper,12pt,oneside,final]{article}
+ 
+% For PDF, suitable for double-sided printing, change the PrintVersion variable below to "true" and use this \documentclass line instead of the one above:
+%\documentclass[letterpaper,12pt,titlepage,openright,twoside,final]{book}
+\newcommand{\package}[1]{\textbf{#1}} % package names in bold text
+\newcommand{\cmmd}[1]{\textbackslash\texttt{#1}} % command name in tt font 
+\newcommand{\href}[1]{#1} % does nothing, but defines the command so the print-optimized version will ignore \href tags (redefined by hyperref pkg).
+%\newcommand{\texorpdfstring}[2]{#1} % does nothing, but defines the command
+% Anything defined here may be redefined by packages added below...
+
+% This package allows if-then-else control structures.
+\usepackage{ifthen}
+\newboolean{PrintVersion}
+\setboolean{PrintVersion}{false}
+% CHANGE THIS VALUE TO "true" as necessary, to improve printed results for hard copies by overriding some options of the hyperref package, called below.
+
+%\usepackage{nomencl} % For a nomenclature (optional; available from ctan.org)
+\usepackage{amsmath,amssymb,amstext} % Lots of math symbols and environments
+\usepackage[pdftex]{graphicx} % For including graphics N.B. pdftex graphics driver
+\usepackage{amsmath,amssymb,amstext,amsthm,amsfonts}
+\usepackage{dsfont}
+\usepackage[pdftex]{graphicx}
+\usepackage{caption}
+\usepackage{color}% Include colors for document elements
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{float}
+\usepackage{multirow}
+\usepackage[round]{natbib}   % omit 'round' option for square brackets
+
+\usepackage{algorithm} % For counting chapters
+\usepackage{algorithmicx, algpseudocode}
+%\renewcommand{\algorithmiccomment}[1]{// #1} % Brackets are confused with the sets
+%\algsetup{linenosize=\scriptsize}
+
+% N.B. HYPERREF MUST BE THE LAST PACKAGE LOADED; ADD ADDITIONAL PKGS ABOVE
+\usepackage[pdftex,pagebackref=false]{hyperref} % with basic options
+%\usepackage[pdftex,pagebackref=true]{hyperref}
+% N.B. pagebackref=true provides links back from the References to the body text. This can cause trouble for printing.
+% define colours
+\definecolor{background-color}{gray}{0.98}
+\definecolor{steelblue}{rgb}{0.27, 0.51, 0.71}
+\definecolor{brickred}{rgb}{0.8, 0.25, 0.33}
+\definecolor{bluegray}{rgb}{0.4, 0.6, 0.8}
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+
+\hypersetup{
+    plainpages=false,       % needed if Roman numbers in frontpages
+    unicode=false,          % non-Latin characters in Acrobat's bookmarks
+    pdftoolbar=true,        % show Acrobats toolbar?
+    pdfmenubar=true,        % show Acrobat's menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Toeplitz\ Eigenvalues},    % title: CHANGE THIS TEXT!
+    pdfauthor={Chris Salahub},    % author: CHANGE THIS TEXT! and uncomment this line
+    pdfsubject={Statistics},  % subject: CHANGE THIS TEXT! and uncomment this line
+%    pdfkeywords={keyword1} {key2} {key3}, % list of keywords, and uncomment this line if desired
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,        % false: boxed links; true: colored links
+    linkcolor=steelblue,         % color of internal links
+    citecolor=brickred,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+\ifthenelse{\boolean{PrintVersion}}{   % for improved print quality, change some hyperref options
+\hypersetup{	% override some previously defined hyperref options
+%    colorlinks,%
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=black}
+}{} % end of ifthenelse (no else)
+
+%\usepackage[automake,toc,abbreviations]{glossaries-extra} % Exception to the rule of hyperref being the last add-on package
+
+% Page margins
+% uWaterloo thesis requirements specify a minimum of 1 inch (72pt) margin at the
+% top, bottom, and outside page edges and a 1.125 in. (81pt) gutter margin (on binding side). 
+\setlength{\marginparwidth}{0pt} % width of margin notes
+% N.B. If margin notes are used, you must adjust \textwidth, \marginparwidth
+% and \marginparsep so that the space left between the margin notes and page
+% edge is less than 15 mm (0.6 in.)
+\setlength{\marginparsep}{0pt} % width of space between body text and margin notes
+\setlength{\evensidemargin}{0.125in} % Adds 1/8 in. to binding side of all even pages when "twoside" is selected
+\setlength{\oddsidemargin}{0.125in} % Adds 1/8 in. to the left of all pages when "oneside" is selected,
+                                    % and to the left of all odd pages when "twoside" is selected
+\setlength{\textwidth}{6.375in} % assuming US letter paper (8.5 in. x 11 in.) and margins as above
+\raggedbottom
+
+\setlength{\parskip}{\medskipamount} % space between paragraphs
+\renewcommand{\baselinestretch}{1} % line space setting
+
+% Commands
+% Code
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand*{\Rnsp}{\textsf{R}}
+\newcommand*{\R}{\textsf{R}$~$}
+\newcommand*{\Pythonnsp}{\textsf{Python}}
+\newcommand*{\Python}{\textsf{Python}$~$}
+\newcommand{\pkg}[1]{\textsf{#1}}
+\newcommand{\pkgsp}[1]{\textsf{#1}$~$}
+\algblock{Input}{EndInput}
+\algnotext{EndInput}
+\newcommand{\Desc}[2]{\State \makebox[2em][l]{#1}#2}
+
+% Theorem styles
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+% vectors
+\newcommand{\ve}[1]{\mathbf{#1}}           % for vectors
+\newcommand{\sv}[1]{\boldsymbol{#1}}   % for greek letters
+\newcommand{\m}[1]{\mathbf{#1}}               % for matrices
+\newcommand{\sm}[1]{\boldsymbol{#1}}   % for greek letters
+\newcommand{\tr}[1]{{#1}^{\mkern-1.5mu\mathsf{T}}}              % for transpose
+\newcommand{\conj}[1]{{#1}^{\ast}}
+\newcommand{\norm}[1]{||{#1}||}              % norm
+\newcommand{\frob}[1]{\norm{#1}_F}
+\newcommand{\abs}[1]{\lvert{#1}\rvert}              % norm
+\newcommand*{\mvec}{\operatorname{vec}}
+\newcommand*{\trace}{\operatorname{trace}}
+\newcommand*{\rank}{\operatorname{rank}}
+\newcommand*{\diag}{\operatorname{diag}}
+\newcommand*{\vspan}{\operatorname{span}}
+\newcommand*{\rowsp}{\operatorname{rowsp}}
+\newcommand*{\colsp}{\operatorname{colsp}}
+\newcommand*{\svd}{\operatorname{svd}}
+\newcommand*{\edm}{\operatorname{edm}}  % euclidean distance matrix (D * D)
+\newcommand{\oneblock}[3]{\m{B}_{#1:#2:#3}}
+\newcommand{\stripe}[2]{\m{S}_{#1,#2}}
+
+% contingency tables
+\newcommand{\abdiff}{\delta_{AB}}
+
+% statistical
+\newcommand{\widebar}[1]{\overline{#1}}  
+\newcommand{\wig}[1]{\tilde{#1}}  
+\newcommand{\bigwig}[1]{\widetilde{#1}}  
+\newcommand{\follows}{\sim}  
+\newcommand{\leftgiven}{~\left\lvert~}
+\newcommand{\given}{~\vert~}
+\newcommand{\biggiven}{~\vline~}
+\newcommand{\indep}{\bot\hspace{-.6em}\bot}
+\newcommand{\notindep}{\bot\hspace{-.6em}\bot\hspace{-0.75em}/\hspace{.4em}}
+\newcommand{\depend}{\Join}
+\newcommand{\notdepend}{\Join\hspace{-0.9 em}/\hspace{.4em}}
+\newcommand{\imply}{\Longrightarrow}
+\newcommand{\notimply}{\Longrightarrow \hspace{-1.5em}/ \hspace{0.8em}}
+\newcommand{\xyAssociation}{g}
+\newcommand{\xDomain}{\mathcal{X}}
+\newcommand{\yDomain}{\mathcal{Y}}
+\newcommand{\measureRange}{\mathcal{R}}
+\newcommand{\bigChi}{\mathcal{D}}
+\newcommand{\ind}[2]{I_{#2} \left( #1 \right)}
+%\newcommand{\ind}[1]{\mathds{1} \hspace{-0.1cm}\left( #1 \right)}
+\newcommand{\mutInf}{\mathcal{I}}
+ 
+% operators
+\newcommand{\Had}{\circ}
+\newcommand{\measureAssociation}{G}
+\DeclareMathOperator*{\lmin}{Minimize}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\arginf}{arg\,inf}
+\DeclareMathOperator*{\argsup}{arg\,sup}
+
+% Sets
+\newcommand*{\intersect}{\cap}
+\newcommand*{\union}{\cup}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+% Fields, Reals, etc. etc
+\newcommand{\field}[1]{\mathbb{#1}}
+\newcommand{\Reals}{\field{R}}
+\newcommand{\Integers}{\field{Z}}
+\newcommand{\Naturals}{\field{N}}
+\newcommand{\Complex}{\field{C}}
+\newcommand{\Rationals}{\field{Q}}
+
+% Editorial
+\newcommand{\needtocite}[1]{{\color{red} [Need to cite {#1} here]}}
+\newcommand{\comment}[1]{{\color{steelblue} COMMENT:  {#1}}}
+\newcommand{\TODO}[1]{{\color{brickred} TODO:  {#1}}}
+
+\title{Approximating the eigenvalues of Toeplitz forms arising from Markov processes}
+\author{Chris Salahub \\ {\footnotesize University of Waterloo, \texttt{csalahub@uwaterloo.ca}}}
+
+\begin{document}
+
+\maketitle
+
+Consider a sequence of random variables $X_1, X_2, \dots, X_M$ which form a homogeneous Markov sequence. Explicitly
+$$X_M | X_{M-1}, X_{M-2}, \dots, X_1 = X_M | X_{M-1},$$
+where $|$ indicates conditioning of the preceeding random variable on those that follow, and there exists some measure $g(X_i, X_j)$ which satisfies
+$$g(X_i, X_j) = g^*(\abs{j - i}) = \rho_{\abs{j-i}}.$$
+Therefore the behaviour of $X_1, X_2, \dots, X_M$ is \emph{homogeneous in $g$}. One clear case is any $g$ which satif Suppose this meaure is applied to all pairs $X_i, X_j$ and a matrix $\sm{\Sigma} = [g(X_i, X_j)]_{i,j=1,\dots,M}$ is then constructed from the pairwise measures. Doing so gives the Toeplitz form
+\begin{equation} \label{eq:multipleTesting:genEigCov}
+  \sm{\Sigma} = \begin{bmatrix}
+    \rho_0 & \rho_1 & \rho_2 & \dots & \rho_{M-1} \\
+    \rho_1 & \rho_0 & \rho_1 & \dots & \rho_{M-2} \\
+    \rho_2 & \rho_1 & \rho_0 & \dots & \rho_{M-3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    \rho_{M-1} & \rho_{M-2} & \rho_{M-3} & \dots & \rho_0
+  \end{bmatrix},
+\end{equation}
+where $\rho_1, \dots, \rho_M \in \Reals$. If $g(X_i, X_j) = Cor(X_i, X_j)$, $\sm{\Sigma}$ is the correlation matrix of $X_1$, $X_2$, $\dots$, $X_M$. If this has the particular form $\rho_m = \rho^m$, then this correlation matrix occurs in both genomic measurements and certain time series models, in particular the autoregressive model of order one. \cite{gray2006toeplitz} notes that such patterns also arise in applications of information theory. Explicitly, consider the matrix
+\begin{equation} \label{eq:multipleTesting:specEigCov}
+  \sm{\Sigma}^* = \begin{bmatrix}
+    1 & \rho & \rho^2 & \dots & \rho^{M-1} \\
+    \rho & 1 & \rho & \dots & \rho^{M-2} \\
+    \rho^2 & \rho & 1 & \dots & \rho^{M-3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    \rho^{M-1} & \rho^{M-2} & \rho^{M-3} & \dots & 1
+  \end{bmatrix}
+\end{equation}
+where $\rho \in [0, 1]$ is a real constant.
+
+Of interest in certain applications are the eigenvalues and eigenvectors of $\sm{\Sigma}$, call them $\ve{V}_1, \ve{V}_2, \dots, \ve{V}_M$ and $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_M$ respectively. For brevity, the combination of these vectors and values is here referred to as the \emph{eigensystem} of $\sm{\Sigma}$. \cite{gray2006toeplitz} demonstrates the application of this particular eigensystem in signal processing, while \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the eigenvalues to adjust for dependent multiple tests in the genomic context.
+
+This problem is trivial in the cases where $\rho = 1$ or $\rho = 0$. The latter gives the identity matrix, in which all eigenvalues are one and the eigenvectors are the basis vectors for $\Complex^M$, while the former gives the matrix of all ones. Recognizing that the case $\rho = 1$ can be written as $\ve{1} \tr{\ve{1}}$ where $\ve{1}$ is the vector of all ones in $\Complex^M$, the eigenvectors are $\ve{1}$ and any collection of $M-1$ vectors orthogonal to $\ve{1}$, with corresponding eigenvalues $\lambda_1 = M$ and $\lambda_2 = \dots = \lambda_M = 0$.
+
+Extending this idea further, \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the approximation
+\begin{equation} \label{eq:multipleTesting:commonCor}
+ \widehat{\sm{\Sigma}} = \rho \ve{1} \tr{\ve{1}} + (1 - \rho) \m{I}_M
+\end{equation}
+as a motivation to develop methods of multiple test adjustment. The eigensystem of $\widehat{\sm{\Sigma}}$ is known due to the simple eigensystems of $\m{I}_M$ and $\ve{1} \tr{\ve{1}}$ and the unique eigensystem of  $\m{I}_M$. \cite{gray2006toeplitz} and \cite{grenanderszego1958} instead utilize circulant matrices to approximate the eigensystem of $\sm{\Sigma}$. Asymptotically, $\sm{\Sigma}$ has the same eigensystem as certain circulant matrices and the eigensystem of circulant matrices are computable exactly.
+
+Absent from these approximations, however, is any consideration of the distance between the approximation and $\sm{\Sigma}$ in the finite case. This work aims to fill this gap by demonstrating the optimality of a particular circulant approximation of $\sm{\Sigma}$ in the weak matrix norm. It begins with a short review and introduction of the basics of circulant matrices in Section \ref{c:multipleTesting:circDecom} before deriving the nearest circulant matrix to $\sm{\Sigma}$, $\m{C}_{\Sigma}$, in Section \ref{c:multipleTesting:nearestCirc}. Finally, the asymptotic equivalence of $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ is computed in Section \ref{c:multipleTesting:asympEquiv} and the rate of convergence compared in Section \ref{c:multipleTesting:rateConverge}.
+
+%Suppose $\bigwig{\sv{\mu}} \follows N_M (\sv{\mu}, \sm{\Sigma})$ where $\sm{\Sigma} = [\rho_{ij}]$ is a correlation matrix so that $\rho_{ii} = 1$, $ \rho_{ij} = \rho_{ji}$, and $\abs{\rho_{ij}} \le 1$ for all $i = 1, \ldots M$ and $j = 1, \ldots M$.
+
+%Let $\sm{\Sigma} = \m{V} \m{D}_\lambda \tr{\m{V}}$ be its eigen decomposition with 
+%$\m{D}_\lambda = diagonal(\lambda_1, \lambda_2, \ldots, \lambda_M)$ 
+%the diagonal matrix of eigenvalues $\lambda_1 \ge \lambda_2 \ge \cdots \lambda_M \ge 0$
+%and $M \times M$ orthogonal matrix
+%$\m{V} = [\ve{V}_1 | \ve{V}_2 | \cdots | \ve{V}_M]$ having as columns the $M \times 1$ eigenvectors $\ve{V}_i$ corresponding to each eigenvalue $\lambda_i$ for $i = 1, \ldots n$.
+
+%Note that for the special case of $\rho_{ij} = \rho > 0$ for all $i \ne j$, $\sm{\Sigma}$ can be written as
+%\begin{equation}
+% \sm{\Sigma} = \rho \ve{1} \tr{\ve{1}} + (1 - \rho) \m{I}_M 
+%\label{eq:multipleTesting:commonCor}
+%\end{equation}
+%where $\ve{1} = \tr{(1, 1, \ldots, 1)}$ is the $M \times 1$ vector of ones and $\m{I}_M$ the $M \times M$ identity matrix.  In this case, $\lambda_ 1 = (M - 1) \rho + 1$ and $\lambda_2 = \lambda_3 = \cdots = \lambda_M = (1 - \rho)$.  The corresponding eigenvectors  are $\ve{V}_1 = \frac{1}{\sqrt{M}} \ve{1}$ and any linearly independent set of $(M - 1)$ orthonormal vectors $\ve{V}_2, \ldots, \ve{V}_M$ all orthogonal to $\ve{V}_1$.  
+%Note that if $\rho < 0$, the eigen decomposition is the same but $\lambda = (M-1)\rho +1$ would be the \emph{smallest} eigenvalue and $\sm{\Sigma}$ would be a non-negative definite matrix only when $\rho \ge -1/(M-1)$.
+
+%Of interest is testing the hypothesis $H_0: \sv{\mu} = \ve{0}$ having observed some realization $\widehat{\sv{\mu}}$ of $\bigwig{\sv{\mu}}$.  Equivalently, the $M$ hypotheses $H_{0i}: \mu_i = 0$ might be tested independently and simultaneously based on the marginal distributions $\bigwig{\mu}_i \follows N(\mu_i, 1)$ and observed $\widehat{\mu}_i$ for $i = 1, \ldots, M$.  The challenge is combining these as a test for $H_0$.
+
+%Testing any of these hypotheses for a fixed significance level $\alpha$ is equivalent to forming confidence regions of size $1 - \alpha$ and determining whether the region contains 0 for a univariate test of $H_{0i}$ or the $M \times 1$ vector $\ve{0}$ for the multivariate test of $H_0$.   A fixed level test would reject the hypothesis whenever the corresponding region did not contain the zero value and would accept otherwise.
+
+\section{Circulant Matrices} \label{c:multipleTesting:circDecom}
+
+Note that in this section the eigenvalues of numerous different matrices are addressed, so let the function $\lambda_k(\m{A})$ return the $k^{\text{th}}$ eigenvalue of $\m{A}$, which may not be ordered by magnitude.
+
+A complex matrix $\m{C} \in \Complex^{M \times M}$ is called circulant if the $i^{\text{th}}$ row is given by the cyclic shift $i$ elements rightward of a vector of $M$ elements, typically denoted $(c_0, c_1, c_2, \dots, c_{M-1})$. Explicitly
+\begin{equation} \label{eq:explicitCirculant}
+  \m{C} = \begin{bmatrix}
+    c_0 & c_1 & c_2 & \dots & c_{M-2} & c_{M-1} \\
+    c_{M-1} & c_0 & c_1 & \dots & c_{M-3} & c_{M-2} \\
+    c_{M-2} & c_{M-1} & c_0 & \dots & c_{M-4} & c_{M-3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    c_2 & c_3 & c_4 & \dots & c_0 & c_1 \\
+    c_1 & c_2 & c_3 & \dots & c_{M-1} & c_0 \\
+    \end{bmatrix}
+\end{equation}
+So every circulant matrix $\m{C}$ can be specified by its first row alone. Moreover, this first row corresponds to the coefficients in a convenient expression of $\m{C}$ as a matrix polynomial. Let $\m{P}$ be the circulant matrix with $c_0 = c_2 = c_3 = \dots = c_{M-1} = 0$ and $c_1 = 1$. That is,
+\begin{equation} \label{eq:pDef}
+  \m{P} = [ \ve{e}_M | \ve{e}_1 | \dots | \ve{e}_{M-1} ]
+\end{equation}
+where $\ve{e}_i$ is the $i^{\text{th}}$ basis vector. Then $\m{P}$ is the permutation matrix corresponding to a cyclic shift of all elements of a vector $\ve{x} \in \Complex^M$ one to the right. Due to this cyclic shift property, it is also straightforward to note that
+\begin{equation} \label{eq:powerPDef}
+  \m{P}^m = \m{P} \m{P} \dots \m{P} = [ \ve{e}_{M-m+1} | \ve{e}_{M-m+2} | \dots | \ve{e}_M | \ve{e}_1 | \dots | \ve{e}_{M-m} ].
+\end{equation}
+Using these $\m{P}^m$, $\m{C}$ can be written
+\begin{equation} \label{eq:circMatPol}
+  \m{C} = c_0 \m{I}_M + c_1 \m{P} + c_2 \m{P}^2 + \dots + c_{M-1} \m{P}^{M-1},
+\end{equation}
+from which the eigensystem of $\m{C}$ can be derived from the eigensystem of $\m{P}$. Using a cofactor expansion of $\det (\m{P} - \lambda \m{I})$ it can be shown that the eigenvalues of $\m{P}$ are the $M^{\text{th}}$ roots of unity, that is
+$$\lambda_k (\m{P}) = \left ( e^{\frac{2 \pi i}{M}} \right )^k = \omega^k$$
+where $k = 0, \dots, M-1$. The corresponding eigenvectors $\ve{x}_k$ are then
+\begin{equation} \label{eq:multipleTesting:circEigenVec}
+  \ve{x}_k = \begin{bmatrix}
+  1 \\
+  \omega^k \\
+  \omega^{2k} \\
+  \vdots \\
+  \omega^{(M-1)k}
+\end{bmatrix},
+\end{equation}
+which can be seen by considering $\m{P} \ve{x}_k = \lambda_k(\m{P}) \ve{x}_k$. Note that any eigenvector of $\m{P}$ with eigenvalue $\lambda$ is also an eigenvector of $\m{P}^m$ with eigenvalue $\lambda^m$, and so the eigenvalues of $\m{C}$ are given by
+\begin{equation} \label{eq:multipleTesting:circEigenVals}
+  \lambda_k (\m{C}) = c_0 + \sum_{m = 1}^{M-1} c_m \omega^{mk}
+\end{equation}
+with corresponding eigenvectors $\ve{x}_k$ as above for $k = 0, \dots, M-1$. A particular circulant matrix structure is of interest.
+
+\begin{definition}[Symmetric circulant] \label{def:symmCirc}
+  A circulant matrix $\m{C} \in \Complex^{M \times M}$ is symmetric if elements in its first row $c_0, c_1, c_2, \dots, c_{M-1}$ satisfy $c_m = c_{M-m}$ for all $m \geq 1$.
+\end{definition}
+
+To provide a visual example of such a matrix, consider the circulant with $c_m = \min \{m, M-m\}$. When $M = 6$ we have
+$$\begin{bmatrix}
+  0 & 1 & 2 & 3 & 2 & 1 \\
+  1 & 0 & 1 & 2 & 3 & 2 \\
+  2 & 1 & 0 & 1 & 2 & 3 \\
+  3 & 2 & 1 & 0 & 1 & 2 \\
+  2 & 3 & 2 & 1 & 0 & 1 \\
+  1 & 2 & 3 & 2 & 1 & 0
+\end{bmatrix}$$
+This circulant is symmetric, and any symmetric circulant matrix will have an analogous structure. By basic results of linear algebra, it follows that any symmetric circulant matrix will have only real eigenvalues. Indeed, a circulant matrix will have only real eigenvalues for any $M$ if and only if it is symmetric.
+
+\begin{theorem}[Real eigenvalues of symmetric circulants] \label{thm:symmEigen}
+  A circulant matrix $\m{C} \in \Complex^{M \times M}$ has real eigenvalues if and only if it is a symmetric circulant matrix.
+\end{theorem}
+\begin{proof}
+  Consider the eigensystem of $\m{C}$. As it is circulant, it has eigenvalues
+  $$\lambda_k (\m{C}) = c_0 + \sum_{m = 1}^{M-1} c_m \omega^{mk},$$
+  or rather
+  $$\lambda_k (\m{C}) = c_0 + \sum_{m = 1}^{M-1} c_m \left ( \cos \frac{2\pi mk}{M} + i \sin \frac{2\pi mk}{M} \right )$$
+  We can rewrite this to emphasize the real and imaginary components as
+  $$\lambda_k (\m{C}) = \left ( \sum_{m = 0}^{M-1} c_m \cos \frac{2\pi mk}{M} \right ) + i \left ( \sum_{m = 1}^{M-1} c_m \sin \frac{2\pi mk}{M} \right ).$$
+  If $\lambda_k (\m{C}) \in \Reals$ for all $k \in \{0, 1, \dots, M-1\}$, we must have
+  $$\sum_{m = 1}^{M-1} c_m i \sin \frac{2\pi mk}{M} = 0 \hspace{0.5cm} \forall k \in \{0, 1, \dots, M-1\}.$$
+  But note that
+  $$i \sin \frac{2\pi mk}{M} = \frac{1}{2} \left ( e^{\frac{2\pi mk}{M} i} - e^{-\frac{2\pi mk}{M} i} \right )$$
+  and
+  $$e^{-\frac{2\pi mk}{M} i} = e^{-\frac{2\pi mk}{M} i + 2\pi ki} = e^{\frac{2\pi (M - m)k}{M} i},$$
+  and so we require
+  $$\sum_{m = 1}^{M-1} c_m \frac{1}{2} \left ( e^{\frac{2\pi mk}{M}i} - e^{\frac{2\pi (M-m)k}{M}i} \right ) = 0 \hspace{0.5cm} \forall k \in \{0, 1, 2, \dots, M-1\}.$$
+  However,
+  $$\sum_{m = 1}^{M-1} c_m \frac{1}{2} \left ( e^{\frac{2\pi mk}{M}i} - e^{\frac{2\pi (M-m)k}{M}i} \right ) = 0$$
+  \\
+  $$\iff \sum_{m = 1}^{M-1} c_m e^{\frac{2\pi mk}{M}i} - \sum_{m = 1}^{M-1} c_m e^{\frac{2\pi (M-m)k}{M}i} = 0$$
+  \\
+  $$\iff \sum_{m = 1}^{M-1} c_m e^{\frac{2\pi mk}{M}i} - \sum_{m = 1}^{M-1} c_{M-m} e^{\frac{2\pi mk}{M}i} = 0$$
+  \\
+  $$\iff \sum_{m = 1}^{M-1} ( c_m - c_{M-m} ) e^{\frac{2\pi mk}{M}i} = \sum_{m = 1}^{M-1} ( c_m - c_{M-m} ) \omega^{mk} = 0$$
+  for all $k \in \{0, 1, \dots, M-1\}$. In other words, the eigenvalues of $\m{C}$ are all real if and only if the vector of differences $(c_m - c_{M-m})_{m=1,\dots,M-1}$ is a vector in the null space of
+  $$\begin{bmatrix}
+  1 & 1 & 1 & \dots & 1 \\
+  \omega & \omega^2 & \omega^3 & \dots & \omega^{M-1} \\
+  \omega^2 & \omega^4 & \omega^6 & \dots & \omega^{2(M-1)} \\
+  \omega^3 & \omega^6 & \omega^9 & \dots & \omega^{3(M-1)} \\
+  \vdots & \vdots & \vdots & \ddots & \vdots \\
+  \omega^{M-1} & \omega^{2(M-1)} & \omega^{3(M-1)} & \dots & \omega^{(M-1)^2} \\
+  \end{bmatrix}.$$
+  Noting that these columns are eigenvectors of $\m{C}$, it can quickly be recognized that the null space of this matrix is the line $x_1 = x_2 = \dots = x_M$, as this is the final orthogonal eigenvector of $\m{C}$. Therefore, our differences must satisfy
+  $$c_m - c_{M-m} = a$$
+  for some $a \in \Complex$ for all $m \in \{1, 2, \dots, M-1\}$. If $M$ is even, then $M/2 \in \{1, 2, \dots, M-1\}$, and so when $m = M/2$ we get the difference $c_{M/2} - c_{M - M/2} = c_{M/2} - c_{M/2} = 0$. Hence, $a = 0$ is the only solution. If $M$ is odd, then we have in particular $c_{\lfloor M/2 \rfloor} - c_{M - \lfloor M/2 \rfloor} = c_{\lfloor M/2 \rfloor} - c_{\lfloor M/2 \rfloor + 1} = a = c_{\lfloor M/2 \rfloor + 1} - c_{\lfloor M/2 \rfloor} = c_{\lfloor M/2 \rfloor + 1} - c_{M - \lfloor M/2 \rfloor - 1}$, which is true only if $c_{\lfloor M/2 \rfloor + 1} = c_{\lfloor M/2 \rfloor}$ and $a = 0$. Therefore, real eigenvalues are ensured if and only if
+  $$c_m - c_{M-m} = 0 \iff c_m = c_{M-m},$$
+  the definition of a symmetric circulant.
+\end{proof}
+
+\section{The Nearest Circulant to $\Sigma$} \label{c:multipleTesting:nearestCirc}
+
+With this proof, we can move to a statistical framing of the problem of the eigenvalue distribution of $\sm{\Sigma}$. Consider the decomposition
+\begin{equation} \label{eq:circDecomp}
+  \sm{\Sigma} = \m{C} + \m{R}
+\end{equation}
+where $\m{C}$ is a circulant matrix and $\m{R} = \sm{\Sigma} - \m{C}$ is a matrix of the element-wise residuals between $\m{C}$ and $\sm{\Sigma}$. This reframing moves the discussion from the space of asymptotic results to the features of $\m{C}$ and $\m{R}$, and places the result in a familiar framework for the statistician accustomed to considering the residuals of a given approximation.
+
+Of immediate and obvious interest is the ``closest'' circulant matrix to a given $\sm{\Sigma}$, call it $\m{C}_{\Sigma}$. Consider using the weak, or Frobenius, norm on matrices. First, introduce the \textit{vectorization} operator on a matrix $\m{A} \in \Complex^{M \times N}$, denoted $\mvec{\m{A}}$. This operator takes $\m{A} \in \Complex^{M \times N}$ and converts it to a vector in $\Complex^{MN}$ by appending columns in order. So, for example,
+$$\mvec{\begin{bmatrix}
+    1 & 2 & 3 \\
+    4 & 5 & 6 \\
+  \end{bmatrix}} =
+\begin{bmatrix}
+  1 \\ 4 \\ 2 \\ 5 \\ 3 \\ 6
+  \end{bmatrix}.$$
+The Frobenius norm is then given by
+$$\frob{\m{A}} = \sqrt{\conj{(\mvec{\m{A}})} (\mvec{\m{A}})}$$
+or equivalently
+$$\frob{\m{A}} = \sqrt{\trace \left ( \conj{\m{A}} \m{A} \right )}$$
+for a matrix $\m{A} \in \Complex^{M \times M}$ with complex conjugate $\conj{\m{A}}$. Note that for any real pairwise measure $\sm{\Sigma}, \m{C}, \m{R} \in \Reals^{M \times M}$, and so for our purpose
+$$\frob{\m{A}} = \sqrt{\tr{(\mvec{\m{A}})} (\mvec{\m{A}})} = \sqrt{ \trace \left ( \tr{\m{A}} \m{A} \right )}.$$
+Let $\m{C}$ be an $M \times M$ circulant matrix with first row $( c_0, c_1, c_2, \dots, c_{M-1} )$. Then by definition $\m{C}_{\Sigma}$ is given by $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}$, or equivalently $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}^2$. Taking the second of these, we have
+\begin{equation} \label{eq:argMinDef}
+  \m{C}_{\Sigma} = \argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}^2.
+\end{equation}
+Considering that
+\begin{equation*}
+  \begin{split}
+    \frob{\sm{\Sigma} - \m{C}}^2 & = \trace \left ( \tr{\left [ \sm{\Sigma} - \m{C} \right ]} \left [ \sm{\Sigma} - \m{C} \right ] \right ) \\
+    & \\
+    & = \left ( \trace \tr{\sm{\Sigma}} \sm{\Sigma} - \trace \tr{\sm{\Sigma}} \m{C} - \trace \tr{\m{C}} \sm{\Sigma} + \trace \tr{\m{C}} \m{C} \right )
+  \end{split}
+\end{equation*}
+and $\trace \tr{\sm{\Sigma}} \sm{\Sigma}$ is constant in $\m{C}$, we need only consider minimizing
+\begin{equation} \label{eq:argMinState}
+  F(\m{C}) = \trace \tr{\m{C}} \m{C} - \trace \tr{\sm{\Sigma}} \m{C} - \trace \tr{\m{C}} \sm{\Sigma}.
+\end{equation}
+The first term of Equation (\ref{eq:argMinState}) is straightforward to express in terms of the $c_m$. As $\m{C}$ is circulant,
+$$\trace \tr{\m{C}} \m{C} = M \sum_{m = 0}^{M-1} c_m^2.$$
+The other terms can be evaluated by expressing $\m{C}$ as a matrix polynomial.
+
+Equation (\ref{eq:circMatPol}) and the symmetry of $\sm{\Sigma}$ allow us to write
+$$\tr{\sm{\Sigma}} \m{C} = \sm{\Sigma} \left ( c_0 \m{I} + \sum_{m = 1}^{M-1} c_m \m{P}^m \right ) = c_0 \sm{\Sigma} + \sum_{m = 1}^{M-1} c_m \sm{\Sigma} \m{P}^m$$
+and similarly
+$$\tr{\m{C}} \sm{\Sigma} = c_0 \sm{\Sigma} + \sum_{m = 1}^{M-1} c_m \tr{\left ( \m{P}^m \right )} \sm{\Sigma} =  c_0 \sm{\Sigma} + \sum_{m = 1}^{M-1} c_m \tr{\left (\sm{\Sigma} \m{P}^m \right )}.$$
+Next, consider
+\begin{equation*}
+    \trace \sm{\Sigma} \m{P}^m  = \trace \left ( \sm{\Sigma} [\ve{e}_{M-m+1} | \ve{e}_{M-m+2} | \dots | \ve{e}_{M-m} ] \right ),
+\end{equation*}
+which can be evaluated by considering the $k^{\text{th}}$ row of $\sm{\Sigma}$, $\sv{\sigma}_k$. The first $k$ elements of this row are the descending sequence $\rho_{k-1}, \rho_{k-2}, \dots, \rho_0$, and the remaining elements are the ascending sequence $\rho_1, \rho_2, \dots, \rho_{M-k}$. Noting that the trace of a product of two matrices is simply a sum of the inner products of the rows of the first with the columns of the second, we obtain
+\begin{equation} \label{eq:productTrace}
+  \begin{split}
+    \trace \sm{\Sigma} \m{P}^m & = \sum_{k = 1}^{m} \tr{\sv{\sigma}}_k \ve{e}_{M-m+k} + \sum_{k = 1}^{M - m} \tr{\sv{\sigma}}_{m+k} \ve{e}_{k} \\
+    & \\
+    & = \sum_{k=1}^m \rho_{M-m} + \sum_{k=1}^{M-m} \rho_m \\
+    & \\
+    & = m \rho_{M-m} + (M-m) \rho_m.
+  \end{split}
+\end{equation}
+
+Equation (\ref{eq:productTrace}) can then be substituted into Equation (\ref{eq:argMinState}) using the decomposition of Equation (\ref{eq:circMatPol}) to give
+\begin{equation} \label{eq:finalDiff}
+  F(\m{C}) = M \sum_{m=0}^{M-1} c_m^2 - 2 \left ( M c_0 \rho_0 + \sum_{m=1}^{M-1} c_m (m \rho_{M-m} + (M - m) \rho_m) \right ).
+\end{equation}
+As $\argmin_{\m{C}} F(\m{C})$ is the same as $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}$, we can now consider the values which minimize Equation (\ref{eq:finalDiff}) in order to find the nearest circulant matrix to $\sm{\Sigma}$. Taking
+\begin{equation*} 
+  \frac{\partial}{\partial c_m} F(\m{C}) = \begin{cases}
+    2Mc_0 - 2M\rho_0 & \text{for } m = 0, \\
+    & \\
+    2Mc_m - 2 \left ( m \rho_{M-m} + (M - m) \rho_m \right ) & \text{otherwise},
+  \end{cases}
+\end{equation*}
+and noting that the Hessian matrix is $2M\m{I}$ and hence is positive definite so any solutions to $\argmin F(\m{C})$ must be minima, we obtain
+\begin{equation*}
+  c_m = \begin{cases}
+    \rho_0 & \text{for } m = 0, \\
+    & \\
+    \frac{m}{M} \rho_{M-m} + \frac{M-m}{M} \rho_m & \text{otherwise},
+  \end{cases}
+\end{equation*}
+which can be re-expressed as
+\begin{equation} \label{eq:closestCirc}
+  c_m = \begin{cases}
+    \rho_0 & \text{for } m = 0, \\
+    & \\
+    \rho_m + \frac{m}{M}(\rho_{M-m} - \rho_m) & \text{otherwise},
+  \end{cases}
+\end{equation}
+to make the relationship between $c_m$ and $\rho_m$ clearer. An important consequence of this system of equations is that $c_m = \frac{m}{M} \rho_{M-m} + \frac{M-m}{M} \rho_m = \frac{M - (M - m)}{M} \rho_{M-m} + \frac{M - m}{M} \rho_{M - (M - m)} = c_{M-m}$, and so $\m{C}_{\Sigma}$ is a symmetric circulant matrix with $c_m$ defined as in Equation (\ref{eq:closestCirc}). Therefore, this nearest circulant will have only real eigenvalues.
+
+So the optimal decomposition in the Frobenius norm is
+\begin{equation} \label{eq:sigmaCirculantDecomp}
+  \sm{\Sigma} = \m{C}_{\Sigma} + \m{R}_{\Sigma}
+\end{equation}
+where $\m{C}_{\Sigma}$ is the circulant matrix defined by Equation (\ref{eq:closestCirc}), that is
+\begin{equation*}
+  c_m = \begin{cases}
+    \rho_0 & \text{for } m = 0, \\
+    & \\
+    \rho_m + \frac{m}{M}(\rho_{M-m} - \rho_m) & \text{otherwise},
+  \end{cases}
+\end{equation*}
+and $\m{R}_{\Sigma} = \sm{\Sigma} - \m{C}_{\Sigma}$, and so the value in the $m^{\text{th}}$ off-diagonal of $\m{R}_{\Sigma}$ is $\rho_m - c_m = \rho_m - (\rho_m + \frac{m}{M}(\rho_{M-m} - \rho_m) = \frac{m}{M} (\rho_m - \rho_{M-m}).$
+
+The eigenvalues of $\m{C}_{\Sigma}$ are given by a substitution of Equation (\ref{eq:closestCirc}) into Equation (\ref{eq:multipleTesting:circEigenVals}), giving
+\begin{equation} \label{eq:multipleTesting:circApproxEig}
+  \lambda_k (\m{C}_{\Sigma}) = \rho_0 + 2 \sum_{m = 1}^{M-1} \frac{M - m}{M} \rho_m \cos \frac{2 \pi mk}{M}.
+\end{equation}
+The corresponding eigenvectors are given by Equation (\ref{eq:multipleTesting:circEigenVec}).
+
+Consider $\m{R}_{\Sigma}$ briefly. For large $M$ and small $m$, $\frac{m}{M} (\rho_{M-m} - \rho_m) \approx 0$ while when $m$ is close to $M$, $\frac{m}{M} (\rho_m - \rho_{M-m}) \approx \rho_m - \rho_{M-m}$. This implies that in the case of large $M$, $\m{R}_{\Sigma}$ will have vanishingly small values for the central off-diagonals, and values in the corners of approximately $\rho_m - \rho_{M-m}$.
+
+In the particular case of $\sm{\Sigma}^*$ from Equation (\ref{eq:multipleTesting:specEigCov}), $\rho_m = \rho^m$. In this case, $\m{C}_{\Sigma^*}$ has entries
+\begin{equation*}
+  c_m =  \rho^m + \frac{m}{M}(\rho^{M-m} - \rho^m)
+\end{equation*}
+and $\m{R}_{\Sigma^*}$ is $\frac{m}{M} (\rho^m - \rho^{M-m})$ for the $m^{\text{th}}$ off-diagonal where $m \in \{0, 1, 2, \dots, M-1\}$. The eigenvalues of $\m{C}_{\Sigma^*}$ are therefore
+\begin{equation*}
+  \lambda_k (\m{C}_{\Sigma}) = 1 + 2 \sum_{m = 1}^{M-1} \frac{M - m}{M} \rho^m \cos \frac{2 \pi mk}{M}.
+\end{equation*}
+
+
+\section{Asymptotic Equivalence} \label{c:multipleTesting:asympEquiv}
+
+The approximate matrix $\m{C}_{\Sigma}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma} - \m{C}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives similar, but less general, results by considering the asymptotic equivalence of matrices in the Frobenius norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
+$$\lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{A - B} = 0.$$
+Therefore, a natural consideration is the difference
+\begin{equation} \label{eq:multipleTesting:asympEq}
+  \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\sm{\Sigma} - \m{C}_{\Sigma}} = \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma}}.
+\end{equation}
+Note that this is equivalent to
+$$\lim_{M \rightarrow \infty} \sqrt{ \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} },$$
+which has the square
+\begin{equation} \label{eq:multipleTesting:asymTrace}
+  \begin{aligned}
+    \lim_{M \rightarrow \infty} \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = \lim_{M \rightarrow \infty} \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} \\
+    & \\
+    & = \lim_{M \rightarrow \infty} \frac{1}{M} \sum_{i = 0}^{M-1} \sum_{j = 0}^{M-1} \frac{\abs{i-j}^2}{M^2} \left ( \rho^{2\abs{i-j}} - 2 \rho^{\abs{i-j} + M - \abs{i-j}} + \rho^{2(M - \abs{i-j})} \right ) \\
+    & \\
+    & =  \lim_{M \rightarrow \infty} \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \\
+    & \\
+    & = \lim_{M \rightarrow \infty} \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2 \sum_{m = 1}^{M-1} m^2 \rho^M + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ). \\
+    & \\
+    & = \lim_{M \rightarrow \infty} \left ( \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \rho^{2m} - \frac{4\rho^M}{M^3} \sum_{m = 1}^{M-1} m^2 + \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right )
+  \end{aligned}
+\end{equation}
+Each term of this limit can be considered in turn.
+
+First, take the middle term
+$$\lim_{M \rightarrow \infty} \frac{4\rho^M}{M^3}\sum_{m = 1}^{M-1} m^2$$
+
+$$=\lim_{M \rightarrow \infty} \frac{4\rho^M}{M^3} \frac{(M-1)M(2M-1)}{6}$$
+
+$$=\lim_{M \rightarrow \infty} \rho^M \left ( \frac{4}{3} - \frac{2}{M} + \frac{2}{3M^2} \right ).$$
+Noting that $\abs{\rho} < 1$, this limit is zero, and so Equation (\ref{eq:multipleTesting:asymTrace}) becomes
+\begin{equation*}
+    \lim_{M \rightarrow \infty} \frob{\m{R}_{\Sigma}}^2  = \lim_{M \rightarrow \infty} \left ( \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \rho^{2m} + \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ).
+\end{equation*}
+Next, note that
+$$\sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} = \sum_{m = 1}^{M-1} (M - m)^2 \rho^{2m} = \sum_{m = 1}^{M-1} (M^2 - 2Mm + m^2) \rho^{2m}$$
+so that Equation (\ref{eq:multipleTesting:asymTrace}) further simplifies to
+\begin{equation} \label{eq:multipleTesting:traceSimpd}
+    \lim_{M \rightarrow \infty} \frob{\m{R}_{\Sigma}}^2  = \lim_{M \rightarrow \infty} \frac{2}{M^3} \sum_{m = 1}^{M-1} (M^2 - 2Mm + 2m^2) \rho^{2m},
+\end{equation}
+so that determining the sums $\sum_{m = 1}^{M-1} \rho^{2m}$, $\sum_{m = 1}^{M-1} m \rho^{2m}$ and $\sum_{m=1}^{M-1} m^2 \rho^{2m}$ permits evaluation of the limit.
+
+The first sum is simply
+\begin{equation} \label{eq:multipleTesting:rhoFirstSum}
+  \sum_{m = 1}^{M-1} \rho^{2m} = \frac{1 - \rho^{2M}}{1 - \rho^2} - 1 = \rho^2 \left [ \frac{1 - \rho^{2(M-1)}}{1 - \rho^2} \right ],
+\end{equation}
+so that the first term in Equation (\ref{eq:multipleTesting:traceSimpd}) becomes
+$$\lim_{M \rightarrow \infty} \frac{2M^2\rho^2}{M^3} \frac{1 - \rho^{2M}}{1 - \rho^2} = 0.$$
+Next, consider
+\begin{equation}
+  \begin{aligned}
+    \sum_{m=1}^{M-1} m \rho^{2m} & = \rho^2 \frac{d}{d\rho^2} \sum_{m = 0}^{M-1} \left ( \rho^2 \right )^m \\
+    & \\
+    & = \rho^2 \frac{d}{d\rho^2} (1 - \rho^{2M}) \left ( \sum_{m = 0}^{\infty} (\rho^2)^m \right ) \\
+    & \\
+    & = \rho^2 \left [ -\frac{M\rho^{2(M-1)}}{1 - \rho^2} + \frac{1 - \rho^{2M}}{(1 - \rho^2)^2} \right ] \\
+    & \\
+    & = \left ( 1 - M\rho^{2(M-1)} + (M - 1)\rho^{2M} \right ) \frac{\rho^2}{(1 - \rho^2)^2}. \\
+  \end{aligned}
+\end{equation}
+Substituting this, the second term becomes
+$$\lim_{M \rightarrow \infty} \frac{2M}{M^3}(1 - M\rho^{2(M-1)} + (M-1)\rho^{2M}) \frac{\rho^2}{(1 - \rho^2)^2} = 0.$$
+Finally, note that
+\begin{equation} \label{eq:multipleTesting:squareSum}
+  \begin{aligned}
+    \sum_{m = 1}^{M-1} m^2 (\rho^2)^m & = \sum_{m=1}^{M-1} m(m-1) \rho^{2m} + m \rho^{2m} \\
+    & \\
+    & = \rho^4 \sum_{m=1}^{M-1} m(m-1) \rho^{2(m-2)} +  \rho^2 \sum_{m = 1}^{M-1} m \rho^{2(m-2)} \\
+    & \\
+    & = \rho^4 \frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m} + \rho^2  \frac{d}{d\rho^2} \sum_{m=1}^{M-1} \rho^{2m} . \\
+  \end{aligned}
+\end{equation}
+But
+$$\frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m}$$
+
+$$= \frac{d^2}{(d\rho^2)^2} \frac{1  - \rho^{2M}}{1 - \rho^2}$$
+
+$$= \frac{d}{d\rho^2} \left ( \frac{1 - \rho^{2M}}{(1 - \rho^2)^2} - \frac{M\rho^{2(M-1)}}{1 - \rho^2} \right )$$
+
+$$= -\frac{M\rho^{2(M-1)}}{(1-\rho^2)^2} + \frac{2(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{M(M-1)\rho^{2(M-2)}}{1 - \rho^2} - \frac{M\rho^{2(M-1)}}{(1 - \rho^2)^2}$$
+
+$$= \frac{2(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{2 M \rho^{2(M-1)}}{(1 - \rho^2)^2} - \frac{M(M-1)\rho^{2(M-2)}}{1 - \rho^2},$$
+and so Equation (\ref{eq:multipleTesting:squareSum}) becomes
+$$\rho^4 \left [ \frac{2(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{2 M \rho^{2(M-1)}}{(1 - \rho^2)^2} - \frac{M(M-1)\rho^{2(M-2)}}{1 - \rho^2} \right ] + \rho^2 \left [ \frac{1 - \rho^{2M}}{(1 - \rho^2)^2} - \frac{M \rho^{2(M-1)}}{1 - \rho^2} \right ]$$
+
+$$= \frac{2\rho^4(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{2M \rho^{2(M+1)}}{(1-\rho^2)^2} - \frac{M(M-1)\rho^{2M}}{1 - \rho^2} + \frac{\rho^2(1 - \rho^{2M})}{(1 - \rho^2)^2} - \frac{M \rho^{2M}}{1 - \rho^2}$$
+
+$$=  \frac{2\rho^4(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{M^2\rho^{2M}}{1 - \rho^2} + \frac{\rho^2 - (2M + 1)\rho^{2(M+1)}}{(1 - \rho^2)^2}$$
+Therefore the final term of Equation (\ref{eq:multipleTesting:traceSimpd}) is
+$$\lim_{M \rightarrow \infty} \frac{4}{M^3}  \left ( \frac{2\rho^4(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{M^2\rho^{2M}}{1 - \rho^2} + \frac{\rho^2 - (2M + 1)\rho^{2(M+1)}}{(1 - \rho^2)^2} \right ) = 0.$$
+Thus,
+\begin{equation} \label{eq:multipleTesting:traceEval}
+    \lim_{M \rightarrow \infty} \frac{1}{M} \frob{\m{R}_{\Sigma}}^2  = 0,
+\end{equation}
+and so the closest circulant matrix to $\sm{\Sigma}$ in the Frobenius norm is asymptotically equivalent to $\sm{\Sigma}$ in the weak norm.
+
+\section{Rate of Convergence} \label{c:multipleTesting:rateConverge}
+
+\cite{gray2006toeplitz} suggests a slightly different approximation. Following \cite{grenanderszego1958}, the sum
+$$f(x) = \sum_{k = -\infty}^{\infty} \rho_k e^{ikx} = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{ikx}$$
+is known to be critical to the approximation of $\sm{\Sigma}$. \cite{gray2006toeplitz} considers circulant entries generated using the expression
+$$c_m = \frac{1}{M} \sum_{j = 0}^{M-1} f\left ( \frac{2\pi i j}{M} \right ) e^{\frac{2 \pi i m}{M}},$$
+which evaluates to
+\begin{equation} \label{eq:multipleTesting:grayApprox}
+  c_m  = \frac{1}{1 - \rho^M} \left ( \rho^m + \rho^{M-m} \right )
+\end{equation}
+in this particular case. So, while $\m{C}_{\Sigma}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a simple sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma} - \m{C}_{GS}$. Then
+\begin{equation} \label{eq:multipleTesting:rateEqgren}
+    \frac{1}{M} \frob{\m{R}_{GS}}^2 = \frac{2}{(1 - \rho^M)^2} \left [ \frac{2}{M(1 - \rho^2)} + 2 \left ( 1 - \frac{1}{M} \right ) \rho^{2M} - \frac{1}{M(1 - \rho^2)} \rho^{4M} \right ]
+\end{equation}
+while an evaluation of Equation (\ref{eq:multipleTesting:traceSimpd}) gives
+\begin{equation} \label{eq:multipleTesting:rateEqCsig}
+  \begin{aligned}
+    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 = & \frac{2 \rho^2}{M^3} \bigg [ \frac{M^2}{1 - \rho^2} + \frac{1 - 2M - \rho^{2M}}{(1 - \rho^2)^2} + \frac{2 \rho^2 ( 1 - \rho^M )}{(1 - \rho^2)^3} \\
+    & \\
+    & - 2 \rho^M M(M-1)(2M-1) \bigg ]
+  \end{aligned}
+\end{equation}
+Both of these have a leading term approximately equal to
+$$ \frac{2}{M(1-\rho^2)}$$
+for large $M$, and so their asymptotic behaviour is identical for all $\rho$. For small $M$, however, it is helpful to plot these values and compare these squared distances.
+
+
+%% BIBLIOGRAPHY
+\bibliographystyle{plainnat}
+\cleardoublepage % This is needed if the "book" class is used to place the anchor correctly
+                 % Use \clearpage instead if the document class uses the "oneside" argument
+\phantomsection  % enables hyperlinking from the table of contents to bibliography             
+
+\renewcommand*{\bibname}{References} % use title "References" for bibliography
+\bibliography{../Bibliography/fullbib}
+\addcontentsline{toc}{chapter}{\textbf{References}} % add to table of contents
+
+
+\end{document}
