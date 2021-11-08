@@ -496,7 +496,7 @@ which has the square
     & \\
     & =  \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \\
     & \\
-    & =  \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2 \sum_{m = 1}^{M-1} m^2 \rho^M + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ). \\
+    & =  \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2 \sum_{m = 1}^{M-1} m^2 \rho^M + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ) \\
     & \\
     & = \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2\rho^M \sum_{m = 1}^{M-1} m^2 + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ) \\
     & \\
@@ -518,9 +518,64 @@ can be split into three separate sums. The simplest of these to reduce is
 when $\rho < 1$, where $r = \frac{\rho^2}{1 - \rho^2}$ is useful shorthand. The restriction $\rho < 1$ corresponds to finite $r$. Considering next
 \begin{equation} \label{eq:multipleTesting:traceterm2}
   \begin{aligned}
-    2M \sum_{m = 1}^{M-1} m \rho^{2m} & = \\
+    2M \sum_{m = 1}^{M-1} m \rho^{2m} & = 2M \rho^2 \frac{d}{d\rho^2} \sum_{m = 0}^{M-1} \rho^{2m}\\
+    & \\
+    & = 2M \rho^2 \frac{d}{d\rho^2} \frac{\rho^2 - \rho^{2M}}{1 - \rho^2}\\
+    & \\
+    & = 2M \rho^2 \left ( \frac{1 - M\rho^{2(M-1)}}{1 - \rho^2} + \frac{\rho^2 - \rho^{2M}}{(1 - \rho^2)^2} \right ) \\
+    & \\
+    & = 2Mr\left (1 - M\rho^{2(M-1)} + r  - \frac{\rho^{2M}}{1 - \rho^2} \right ) \\
+    & \\
+    & = 2Mr\left (1 + r - \rho^{2(M-1)} [ M + r ] \right ). \\
   \end{aligned}
 \end{equation}
+The same derivative trick can be applied to obtain
+\begin{equation} \label{eq:multipleTesting:traceterm4a}
+  \begin{aligned}
+    \sum_{m = 1}^{M-1} m^2 \rho^{2m} & = \sum_{m = 1}^{M-1} m (m-1) \rho^{2m} + m \rho^{2m} \\
+    & \\
+    & = \rho^4 \frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m} + \rho^2 \frac{d}{d\rho^2} \sum_{m = 1}^{M-1} \rho^{2m}, \\
+  \end{aligned}
+\end{equation}
+the second term of which can be determined easily using Equation (\ref{eq:multipleTesting:traceterm3}) above. With a second differentiation, the first term is
+\begin{equation*}
+  \begin{aligned}
+    \rho^4 \frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m} & = \rho^4 \frac{d}{d\rho^2} \left ( \frac{1 - M\rho^{2(M-1)}}{1 - \rho^2} + \frac{\rho^2 - \rho^{2M}}{(1 - \rho^2)^2} \right ) \\
+    & \\
+    & = \rho^4 \left ( \frac{ - M(M-1) \rho^{2(M-2)}}{1 - \rho^2} + \frac{2(1 - M \rho^{2(M-1)})}{(1 - \rho^2)^2} + \frac{2(\rho^2 - \rho^{2M})}{(1 - \rho^2)^3} \right ). \\
+  \end{aligned}
+\end{equation*}
+Substituting this and Equation (\ref{eq:multipleTesting:traceterm3}) into Equation (\ref{eq:multipleTesting:traceterm4a}) gives
+\begin{equation} \label{eq:multipleTesting:traceterm4}
+  \begin{aligned}
+    \sum_{m = 1}^{M-1} m^2 \rho^{2m} & =  \rho^2 \left ( \frac{1 - M\rho^{2(M-1)}}{1 - \rho^2} + \frac{\rho^2 - \rho^{2M}}{(1 - \rho^2)^2} \right ) \\
+    & ~~~~ + \rho^4 \left ( \frac{ - M(M-1) \rho^{2(M-2)}}{1 - \rho^2} + \frac{2(1 - M \rho^{2(M-1)})}{(1 - \rho^2)^2} + \frac{2(\rho^2 - \rho^{2M})}{(1 - \rho^2)^3} \right ) \\
+    & \\
+    & = \rho^2 \left ( \frac{1 - M^2 \rho^{2(M-1)}}{1 - \rho^2} + \frac{3\rho^2 - (2M + 1) \rho^{2M}}{(1 - \rho^2)^2} + \frac{2\rho^2(\rho^2 - \rho^{2M})}{(1 - \rho^2)^3} \right ) \\
+    & \\
+    & = r \left ( 1 - M^2 \rho^{2(M-1)} + 3r - (2M + 1)r \rho^{2(M-1)} + 2r^2 - 2r^2 \rho^{2(M-1)} \right ) \\
+    & \\
+    & = r \left ( 1 + 3r + 2r^2 - [M^2 + (2M + 1)r + 2r^2] \rho^{2(M-1)} \right ) \\
+    & \\
+    & = r \left [ (1 + r)(1 + 2r) - \{ (M + r)^2 + r(1 + r) \} \rho^{M-1} \right ] \\
+  \end{aligned}
+\end{equation}
+So that Equation (\ref{eq:multipleTesting:asymTrace}) becomes
+\begin{equation} \label{eq:multipleTesting:traceSimplified}
+  \begin{aligned}
+    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = \frac{2}{M^3} \bigg ( 2r  \Big [ (1 + r)(1 + 2r) - \{ (M + r)^2 + r(1 + r) \} \rho^{M-1} \Big ] \\
+    & ~~~~ + M^2 r \Big [ 1 - \rho^{2(M-1)} \Big ] - 2Mr\Big [ 1 + r - \rho^{2(M-1)} ( M + r ) \Big ]  \\
+    & ~~~~ + \frac{1}{3}\rho^M (M-1)M(2M-1) \bigg ) \\
+    & \\
+    & = \frac{2}{M^3} \bigg ( r \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
+    & ~~~~ - \frac{1}{3} \rho^M M(M-1)(2M-1) \bigg ) \\
+    & \\
+    & = \frac{2r}{M^3} \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
+    & ~~~~ - \frac{2 \rho^M}{3 M^2} (M-1)(2M-1) \\
+  \end{aligned}
+\end{equation}
+
+
 
 Each term of this limit can be considered in turn.
 

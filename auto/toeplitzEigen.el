@@ -5,12 +5,12 @@
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("graphicx" "pdftex") ("natbib" "round") ("hyperref" "pdftex" "pagebackref=false")))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
@@ -131,6 +131,8 @@
     "eq:multipleTesting:traceterm4"
     "eq:multipleTesting:traceterm3"
     "eq:multipleTesting:traceterm2"
+    "eq:multipleTesting:traceterm4a"
+    "eq:multipleTesting:traceSimplified"
     "eq:multipleTesting:traceSimpd"
     "eq:multipleTesting:rhoFirstSum"
     "eq:multipleTesting:squareSum"
