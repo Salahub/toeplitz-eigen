@@ -479,7 +479,7 @@ and $\m{R}_{\Sigma^*}$ is $\frac{m}{M} (\rho^m - \rho^{M-m})$ for the $m^{\text{
 
 \section{Asymptotic Equivalence} \label{c:multipleTesting:asympEquiv}
 
-The approximate matrix $\m{C}_{\Sigma}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma} - \m{C}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives similar, but less general, results by considering the asymptotic equivalence of matrices in the Frobenius norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
+The approximate matrix $\m{C}_{\Sigma}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma} - \m{C}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives similar, but less general, results by considering the asymptotic equivalence of matrices in the weak norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
 $$\lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{A - B} = 0.$$
 Therefore, a natural consideration is the difference
 \begin{equation} \label{eq:multipleTesting:asympEq}
@@ -494,7 +494,7 @@ which has the square
     & \\
     & = \frac{1}{M} \sum_{i = 0}^{M-1} \sum_{j = 0}^{M-1} \frac{\abs{i-j}^2}{M^2} \left ( \rho^{2\abs{i-j}} - 2 \rho^{\abs{i-j} + M - \abs{i-j}} + \rho^{2(M - \abs{i-j})} \right ) \\
     & \\
-    & =  \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \\
+    & =  \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \\
     & \\
     & =  \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2 \sum_{m = 1}^{M-1} m^2 \rho^M + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ) \\
     & \\
@@ -567,105 +567,72 @@ So that Equation (\ref{eq:multipleTesting:asymTrace}) becomes
     & ~~~~ + M^2 r \Big [ 1 - \rho^{2(M-1)} \Big ] - 2Mr\Big [ 1 + r - \rho^{2(M-1)} ( M + r ) \Big ]  \\
     & ~~~~ + \frac{1}{3}\rho^M (M-1)M(2M-1) \bigg ) \\
     & \\
-    & = \frac{2}{M^3} \bigg ( r \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
+    & = \frac{2}{M^3} \bigg ( r \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 \\
+    & ~~~~~~~~~~~~~ - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
     & ~~~~ - \frac{1}{3} \rho^M M(M-1)(2M-1) \bigg ) \\
     & \\
     & = \frac{2r}{M^3} \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
     & ~~~~ - \frac{2 \rho^M}{3 M^2} (M-1)(2M-1) \\
+    & \\
+    & = 2 \Big ( r [ 1 - \rho^{2(M-1)} ] + \rho^M \Big ) \frac{1}{M} - \Big ( 4r [ 2 + 2r - r\rho^{2(M-1)} ] - \frac{2}{3} \rho^M \Big ) \frac{1}{M^2} \\
+    & ~~~~ + 2r \Big ( 1 + r \Big ) \Big ( 1 + 2r - 3r \rho^{2(M-1)} \Big ) \frac{1}{M^3} - \frac{4}{3} \rho^M \\
   \end{aligned}
 \end{equation}
-
-
-
-Each term of this limit can be considered in turn.
-
-First, take the middle term
-$$\lim_{M \rightarrow \infty} \frac{4\rho^M}{M^3}\sum_{m = 1}^{M-1} m^2$$
-
-$$=\lim_{M \rightarrow \infty} \frac{4\rho^M}{M^3} \frac{(M-1)M(2M-1)}{6}$$
-
-$$=\lim_{M \rightarrow \infty} \rho^M \left ( \frac{4}{3} - \frac{2}{M} + \frac{2}{3M^2} \right ).$$
-Noting that $\abs{\rho} < 1$, this limit is zero, and so Equation (\ref{eq:multipleTesting:asymTrace}) becomes
+when $\rho < 1 \iff r < \infty$. Under these constraints, the coefficients of Equation (\ref{eq:multipleTesting:traceSimplified}) are finite for all $M > 0$, and so
 \begin{equation*}
-    \lim_{M \rightarrow \infty} \frob{\m{R}_{\Sigma}}^2  = \lim_{M \rightarrow \infty} \left ( \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \rho^{2m} + \frac{2}{M^3} \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ).
+  \lim_{M \rightarrow \infty} \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 = 0 \implies \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma}} = 0.
 \end{equation*}
-Next, note that
-$$\sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} = \sum_{m = 1}^{M-1} (M - m)^2 \rho^{2m} = \sum_{m = 1}^{M-1} (M^2 - 2Mm + m^2) \rho^{2m}$$
-so that Equation (\ref{eq:multipleTesting:asymTrace}) further simplifies to
-\begin{equation} \label{eq:multipleTesting:traceSimpd}
-    \lim_{M \rightarrow \infty} \frob{\m{R}_{\Sigma}}^2  = \lim_{M \rightarrow \infty} \frac{2}{M^3} \sum_{m = 1}^{M-1} (M^2 - 2Mm + 2m^2) \rho^{2m},
-\end{equation}
-so that determining the sums $\sum_{m = 1}^{M-1} \rho^{2m}$, $\sum_{m = 1}^{M-1} m \rho^{2m}$ and $\sum_{m=1}^{M-1} m^2 \rho^{2m}$ permits evaluation of the limit.
-
-The first sum is simply
-\begin{equation} \label{eq:multipleTesting:rhoFirstSum}
-  \sum_{m = 1}^{M-1} \rho^{2m} = \frac{1 - \rho^{2M}}{1 - \rho^2} - 1 = \rho^2 \left [ \frac{1 - \rho^{2(M-1)}}{1 - \rho^2} \right ],
-\end{equation}
-so that the first term in Equation (\ref{eq:multipleTesting:traceSimpd}) becomes
-$$\lim_{M \rightarrow \infty} \frac{2M^2\rho^2}{M^3} \frac{1 - \rho^{2M}}{1 - \rho^2} = 0.$$
-Next, consider
-\begin{equation}
-  \begin{aligned}
-    \sum_{m=1}^{M-1} m \rho^{2m} & = \rho^2 \frac{d}{d\rho^2} \sum_{m = 0}^{M-1} \left ( \rho^2 \right )^m \\
-    & \\
-    & = \rho^2 \frac{d}{d\rho^2} (1 - \rho^{2M}) \left ( \sum_{m = 0}^{\infty} (\rho^2)^m \right ) \\
-    & \\
-    & = \rho^2 \left [ -\frac{M\rho^{2(M-1)}}{1 - \rho^2} + \frac{1 - \rho^{2M}}{(1 - \rho^2)^2} \right ] \\
-    & \\
-    & = \left ( 1 - M\rho^{2(M-1)} + (M - 1)\rho^{2M} \right ) \frac{\rho^2}{(1 - \rho^2)^2}. \\
-  \end{aligned}
-\end{equation}
-Substituting this, the second term becomes
-$$\lim_{M \rightarrow \infty} \frac{2M}{M^3}(1 - M\rho^{2(M-1)} + (M-1)\rho^{2M}) \frac{\rho^2}{(1 - \rho^2)^2} = 0.$$
-Finally, note that
-\begin{equation} \label{eq:multipleTesting:squareSum}
-  \begin{aligned}
-    \sum_{m = 1}^{M-1} m^2 (\rho^2)^m & = \sum_{m=1}^{M-1} m(m-1) \rho^{2m} + m \rho^{2m} \\
-    & \\
-    & = \rho^4 \sum_{m=1}^{M-1} m(m-1) \rho^{2(m-2)} +  \rho^2 \sum_{m = 1}^{M-1} m \rho^{2(m-2)} \\
-    & \\
-    & = \rho^4 \frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m} + \rho^2  \frac{d}{d\rho^2} \sum_{m=1}^{M-1} \rho^{2m} . \\
-  \end{aligned}
-\end{equation}
-But
-$$\frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m}$$
-
-$$= \frac{d^2}{(d\rho^2)^2} \frac{1  - \rho^{2M}}{1 - \rho^2}$$
-
-$$= \frac{d}{d\rho^2} \left ( \frac{1 - \rho^{2M}}{(1 - \rho^2)^2} - \frac{M\rho^{2(M-1)}}{1 - \rho^2} \right )$$
-
-$$= -\frac{M\rho^{2(M-1)}}{(1-\rho^2)^2} + \frac{2(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{M(M-1)\rho^{2(M-2)}}{1 - \rho^2} - \frac{M\rho^{2(M-1)}}{(1 - \rho^2)^2}$$
-
-$$= \frac{2(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{2 M \rho^{2(M-1)}}{(1 - \rho^2)^2} - \frac{M(M-1)\rho^{2(M-2)}}{1 - \rho^2},$$
-and so Equation (\ref{eq:multipleTesting:squareSum}) becomes
-$$\rho^4 \left [ \frac{2(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{2 M \rho^{2(M-1)}}{(1 - \rho^2)^2} - \frac{M(M-1)\rho^{2(M-2)}}{1 - \rho^2} \right ] + \rho^2 \left [ \frac{1 - \rho^{2M}}{(1 - \rho^2)^2} - \frac{M \rho^{2(M-1)}}{1 - \rho^2} \right ]$$
-
-$$= \frac{2\rho^4(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{2M \rho^{2(M+1)}}{(1-\rho^2)^2} - \frac{M(M-1)\rho^{2M}}{1 - \rho^2} + \frac{\rho^2(1 - \rho^{2M})}{(1 - \rho^2)^2} - \frac{M \rho^{2M}}{1 - \rho^2}$$
-
-$$=  \frac{2\rho^4(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{M^2\rho^{2M}}{1 - \rho^2} + \frac{\rho^2 - (2M + 1)\rho^{2(M+1)}}{(1 - \rho^2)^2}$$
-Therefore the final term of Equation (\ref{eq:multipleTesting:traceSimpd}) is
-$$\lim_{M \rightarrow \infty} \frac{4}{M^3}  \left ( \frac{2\rho^4(1 - \rho^{2M})}{(1 - \rho^2)^3} - \frac{M^2\rho^{2M}}{1 - \rho^2} + \frac{\rho^2 - (2M + 1)\rho^{2(M+1)}}{(1 - \rho^2)^2} \right ) = 0.$$
-Thus,
-\begin{equation} \label{eq:multipleTesting:traceEval}
-    \lim_{M \rightarrow \infty} \frac{1}{M} \frob{\m{R}_{\Sigma}}^2  = 0,
-\end{equation}
-and so the closest circulant matrix to $\sm{\Sigma}$ in the Frobenius norm is asymptotically equivalent to $\sm{\Sigma}$ in the weak norm.
+Therefore, $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ are asymptotically equivalent in the weak norm.
 
 \section{Rate of Convergence} \label{c:multipleTesting:rateConverge}
 
 \cite{gray2006toeplitz} suggests a slightly different approximation. Following \cite{grenanderszego1958}, the sum
 $$f(x) = \sum_{k = -\infty}^{\infty} \rho_k e^{ikx} = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{ikx}$$
 is known to be critical to the approximation of $\sm{\Sigma}$. \cite{gray2006toeplitz} considers circulant entries generated using the expression
-$$c_m = \frac{1}{M} \sum_{j = 0}^{M-1} f\left ( \frac{2\pi i j}{M} \right ) e^{\frac{2 \pi i m}{M}},$$
-which evaluates to
-\begin{equation} \label{eq:multipleTesting:grayApprox}
-  c_m  = \frac{1}{1 - \rho^M} \left ( \rho^m + \rho^{M-m} \right )
+\begin{equation} \label{eq:multipleTesting:grayEq}
+  c_m = \begin{cases}
+    \rho_0 & \text{for } m = 0, \\
+    & \\
+    \frac{1}{M} \sum_{j = 0}^{M-1} f\left ( \frac{2\pi j}{M} \right ) e^{\frac{2 \pi i j m}{M}} & \text{otherwise}, \\
+  \end{cases}
 \end{equation}
-in this particular case. So, while $\m{C}_{\Sigma}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a simple sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma} - \m{C}_{GS}$. Then
+the second case can be expressed
+\begin{equation*}
+  \begin{aligned}
+    \frac{1}{M} \sum_{j = 0}^{M-1} f\left ( \frac{2\pi j}{M} \right ) e^{\frac{2 \pi i j m}{M}} & = \frac{1}{M} \sum_{j = 0}^{M-1} \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{ik \frac{2\pi j}{M}} e^{\frac{2 \pi i j m}{M}} \\
+    & \\
+    & = \frac{1}{M} \sum_{j = 0}^{M-1} \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{\frac{2 \pi i j}{M}(m+k)} \\
+    & \\
+    & = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} \frac{1}{M} \sum_{j = 0}^{M-1} e^{\frac{2 \pi i j}{M}(m+k)} \\
+    & \\
+    & = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} \ind{0}{(m+k)\text{mod} M} \\
+  \end{aligned}
+\end{equation*}
+as the second sum is the sum of the squared $M^{\text{th}}$ roots of unity, which are orthonormal. Now
+\begin{equation*}
+  \begin{aligned}
+    \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} \ind{0}{(m+k)\text{mod} M} & = \sum_{k = -\infty}^{\infty} \rho^{\abs{-m + kM}} \\
+    & \\
+    & = \sum_{k = -\infty}^0 \rho^{m - kM} + \sum_{k = 1}^{\infty} \rho^{- m + kM} \\
+    & \\
+    & = \rho^m \frac{1}{1 - \rho^M} + \rho^{-m} \frac{\rho^M}{1 - \rho^M} \\
+    & \\
+    & = \frac{1}{1 - \rho^M} \big ( \rho^m + \rho^{M-m} \big ) \\
+  \end{aligned}
+\end{equation*}
+when $\rho < 1$. Therefore, Equation (\ref{eq:multipleTesting:grayEq}) becomes
+\begin{equation} \label{eq:multipleTesting:grayApprox}
+  c_m = \begin{cases}
+    \rho_0 & \text{for } m = 0, \\
+    & \\
+    \frac{1}{1 - \rho^M} \big ( \rho^m + \rho^{M-m} \big )  & \text{otherwise},\\
+  \end{cases}
+\end{equation}
+in the particular case of $\rho_m = \rho^m$. So, while $\m{C}_{\Sigma}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a simple sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma} - \m{C}_{GS}$. Then
 \begin{equation} \label{eq:multipleTesting:rateEqgren}
     \frac{1}{M} \frob{\m{R}_{GS}}^2 = \frac{2}{(1 - \rho^M)^2} \left [ \frac{2}{M(1 - \rho^2)} + 2 \left ( 1 - \frac{1}{M} \right ) \rho^{2M} - \frac{1}{M(1 - \rho^2)} \rho^{4M} \right ]
 \end{equation}
-while an evaluation of Equation (\ref{eq:multipleTesting:traceSimpd}) gives
+while an evaluation of Equation (\ref{eq:multipleTesting:traceSimplified}) gives
 \begin{equation} \label{eq:multipleTesting:rateEqCsig}
   \begin{aligned}
     \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 = & \frac{2 \rho^2}{M^3} \bigg [ \frac{M^2}{1 - \rho^2} + \frac{1 - 2M - \rho^{2M}}{(1 - \rho^2)^2} + \frac{2 \rho^2 ( 1 - \rho^M )}{(1 - \rho^2)^3} \\

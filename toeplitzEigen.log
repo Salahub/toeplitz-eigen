@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  5 NOV 2021 16:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  9 NOV 2021 16:22
 entering extended mode
 **\input toeplitzEigen.tex
  (toeplitzEigen.tex
@@ -502,10 +502,10 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 357.
 
-[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] (toeplitzEigen.bbl
-) [19
+[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] (toeplitzEigen.bbl) [17
 
-] (toeplitzEigen.aux)
+]
+(toeplitzEigen.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -513,10 +513,10 @@ Package rerunfilecheck Info: File `toeplitzEigen.out' has not changed.
 (rerunfilecheck)             Checksum: F6A699A73EE252567D581BE5065D105C;270.
  ) 
 Here is how much of TeX's memory you used:
- 11725 strings out of 478927
- 177419 string characters out of 2852535
- 485786 words of memory out of 3000000
- 29338 multiletter control sequences out of 15000+600000
+ 11716 strings out of 478927
+ 177257 string characters out of 2852535
+ 487630 words of memory out of 3000000
+ 29335 multiletter control sequences out of 15000+600000
  421002 words of font info for 91 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,18n,66p,824b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -542,9 +542,9 @@ Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Chris
 /AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Us
 ers/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msb
 m10.pfb>
-Output written on toeplitzEigen.pdf (19 pages, 294040 bytes).
+Output written on toeplitzEigen.pdf (17 pages, 289856 bytes).
 PDF statistics:
- 313 PDF objects out of 1000 (max. 8388607)
- 66 named destinations out of 1000 (max. 500000)
+ 296 PDF objects out of 1000 (max. 8388607)
+ 60 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 
