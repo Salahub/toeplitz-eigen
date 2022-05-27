@@ -40,11 +40,9 @@ J~Li and L~Ji.
   eigenvalues of a correlation matrix.
 \newblock \emph{Heredity}, 95\penalty0 (3):\penalty0 221--227, 2005.
 
-\bibitem[Narayan and Shastry(2021)]{narayanshastry2021toeplitz}
-Onuttom Narayan and B~Sriram Shastry.
-\newblock Generalized toeplitz--hankel matrices and their application to a
-  layered electron gas.
-\newblock \emph{Journal of Physics A: Mathematical and Theoretical},
-  54\penalty0 (17):\penalty0 175201, 2021.
+\bibitem[Salahub(2022)]{salahub2022correlation}
+Christopher Salahub.
+\newblock A structural model of genome-wide association studies, 2022.
+\newblock URL \url{https://arxiv.org/abs/2205.10391}.
 
 \end{thebibliography}

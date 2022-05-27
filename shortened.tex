@@ -12,12 +12,6 @@
 %\newcommand{\texorpdfstring}[2]{#1} % does nothing, but defines the command
 % Anything defined here may be redefined by packages added below...
 
-% This package allows if-then-else control structures.
-\usepackage{ifthen}
-\newboolean{PrintVersion}
-\setboolean{PrintVersion}{false}
-% CHANGE THIS VALUE TO "true" as necessary, to improve printed results for hard copies by overriding some options of the hyperref package, called below.
-
 %\usepackage{nomencl} % For a nomenclature (optional; available from ctan.org)
 \usepackage{amsmath,amssymb,amstext} % Lots of math symbols and environments
 \usepackage[pdftex]{graphicx} % For including graphics N.B. pdftex graphics driver
@@ -66,16 +60,6 @@
     filecolor=magenta,      % color of file links
     urlcolor=cyan           % color of external links
 }
-\ifthenelse{\boolean{PrintVersion}}{   % for improved print quality, change some hyperref options
-\hypersetup{	% override some previously defined hyperref options
-%    colorlinks,%
-    citecolor=black,%
-    filecolor=black,%
-    linkcolor=black,%
-    urlcolor=black}
-}{} % end of ifthenelse (no else)
-
-%\usepackage[automake,toc,abbreviations]{glossaries-extra} % Exception to the rule of hyperref being the last add-on package
 
 % Page margins
 % uWaterloo thesis requirements specify a minimum of 1 inch (72pt) margin at the
@@ -187,14 +171,14 @@
 \newcommand{\comment}[1]{{\color{steelblue} COMMENT:  {#1}}}
 \newcommand{\TODO}[1]{{\color{brickred} TODO:  {#1}}}
 
-\title{Approximating the eigenvalues of symmetric Toeplitz matrices using nearest circulants}
+\title{Approximating the eigenvalues of real symmetric Toeplitz matrices using the nearest circulants}
 \author{Chris Salahub \\ {\footnotesize University of Waterloo, \texttt{csalahub@uwaterloo.ca}}}
 
 \begin{document}
 
 \maketitle
 
-Consider the symmetric Toeplitz matrix
+A number of methods exist to approximated the eigensystem of the symmetric Toeplitz matrix
 \begin{equation} \label{eq:multipleTesting:genEigCov}
   \sm{\Sigma} = \begin{bmatrix}
     \rho_0 & \rho_1 & \rho_2 & \dots & \rho_{M-1} \\
@@ -204,7 +188,7 @@ Consider the symmetric Toeplitz matrix
     \rho_{M-1} & \rho_{M-2} & \rho_{M-3} & \dots & \rho_0
   \end{bmatrix},
 \end{equation}
-where $\rho_0, \dots, \rho_{M-1} \in \Reals$. This matrix arises in statistical applications such as the correlation matrix of the discrete autoregressive process of order one, in information theory in certain filtering tasks \cite{gray2006toeplitz}, and in genetics in the correlation matrix between disjoint measured sequences \needtocite{My arXiv paper}. In the case of the equidistant genetic survey of \cite{LanderBotstein1989} and the autoregressive time series, the matrix has the more specific form
+where $\rho_0, \dots, \rho_{M-1} \in \Reals$. $\sm{\Sigma}$ appears regularly in statistical applications such as the correlation matrix of the discrete autoregressive process of order one, in information theory in certain filtering tasks \cite{gray2006toeplitz}, and in genetics in the correlation between disjoint measured sequences \cite{salahub2022correlation}. In the case of the equidistant genetic survey of \cite{LanderBotstein1989} and the autoregressive time series, the matrix has the more specific form
 \begin{equation} \label{eq:multipleTesting:specEigCov}
   \sm{\Sigma}_e = \begin{bmatrix}
     1 & \rho & \rho^2 & \dots & \rho^{M-1} \\
@@ -213,56 +197,24 @@ where $\rho_0, \dots, \rho_{M-1} \in \Reals$. This matrix arises in statistical 
     \vdots & \vdots & \vdots & \ddots & \vdots \\
     \rho^{M-1} & \rho^{M-2} & \rho^{M-3} & \dots & 1
   \end{bmatrix}
-\end{equation}p
+\end{equation}
 where $\rho \in [0, 1]$ is a real constant.
 
-Of interest in certain applications are the eigenvalues and eigenvectors of $\sm{\Sigma}$, call them $\ve{V}_1, \ve{V}_2, \dots, \ve{V}_M$ and $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_M$ respectively. For brevity, the combination of these vectors and values is here referred to as the \emph{eigensystem} of $\sm{\Sigma}$. \cite{gray2006toeplitz} demonstrates the application of this particular eigensystem in signal processing, while \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the eigenvalues to adjust for dependent multiple tests in the genomic context.
+Of interest are the eigenvalues and eigenvectors of $\sm{\Sigma}$, call them $\ve{V}_1, \ve{V}_2, \dots, \ve{V}_M$ and $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_M$ respectively. For brevity, the combination of these vectors and values is here referred to as the \emph{eigensystem} of $\sm{\Sigma}$. \cite{gray2006toeplitz} demonstrates the application of this particular eigensystem in signal processing, while \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the eigenvalues to adjust for dependent multiple tests in the genomic context.
 
-This problem is trivial in the cases where $\rho = 1$ or $\rho = 0$. The latter gives the identity matrix, in which all eigenvalues are one and the eigenvectors are the basis vectors for $\Complex^M$, while the former gives the matrix of all ones. Recognizing that the case $\rho = 1$ can be written as $\ve{1} \tr{\ve{1}}$ where $\ve{1}$ is the vector of all ones in $\Complex^M$, the eigenvectors are $\ve{1}$ and any collection of $M-1$ vectors orthogonal to $\ve{1}$, with corresponding eigenvalues $\lambda_1 = M$ and $\lambda_2 = \dots = \lambda_M = 0$.
-
-Extending this idea further, \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the approximation
+A number of approximations for this eigensystem exist. \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} present different approximations based on the matrix
 \begin{equation} \label{eq:multipleTesting:commonCor}
- \widehat{\sm{\Sigma}} = \rho \ve{1} \tr{\ve{1}} + (1 - \rho) \m{I}_M
+  \m{A}(\rho) = \rho \ve{1} \tr{\ve{1}} + (1 - \rho) \m{I}_M.
 \end{equation}
-as a motivation to develop methods of multiple test adjustment. The eigensystem of $\widehat{\sm{\Sigma}}$ is known due to the simple eigensystems of $\m{I}_M$ and $\ve{1} \tr{\ve{1}}$ and the unique eigensystem of  $\m{I}_M$. \cite{gray2006toeplitz} and \cite{grenanderszego1958} instead utilize circulant matrices to approximate the eigensystem of $\sm{\Sigma}$. Asymptotically, $\sm{\Sigma}$ has the same eigensystem as certain circulant matrices and the eigensystem of circulant matrices are computable exactly.
+$\m{A}(\rho)$ has a known eigensystem for any $\rho$ and matches the eigensystem of $\sm{\Sigma}$ for the edge cases where $\rho_1 = \rho_2 = \dots = 0$ or $\rho_1 = \rho_2 = \dots = 0$ and $\rho_0 = 1$. 
 
-In the case where $\rho = e^{-\kappa}$ for $\kappa \in \Reals$, \cite{narayanshastry2021toeplitz} have an exact solution. Indeed, they provide a solution for a more general, non-Toeplitz case which is directly applicable to multiple test adjustment in the genomic context. Specifically the matrix
-\begin{equation} \label{eq:generalMat}
-  D = \begin{bmatrix}
-    1 & \rho_1 & \rho_1 \rho_2 & \rho_1 \rho_2 \rho_3 & \dots \\
-    \rho_1 & 1 & \rho_2 & \rho_2 \rho_3 & \dots \\
-    \rho_2 \rho_1 & \rho_2 & 1 &  \rho_3 & \dots \\
-    \rho_3 \rho_2 \rho_1 & \rho_3 \rho_2 & \rho_3 &1 & \dots \\
-    \vdots & \vdots & \vdots & \vdots& \ddots \\
-  \end{bmatrix}
-\end{equation}
-is solved. The solution presented is somewhat unclear, however, and so is translated into a more general mathematical form here.
+\cite{gray2006toeplitz} and \cite{grenanderszego1958} instead utilize circulant matrices to approximate the eigensystem of $\sm{\Sigma}$. Asymptotically, $\sm{\Sigma}$ has the same eigensystem as certain circulant matrices and the eigensystem of any circulant matrix is known.
 
-Presented here is a comparison of different approximations to the known solution. Absent from approximations is a consideration of the distance between the approximation and $\sm{\Sigma}$ in the finite case. This work aims to fill this gap by demonstrating the optimality of a particular circulant approximation of $\sm{\Sigma}$ in the weak matrix norm. It begins with a short review and introduction of the basics of circulant matrices in Section \ref{c:multipleTesting:circDecom} before deriving the nearest circulant matrix to $\sm{\Sigma}$, $\m{C}_{\Sigma}$, in Section \ref{c:multipleTesting:nearestCirc}. Finally, the asymptotic equivalence of $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ is computed in Section \ref{c:multipleTesting:asympEquiv} and the rate of convergence compared in Section \ref{c:multipleTesting:rateConverge}.
-
-%Suppose $\bigwig{\sv{\mu}} \follows N_M (\sv{\mu}, \sm{\Sigma})$ where $\sm{\Sigma} = [\rho_{ij}]$ is a correlation matrix so that $\rho_{ii} = 1$, $ \rho_{ij} = \rho_{ji}$, and $\abs{\rho_{ij}} \le 1$ for all $i = 1, \ldots M$ and $j = 1, \ldots M$.
-
-%Let $\sm{\Sigma} = \m{V} \m{D}_\lambda \tr{\m{V}}$ be its eigen decomposition with 
-%$\m{D}_\lambda = diagonal(\lambda_1, \lambda_2, \ldots, \lambda_M)$ 
-%the diagonal matrix of eigenvalues $\lambda_1 \ge \lambda_2 \ge \cdots \lambda_M \ge 0$
-%and $M \times M$ orthogonal matrix
-%$\m{V} = [\ve{V}_1 | \ve{V}_2 | \cdots | \ve{V}_M]$ having as columns the $M \times 1$ eigenvectors $\ve{V}_i$ corresponding to each eigenvalue $\lambda_i$ for $i = 1, \ldots n$.
-
-%Note that for the special case of $\rho_{ij} = \rho > 0$ for all $i \ne j$, $\sm{\Sigma}$ can be written as
-%\begin{equation}
-% \sm{\Sigma} = \rho \ve{1} \tr{\ve{1}} + (1 - \rho) \m{I}_M 
-%\label{eq:multipleTesting:commonCor}
-%\end{equation}
-%where $\ve{1} = \tr{(1, 1, \ldots, 1)}$ is the $M \times 1$ vector of ones and $\m{I}_M$ the $M \times M$ identity matrix.  In this case, $\lambda_ 1 = (M - 1) \rho + 1$ and $\lambda_2 = \lambda_3 = \cdots = \lambda_M = (1 - \rho)$.  The corresponding eigenvectors  are $\ve{V}_1 = \frac{1}{\sqrt{M}} \ve{1}$ and any linearly independent set of $(M - 1)$ orthonormal vectors $\ve{V}_2, \ldots, \ve{V}_M$ all orthogonal to $\ve{V}_1$.  
-%Note that if $\rho < 0$, the eigen decomposition is the same but $\lambda = (M-1)\rho +1$ would be the \emph{smallest} eigenvalue and $\sm{\Sigma}$ would be a non-negative definite matrix only when $\rho \ge -1/(M-1)$.
-
-%Of interest is testing the hypothesis $H_0: \sv{\mu} = \ve{0}$ having observed some realization $\widehat{\sv{\mu}}$ of $\bigwig{\sv{\mu}}$.  Equivalently, the $M$ hypotheses $H_{0i}: \mu_i = 0$ might be tested independently and simultaneously based on the marginal distributions $\bigwig{\mu}_i \follows N(\mu_i, 1)$ and observed $\widehat{\mu}_i$ for $i = 1, \ldots, M$.  The challenge is combining these as a test for $H_0$.
-
-%Testing any of these hypotheses for a fixed significance level $\alpha$ is equivalent to forming confidence regions of size $1 - \alpha$ and determining whether the region contains 0 for a univariate test of $H_{0i}$ or the $M \times 1$ vector $\ve{0}$ for the multivariate test of $H_0$.   A fixed level test would reject the hypothesis whenever the corresponding region did not contain the zero value and would accept otherwise.
+Absent from the symptotic approach of \cite{gray2006toeplitz} or the myriad approaches of \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} is a consideration of the finite, non-edge cases of $\sm{\Sigma}$ and how it might be best approximated. This work derives $\m{C}_{\Sigma}$, the nearest circulant matrix to $\sm{\Sigma}$ in the weak norm. $\m{C}_{\Sigma}$ is symmetric circulant, and so has only real eigenvalues. Indeed, it is proven that a real circulant matrix has real eigenvalues if and only if it is a symmetric circulant. $\m{C}_{\Sigma}$ is additionally shown to be asymptotically equivalent to $\sm{\Sigma}$ by considering the limit of the remainder $\sm{\Sigma} - \m{C}_{\Sigma}$. Finally, the eigensystem of $\m{C}_{\Sigma}$ is stated expicitly.
 
 \section{Circulant Matrices} \label{c:multipleTesting:circDecom}
 
-Note that in this section the eigenvalues of numerous different matrices are addressed, so let the function $\lambda_k(\m{A})$ return the $k^{\text{th}}$ eigenvalue of $\m{A}$, which may not be ordered by magnitude.
+For clarity working with different matrices, let the function $\lambda_k(\m{C})$ return the $k^{\text{th}}$ eigenvalue of $\m{C}$, which may not be ordered by magnitude.
 
 A complex matrix $\m{C} \in \Complex^{M \times M}$ is called circulant if the $i^{\text{th}}$ row is given by the cyclic shift $i$ elements rightward of a vector of $M$ elements, typically denoted $(c_0, c_1, c_2, \dots, c_{M-1})$. Explicitly
 \begin{equation} \label{eq:explicitCirculant}
@@ -321,7 +273,7 @@ $$\begin{bmatrix}
 This circulant is symmetric, and any symmetric circulant matrix will have an analogous structure. By basic results of linear algebra, it follows that any symmetric circulant matrix will have only real eigenvalues. Indeed, a circulant matrix will have only real eigenvalues for any $M$ if and only if it is symmetric.
 
 \begin{theorem}[Real eigenvalues of symmetric circulants] \label{thm:symmEigen}
-  A circulant matrix $\m{C} \in \Complex^{M \times M}$ has real eigenvalues if and only if it is a symmetric circulant matrix.
+  A circulant matrix $\m{C} \in \Reals^{M \times M}$ has real eigenvalues if and only if it is a symmetric circulant matrix.
 \end{theorem}
 \begin{proof}
   Consider the eigensystem of $\m{C}$. As it is circulant, it has eigenvalues
@@ -364,27 +316,27 @@ This circulant is symmetric, and any symmetric circulant matrix will have an ana
 
 \section{The Nearest Circulant to $\Sigma$} \label{c:multipleTesting:nearestCirc}
 
-With this proof, we can move to a statistical framing of the problem of the eigenvalue distribution of $\sm{\Sigma}$. Consider the decomposition
+Now consider the decomposition
 \begin{equation} \label{eq:circDecomp}
   \sm{\Sigma} = \m{C} + \m{R}
 \end{equation}
-where $\m{C}$ is a circulant matrix and $\m{R} = \sm{\Sigma} - \m{C}$ is a matrix of the element-wise residuals between $\m{C}$ and $\sm{\Sigma}$. This reframing moves the discussion from the space of asymptotic results to the features of $\m{C}$ and $\m{R}$, and places the result in a familiar framework for the statistician accustomed to considering the residuals of a given approximation.
+where $\m{C}$ is a circulant matrix and $\m{R} = \sm{\Sigma} - \m{C}$ is a matrix of the element-wise residuals between $\m{C}$ and $\sm{\Sigma}$. This reframing moves the discussion from the space of asymptotic results to the features of $\m{C}$ and $\m{R}$, a familiar framework for anyone accustomed to considering the residuals of a given approximation.
 
-Of immediate and obvious interest is the ``closest'' circulant matrix to a given $\sm{\Sigma}$, call it $\m{C}_{\Sigma}$. Consider using the weak, or Frobenius, norm on matrices. First, introduce the \textit{vectorization} operator on a matrix $\m{A} \in \Complex^{M \times N}$, denoted $\mvec{\m{A}}$. This operator takes $\m{A} \in \Complex^{M \times N}$ and converts it to a vector in $\Complex^{MN}$ by appending columns in order. So, for example,
+Of immediate and obvious interest is the closest circulant matrix to $\sm{\Sigma}$, call it $\m{C}_{\Sigma}$. Consider using the weak, or Frobenius, norm on matrices. First, introduce the \textit{vectorization} operator on a matrix $\m{A} \in \Complex^{M \times N}$, denoted $\mvec{\m{A}}$. This operator takes $\m{A} \in \Complex^{M \times N}$ and converts it to a vector in $\Complex^{MN}$ by appending columns in order. So, for example,
 $$\mvec{\begin{bmatrix}
-    1 & 2 & 3 \\
-    4 & 5 & 6 \\
+    1 & 2  \\
+    4 & 5  \\
   \end{bmatrix}} =
 \begin{bmatrix}
-  1 \\ 4 \\ 2 \\ 5 \\ 3 \\ 6
+  1 \\ 4 \\ 2 \\ 5
   \end{bmatrix}.$$
 The Frobenius norm is then given by
 $$\frob{\m{A}} = \sqrt{\conj{(\mvec{\m{A}})} (\mvec{\m{A}})}$$
 or equivalently
 $$\frob{\m{A}} = \sqrt{\trace \left ( \conj{\m{A}} \m{A} \right )}$$
-for a matrix $\m{A} \in \Complex^{M \times M}$ with complex conjugate $\conj{\m{A}}$. Note that for any real pairwise measure $\sm{\Sigma}, \m{C}, \m{R} \in \Reals^{M \times M}$, and so for our purpose
-$$\frob{\m{A}} = \sqrt{\tr{(\mvec{\m{A}})} (\mvec{\m{A}})} = \sqrt{ \trace \left ( \tr{\m{A}} \m{A} \right )}.$$
-Let $\m{C}$ be an $M \times M$ circulant matrix with first row $( c_0, c_1, c_2, \dots, c_{M-1} )$. Then by definition $\m{C}_{\Sigma}$ is given by $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}$, or equivalently $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}^2$. Taking the second of these, we have
+for a matrix $\m{A} \in \Complex^{M \times M}$ with complex conjugate $\conj{\m{A}}$. In the real case, this is
+$$\frob{\m{A}} = \sqrt{\trace \left ( \tr{\m{A}} \m{A} \right )}$$
+Let $\m{C}$ be an $M \times M$ circulant matrix with first row $( c_0, c_1, c_2, \dots, c_{M-1} ) \in \Reals^M$. Then by definition $\m{C}_{\Sigma}$ is given by $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}$, or equivalently $\argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}^2$. Taking the second of these, we have
 \begin{equation} \label{eq:argMinDef}
   \m{C}_{\Sigma} = \argmin_{\m{C}} \frob{\sm{\Sigma} - \m{C}}^2.
 \end{equation}
@@ -481,13 +433,13 @@ In the particular case of $\sm{\Sigma}_e$ from Equation (\ref{eq:multipleTesting
 \end{equation*}
 and $\m{R}_{\Sigma_e}$ is $\frac{m}{M} (\rho^m - \rho^{M-m})$ for the $m^{\text{th}}$ off-diagonal where $m \in \{0, 1, 2, \dots, M-1\}$. The eigenvalues of $\m{C}_{\Sigma_e}$ are therefore
 \begin{equation*}
-  \lambda_k (\m{C}_{\Sigma}) = 1 + 2 \sum_{m = 1}^{M-1} \frac{M - m}{M} \rho^m \cos \frac{2 \pi mk}{M}.
+  \lambda_k (\m{C}_{\Sigma_e}) = 1 + 2 \sum_{m = 1}^{M-1} \frac{M - m}{M} \rho^m \cos \frac{2 \pi mk}{M}.
 \end{equation*}
 
 
 \section{Asymptotic Equivalence} \label{c:multipleTesting:asympEquiv}
 
-The approximate matrix $\m{C}_{\Sigma}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma} - \m{C}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives similar, but less general, results by considering the asymptotic equivalence of matrices in the weak norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
+The approximation matrix $\m{C}_{\Sigma}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma} - \m{C}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives similar, but less general, results by considering the asymptotic equivalence of matrices in the weak norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
 $$\lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{A - B} = 0.$$
 Therefore, a natural consideration is the difference
 \begin{equation} \label{eq:multipleTesting:asympEq}
@@ -502,16 +454,30 @@ which has the square
     & \\
     & = \frac{1}{M} \sum_{i = 0}^{M-1} \sum_{j = 0}^{M-1} \frac{\abs{i-j}^2}{M^2} \left ( \rho^{2\abs{i-j}} - 2 \rho^{\abs{i-j} + M - \abs{i-j}} + \rho^{2(M - \abs{i-j})} \right ) \\
     & \\
-    & =  \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \\
-    & \\
-    & =  \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2 \sum_{m = 1}^{M-1} m^2 \rho^M + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ) \\
-    & \\
-    & = \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} m^2 \rho^{2m} - 2\rho^M \sum_{m = 1}^{M-1} m^2 + \sum_{m = 1}^{M-1} m^2 \rho^{2(M-m)} \right ) \\
-    & \\
-    & =  \frac{2}{M^3} \left ( \sum_{m = 1}^{M-1} \left [ 2m^2 + M^2 - 2Mm \right ] \rho^{2m} -  2 \rho^M \sum_{m = 1}^{M-1} m^2 \right ),
+    & =  \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right )
   \end{aligned}
 \end{equation}
-where the last step comes by changing the index in the sum on the third term.
+Evaluating this expression for $\rho < 1$ is made easier by considering the general sum
+$$\sum_{m = 1}^{M} m^k \rho^m.$$
+Multiplying by $\frac{1 - \rho}{1 - \rho}$, we obtain
+$$\sum_{m = 1}^{M} m^k \rho^m = \frac{\rho}{1 - \rho} \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho).$$
+Now
+\begin{equation*}
+  \begin{aligned}
+    \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho) & = \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = M + 1}^{\infty} m^k \rho^{m - M - 1} (1 - \rho) \\
+    & \\
+    & = \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M}\sum_{m = 1}^{\infty} (m + M)^k \rho^{m - 1} (1 - \rho) \\
+    & \\
+    & = \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = 1}^{\infty} \sum_{l = 0}^k {k \choose l} m^{k-l} M^l \rho^{m - 1} (1 - \rho) \\
+    & \\
+    & = (1 - \rho^M) \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \sum_{m = 1}^{\infty}  m^{k-l} \rho^{m - 1} (1 - \rho) \\
+  \end{aligned}
+\end{equation*}
+
+
+\begin{equation} \label{eq:kfirstMoments}
+  \sum_{m = 1}^{M-1} m^k \rho^m = \frac{\rho}{1 - \rho} \left [ \left ( 1 - \rho^M \right ) \sum_{m = 0}^{\infty} m^k \rho^{m-1} \right ]
+\end{equation}
 
 Each term in this sum can then be considered separately. The final term is the sum of the first $M-1$ squared integers multiplied by a constant and so
 \begin{equation} \label{eq:multipleTesting:traceterm4}

@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  22 MAY 2022 18:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  26 MAY 2022 17:08
 entering extended mode
-**\input toeplitzEigen.tex
- (toeplitzEigen.tex
+**\input shortened.tex
+ (shortened.tex
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
 Document Class: article 2021/02/12 v1.4n Standard LaTeX document class
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
@@ -18,9 +18,6 @@ File: size12.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip47
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
-)
-(C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
-Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
 )
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
 Package: amsmath 2021/04/20 v2.17j AMS math features
@@ -202,6 +199,9 @@ LaTeX Info: Redefining \cite on input line 694.
 y
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
+ (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/base\ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+)
 \@float@every@algorithm=\toks31
 \c@algorithm=\count273
 )
@@ -368,13 +368,13 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip64
 )
-Package hyperref Info: Option `plainpages' set `false' on input line 68.
-Package hyperref Info: Option `unicode' set `false' on input line 68.
-Package hyperref Info: Option `pdftoolbar' set `true' on input line 68.
-Package hyperref Info: Option `pdfmenubar' set `true' on input line 68.
-Package hyperref Info: Option `pdffitwindow' set `false' on input line 68.
-Package hyperref Info: Option `pdfnewwindow' set `true' on input line 68.
-Package hyperref Info: Option `colorlinks' set `true' on input line 68.
+Package hyperref Info: Option `plainpages' set `false' on input line 62.
+Package hyperref Info: Option `unicode' set `false' on input line 62.
+Package hyperref Info: Option `pdftoolbar' set `true' on input line 62.
+Package hyperref Info: Option `pdfmenubar' set `true' on input line 62.
+Package hyperref Info: Option `pdffitwindow' set `false' on input line 62.
+Package hyperref Info: Option `pdfnewwindow' set `true' on input line 62.
+Package hyperref Info: Option `colorlinks' set `true' on input line 62.
 \c@definition=\count291
 \c@theorem=\count292
 
@@ -383,31 +383,31 @@ tex.def
 File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count293
 \l__pdf_internal_box=\box56
-) (toeplitzEigen.aux
+) (shortened.aux
 
 LaTeX Warning: Label `eq:multipleTesting:traceterm4' multiply defined.
 
 )
-\openout1 = `toeplitzEigen.aux'.
+\openout1 = `shortened.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 193.
-LaTeX Font Info:    ... okay on input line 193.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 177.
+LaTeX Font Info:    ... okay on input line 177.
 
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
 ii
@@ -438,7 +438,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 193.
+Package hyperref Info: Link coloring ON on input line 177.
 
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -452,20 +452,20 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count300
 )
-LaTeX Info: Redefining \ref on input line 193.
-LaTeX Info: Redefining \pageref on input line 193.
-LaTeX Info: Redefining \nameref on input line 193.
- (toeplitzEigen.out) (toeplitzEigen.out)
+LaTeX Info: Redefining \ref on input line 177.
+LaTeX Info: Redefining \pageref on input line 177.
+LaTeX Info: Redefining \nameref on input line 177.
+ (shortened.out) (shortened.out)
 \@outlinefile=\write3
-\openout3 = `toeplitzEigen.out'.
+\openout3 = `shortened.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 196
+LaTeX Font Info:    Trying to load font information for U+msa on input line 180
 .
 
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 196
+LaTeX Font Info:    Trying to load font information for U+msb on input line 180
 .
 
 (C:\Users\Chris\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -475,51 +475,63 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/Chris/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3]
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 342--344
+Underfull \hbox (badness 10000) in paragraph at lines 294--296
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 344--346
+Underfull \hbox (badness 10000) in paragraph at lines 296--298
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 346--348
+Underfull \hbox (badness 10000) in paragraph at lines 298--300
 
  []
 
 [5]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 365.
+(hyperref)                removing `math shift' on input line 317.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\Sigma' on input line 365.
+(hyperref)                removing `\Sigma' on input line 317.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 365.
+(hyperref)                removing `math shift' on input line 317.
 
-[6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] (toeplitzEigen.bbl) [17
+[6] [7] [8]
+Overfull \hbox (0.38875pt too wide) in paragraph at lines 442--443
+\OT1/cmr/m/n/12 The ap-prox-i-ma-tion ma-trix $\OT1/cmr/bx/n/12 C[]$ \OT1/cmr/m
+/n/12 has been de-rived here based purely on min-i-miz-ing $\OMS/cmsy/m/n/12 jj
+[]jj[]$
+ []
 
-]
-(toeplitzEigen.aux)
+[9]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 471.
+
+[10] [11] [12] [13] [14] [15] [16] (shortened.bbl) [17
+
+] (shortened.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package rerunfilecheck Info: File `toeplitzEigen.out' has not changed.
+Package rerunfilecheck Info: File `shortened.out' has not changed.
 (rerunfilecheck)             Checksum: F6A699A73EE252567D581BE5065D105C;270.
  ) 
 Here is how much of TeX's memory you used:
- 11726 strings out of 478927
- 177519 string characters out of 2852535
- 488742 words of memory out of 3000000
- 29342 multiletter control sequences out of 15000+600000
- 421002 words of font info for 91 fonts, out of 8000000 for 9000
+ 11725 strings out of 478927
+ 177392 string characters out of 2852535
+ 488743 words of memory out of 3000000
+ 29340 multiletter control sequences out of 15000+600000
+ 421171 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,18n,66p,832b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,18n,66p,814b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/pu
@@ -540,11 +552,12 @@ iKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Chris/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Chris/AppData/
 Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Chris
 /AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Us
-ers/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msb
-m10.pfb>
-Output written on toeplitzEigen.pdf (17 pages, 291730 bytes).
+ers/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.p
+fb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb>
+Output written on shortened.pdf (17 pages, 298202 bytes).
 PDF statistics:
- 304 PDF objects out of 1000 (max. 8388607)
+ 315 PDF objects out of 1000 (max. 8388607)
  63 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

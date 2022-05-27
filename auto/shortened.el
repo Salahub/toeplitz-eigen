@@ -1,22 +1,14 @@
 (TeX-add-style-hook
- "toeplitzEigen"
+ "shortened"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("graphicx" "pdftex") ("natbib" "round") ("hyperref" "pdftex" "pagebackref=false")))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
     "article"
     "art12"
-    "ifthen"
     "amsmath"
     "amssymb"
     "amstext"
@@ -94,6 +86,11 @@
     "mutInf"
     "Had"
     "measureAssociation"
+    "lmin"
+    "argmin"
+    "argmax"
+    "arginf"
+    "argsup"
     "intersect"
     "union"
     "Reals"
@@ -107,7 +104,6 @@
     "eq:multipleTesting:genEigCov"
     "eq:multipleTesting:specEigCov"
     "eq:multipleTesting:commonCor"
-    "eq:generalMat"
     "c:multipleTesting:circDecom"
     "eq:explicitCirculant"
     "eq:pDef"
@@ -129,6 +125,7 @@
     "c:multipleTesting:asympEquiv"
     "eq:multipleTesting:asympEq"
     "eq:multipleTesting:asymTrace"
+    "eq:kfirstMoments"
     "eq:multipleTesting:traceterm4"
     "eq:multipleTesting:traceterm3"
     "eq:multipleTesting:traceterm2"
@@ -139,16 +136,10 @@
     "eq:multipleTesting:grayApprox"
     "eq:multipleTesting:rateEqgren"
     "eq:multipleTesting:rateEqCsig")
-   (LaTeX-add-bibliographies
-    "../Bibliography/fullbib")
-   (LaTeX-add-amsthm-newtheorems
+   (LaTeX-add-environments
     "definition"
     "theorem")
-   (LaTeX-add-color-definecolors
-    "background-color"
-    "steelblue"
-    "brickred"
-    "bluegray"
-    "amethyst"))
+   (LaTeX-add-bibliographies
+    "../Bibliography/fullbib"))
  :latex)
 
