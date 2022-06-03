@@ -5,6 +5,13 @@
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("graphicx" "pdftex") ("natbib" "round") ("hyperref" "pdftex" "pagebackref=false")))
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
     "article"
@@ -86,11 +93,6 @@
     "mutInf"
     "Had"
     "measureAssociation"
-    "lmin"
-    "argmin"
-    "argmax"
-    "arginf"
-    "argsup"
     "intersect"
     "union"
     "Reals"
@@ -124,8 +126,14 @@
     "eq:multipleTesting:circApproxEig"
     "c:multipleTesting:asympEquiv"
     "eq:multipleTesting:asympEq"
-    "eq:multipleTesting:asymTrace"
-    "eq:kfirstMoments"
+    "eq:asymTrace"
+    "thm:trunkmoment"
+    "eq:decomp1"
+    "eq:geoMGF"
+    "eq:sumByMoments"
+    "eq:kfirstmoments"
+    "eq:k1sum"
+    "eq:k2sum"
     "eq:multipleTesting:traceterm4"
     "eq:multipleTesting:traceterm3"
     "eq:multipleTesting:traceterm2"
@@ -136,10 +144,16 @@
     "eq:multipleTesting:grayApprox"
     "eq:multipleTesting:rateEqgren"
     "eq:multipleTesting:rateEqCsig")
-   (LaTeX-add-environments
+   (LaTeX-add-bibliographies
+    "../Bibliography/fullbib")
+   (LaTeX-add-amsthm-newtheorems
     "definition"
     "theorem")
-   (LaTeX-add-bibliographies
-    "../Bibliography/fullbib"))
+   (LaTeX-add-color-definecolors
+    "background-color"
+    "steelblue"
+    "brickred"
+    "bluegray"
+    "amethyst"))
  :latex)
 

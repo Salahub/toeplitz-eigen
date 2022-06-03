@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  26 MAY 2022 17:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  3 JUN 2022 08:23
 entering extended mode
 **\input shortened.tex
  (shortened.tex
@@ -513,11 +513,42 @@ Overfull \hbox (0.38875pt too wide) in paragraph at lines 442--443
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 471.
+(amsmath)                 on input line 464.
 
-[10] [11] [12] [13] [14] [15] [16] (shortened.bbl) [17
+[10] [11] [12]pdfTeX warning (ext4): destination with the same identifier (name
+{equation.3.26}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.522 \begin{equation}
+                       \label{eq:multipleTesting:traceterm4}pdfTeX warning (ext
+4): destination with the same identifier (name{equation.3.26}) has been already
+ used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.522 \begin{equation}
+                       \label{eq:multipleTesting:traceterm4}pdfTeX warning (ext
+4): destination with the same identifier (name{equation.3.26}) has been already
+ used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.522 \begin{equation}
+                       \label{eq:multipleTesting:traceterm4}pdfTeX warning (ext
+4): destination with the same identifier (name{equation.3.26}) has been already
+ used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.522 \begin{equation}
+                       \label{eq:multipleTesting:traceterm4} [13]
+
+LaTeX Warning: Reference `eq:multipleTesting:asymTrace' on page 14 undefined on
+ input line 576.
+
+[14] [15] [16] [17] (shortened.bbl) [18
 
 ] (shortened.aux)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -525,13 +556,13 @@ Package rerunfilecheck Info: File `shortened.out' has not changed.
 (rerunfilecheck)             Checksum: F6A699A73EE252567D581BE5065D105C;270.
  ) 
 Here is how much of TeX's memory you used:
- 11725 strings out of 478927
- 177392 string characters out of 2852535
- 488743 words of memory out of 3000000
- 29340 multiletter control sequences out of 15000+600000
+ 11738 strings out of 478927
+ 177551 string characters out of 2852535
+ 491054 words of memory out of 3000000
+ 29347 multiletter control sequences out of 15000+600000
  421171 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,18n,66p,814b,389s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,18n,66p,814b,415s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmbx8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/pu
@@ -555,9 +586,9 @@ Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Chris
 ers/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.p
 fb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on shortened.pdf (17 pages, 298202 bytes).
+Output written on shortened.pdf (18 pages, 306475 bytes).
 PDF statistics:
- 315 PDF objects out of 1000 (max. 8388607)
- 63 named destinations out of 1000 (max. 500000)
+ 329 PDF objects out of 1000 (max. 8388607)
+ 69 named destinations out of 1000 (max. 500000)
  41 words of extra memory for PDF output out of 10000 (max. 10000000)
 

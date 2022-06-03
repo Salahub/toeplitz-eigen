@@ -448,36 +448,76 @@ Therefore, a natural consideration is the difference
 Before taking the limit, consider
 $$\frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma}} =  \sqrt{ \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} },$$
 which has the square
-\begin{equation} \label{eq:multipleTesting:asymTrace}
-  \begin{aligned}
-    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & =  \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} \\
-    & \\
-    & = \frac{1}{M} \sum_{i = 0}^{M-1} \sum_{j = 0}^{M-1} \frac{\abs{i-j}^2}{M^2} \left ( \rho^{2\abs{i-j}} - 2 \rho^{\abs{i-j} + M - \abs{i-j}} + \rho^{2(M - \abs{i-j})} \right ) \\
-    & \\
-    & =  \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right )
-  \end{aligned}
-\end{equation}
+\begin{eqnarray}
+    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = &  \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} \nonumber \\
+    & & \nonumber \\
+    & = & \frac{1}{M} \sum_{i = 0}^{M-1} \sum_{j = 0}^{M-1} \frac{\abs{i-j}^2}{M^2} \left ( \rho^{2\abs{i-j}} - 2 \rho^{\abs{i-j} + M - \abs{i-j}} + \rho^{2(M - \abs{i-j})} \right ) \nonumber \\
+    & & \nonumber \\
+    & = & \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \label{eq:asymTrace}
+\end{eqnarray}
 Evaluating this expression for $\rho < 1$ is made easier by considering the general sum
 $$\sum_{m = 1}^{M} m^k \rho^m.$$
+\begin{theorem}[Truncated geometric power series] \label{thm:trunkmoment}
+  The finite sum
+  $$\sum_{m = 1}^{M} m^k \rho^m$$
+  can be expressed as
+  $$\frac{\rho}{1 - \rho} \left [ (1 - \rho^M) \frac{d^k}{dt^k} G(t) \Big |_{t = 0} - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \frac{d^{k-l}}{dt^{k-l}} G(t) \Big |_{t = 0} \right ]$$
+  where
+  $$G(t) = E[e^{itX}]$$
+  is the moment generating function for $X \sim Geo(1 - \rho)$.
+\end{theorem}
+\begin{proof}
 Multiplying by $\frac{1 - \rho}{1 - \rho}$, we obtain
 $$\sum_{m = 1}^{M} m^k \rho^m = \frac{\rho}{1 - \rho} \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho).$$
 Now
-\begin{equation*}
-  \begin{aligned}
-    \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho) & = \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = M + 1}^{\infty} m^k \rho^{m - M - 1} (1 - \rho) \\
-    & \\
-    & = \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M}\sum_{m = 1}^{\infty} (m + M)^k \rho^{m - 1} (1 - \rho) \\
-    & \\
-    & = \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = 1}^{\infty} \sum_{l = 0}^k {k \choose l} m^{k-l} M^l \rho^{m - 1} (1 - \rho) \\
-    & \\
-    & = (1 - \rho^M) \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \sum_{m = 1}^{\infty}  m^{k-l} \rho^{m - 1} (1 - \rho) \\
-  \end{aligned}
-\end{equation*}
-
-
-\begin{equation} \label{eq:kfirstMoments}
-  \sum_{m = 1}^{M-1} m^k \rho^m = \frac{\rho}{1 - \rho} \left [ \left ( 1 - \rho^M \right ) \sum_{m = 0}^{\infty} m^k \rho^{m-1} \right ]
+\begin{eqnarray}
+    \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho) & = & \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = M + 1}^{\infty} m^k \rho^{m - M - 1} (1 - \rho) \nonumber \\
+    & & \nonumber \\
+    & = & \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M}\sum_{m = 1}^{\infty} (m + M)^k \rho^{m - 1} (1 - \rho) \nonumber \\
+    & & \nonumber \\
+    & = & \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = 1}^{\infty} \sum_{l = 0}^k {k \choose l} m^{k-l} M^l \rho^{m - 1} (1 - \rho) \nonumber \\
+    & & \nonumber \\
+    & = & (1 - \rho^M) \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) \nonumber \\
+    & & \hspace{0.5cm}- \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \sum_{m = 1}^{\infty}  m^{k-l} \rho^{m - 1} (1 - \rho),  \label{eq:decomp1}
+\end{eqnarray}
+but
+$$\sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho)$$
+is just the $k^{\text{th}}$ moment of a geometric distribution with a probability of sucess of $1 - \rho$. This distribution has a moment-generating function
+\begin{equation} \label{eq:geoMGF}
+G(t) = \frac{1 - \rho}{e^{-t} - \rho}
 \end{equation}
+which can be used to evaluate the $k^{\text{th}}$ moment by taking the $k^{\text{th}}$ derivative and evaluating it at $t = 0$, denoted
+\begin{equation*} 
+\frac{d^k}{dt^k} G(t) \Big |_{t = 0}
+\end{equation*}
+and substituted into Equation \ref{eq:decomp1} to give the more succinct
+\begin{equation} \label{eq:sumByMoments}
+  \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho) = (1 - \rho^M) \frac{d^k}{dt^k} G(t) \Big |_{t = 0} - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \frac{d^{k-l}}{dt^{k-l}} G(t) \Big |_{t = 0}.
+\end{equation}
+This gives the result for the original sum
+\begin{equation} \label{eq:kfirstmoments}
+ \sum_{m = 1}^{M} m^k \rho^m = \frac{\rho}{1 - \rho} \left [ (1 - \rho^M) \frac{d^k}{dt^k} G(t) \Big |_{t = 0} - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \frac{d^{k-l}}{dt^{k-l}} G(t) \Big |_{t = 0} \right ].
+\end{equation}
+\end{proof}
+As expected, taking the limit $M \rightarrow \infty$ reduces this expression to the $k^{\text{th}}$ geometric moment multiplied by $\rho/(1 - \rho)$.
+
+and expresses it as a linear combination of the first $k$ moments of the geometric distribution. In particular, for $k = 1$ and $2$ we have
+\begin{eqnarray}
+  \sum_{m = 1}^{M} m \rho^m & = & \frac{\rho}{(1 - \rho)^2} \Big [ 1 - M\rho^{M-1} + (M-1)\rho^{M+1} \Big ], \label{eq:k1sum} \\
+  & & \nonumber \\
+  \sum_{m = 1}^{M} m^2 \rho^m & = & \frac{\rho}{(1 - \rho)^3} \Big [ 1 + \rho - M^2 \rho^{M-1} + (3M^2 - (M+1)^2) \rho^M \label{eq:k2sum} \\
+  & & \hspace{2cm} - 2(M-1)^2 \rho^{M+1} \Big ]. \nonumber
+\end{eqnarray}
+Critically, Equations \ref{eq:k1sum} and \ref{eq:k2sum} demonstrate that as $M \rightarrow \infty$ Equation \ref{eq:kfirstmoments} approaches a value proportional to the $k^{th}$ moment of the geometric distribution. These moments are finite for $k = 1$ and $k = 2$.
+
+We can expand Equation \ref{eq:asymTrace} to give
+\begin{eqnarray}
+  \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = & \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \nonumber \\
+  & & \nonumber \\
+  & = & \frac{2}{M^2} \left [ \sum_{m = 1}^{M-1} (M^2 - 2Mm + 2m^2) \rho^{2m} - 2 \rho^M \sum_{m = 1}^{M-1} m^2 \right ] \nonumber \\
+  & & - \frac{2}{M^3} \left [ \sum_{m = 1}^{M-1} (M^3 - 3M^2m + 3Mm^2) \rho^{2m} - 2 \rho^M \sum_{m = 1}^{M-1} m^3 \right ] \nonumber 
+\end{eqnarray}
+
 
 Each term in this sum can then be considered separately. The final term is the sum of the first $M-1$ squared integers multiplied by a constant and so
 \begin{equation} \label{eq:multipleTesting:traceterm4}
