@@ -24,7 +24,7 @@
 \usepackage{bm}% bold math
 \usepackage{float}
 \usepackage{multirow}
-\usepackage[round]{natbib}   % omit 'round' option for square brackets
+\usepackage{natbib}   % omit 'round' option for square brackets
 
 \usepackage{algorithm} % For counting chapters
 \usepackage{algorithmicx, algpseudocode}
@@ -171,14 +171,18 @@
 \newcommand{\comment}[1]{{\color{steelblue} COMMENT:  {#1}}}
 \newcommand{\TODO}[1]{{\color{brickred} TODO:  {#1}}}
 
-\title{Approximating the eigenvalues of real symmetric Toeplitz matrices using the nearest circulants}
+\title{Approximating real symmetric Toeplitz matrices using the nearest circulant}
 \author{Chris Salahub \\ {\footnotesize University of Waterloo, \texttt{csalahub@uwaterloo.ca}}}
 
 \begin{document}
 
 \maketitle
 
-A number of methods exist to approximated the eigensystem of the symmetric Toeplitz matrix
+\begin{abstract}
+  An approximation of a real Toeplitz matrix $\sm{\Sigma}$ based on the nearest circulant matrix is derived. This matrix, $\m{C}_{\Sigma}$, is symmetric as well as circulant. A proof that symmetric circulant matrices are the only real circulant matrices with all real eigenvalues is presented. The Frobenius norm of the difference $\sm{\Sigma} - \m{C}_{\Sigma}$ for the case of $\sm{\Sigma}$ displaying exponential decay is evaluated using an expression of the sum $\sum_{n=1}^{N} n^k p^n$ in terms of the first $k$ geometric moments. This is compared to a classic approximation based on \cite{grenanderszego1958}. Despite similar leading terms for large $M$, the nearest circulant is a dramatically closer approximation in many finite cases.
+\end{abstract}
+
+A number of methods exist to approximate the symmetric Toeplitz matrix
 \begin{equation} \label{eq:multipleTesting:genEigCov}
   \sm{\Sigma} = \begin{bmatrix}
     \rho_0 & \rho_1 & \rho_2 & \dots & \rho_{M-1} \\
@@ -314,7 +318,7 @@ This circulant is symmetric, and any symmetric circulant matrix will have an ana
   the definition of a symmetric circulant.
 \end{proof}
 
-\section{The Nearest Circulant to $\Sigma$} \label{c:multipleTesting:nearestCirc}
+\section{The Nearest Circulant to $\m{\Sigma}$} \label{c:multipleTesting:nearestCirc}
 
 Now consider the decomposition
 \begin{equation} \label{eq:circDecomp}
@@ -403,7 +407,7 @@ which can be re-expressed as
     \rho_m + \frac{m}{M}(\rho_{M-m} - \rho_m) & \text{otherwise},
   \end{cases}
 \end{equation}
-to make the relationship between $c_m$ and $\rho_m$ clearer. An important consequence of this system of equations is that $c_m = \frac{m}{M} \rho_{M-m} + \frac{M-m}{M} \rho_m = \frac{M - (M - m)}{M} \rho_{M-m} + \frac{M - m}{M} \rho_{M - (M - m)} = c_{M-m}$, and so $\m{C}_{\Sigma}$ is a symmetric circulant matrix with $c_m$ defined as in Equation (\ref{eq:closestCirc}). Therefore, this nearest circulant will have only real eigenvalues.
+to make the relationship between $c_m$ and $\rho_m$ clearer. An important consequence of this system of equations is that $c_m = \frac{m}{M} \rho_{M-m} + \frac{M-m}{M} \rho_m = \frac{M - (M - m)}{M} \rho_{M-m} + \frac{M - m}{M} \rho_{M - (M - m)} = c_{M-m}$, and so $\m{C}_{\Sigma}$ is a symmetric circulant matrix with $c_m$ defined as in Equation (\ref{eq:closestCirc}). Therefore, this nearest circulant will have only real eigenvalues. This is desirable for the multiple testing adjustment case of \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009}, where the effective number of tests is a real number that is some function of the eigenvalues.
 
 So the optimal decomposition in the Frobenius norm is
 \begin{equation} \label{eq:sigmaCirculantDecomp}
@@ -437,19 +441,19 @@ and $\m{R}_{\Sigma_e}$ is $\frac{m}{M} (\rho^m - \rho^{M-m})$ for the $m^{\text{
 \end{equation*}
 
 
-\section{Asymptotic Equivalence} \label{c:multipleTesting:asympEquiv}
+\section{Asymptotic Equivalence of $\m{C}_{\Sigma_e}$ and $\m{\Sigma}_e$} \label{c:multipleTesting:asympEquiv}
 
-The approximation matrix $\m{C}_{\Sigma}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma} - \m{C}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives similar, but less general, results by considering the asymptotic equivalence of matrices in the weak norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
+The approximation matrix $\m{C}_{\Sigma_e}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma}_e - \m{C}_{\Sigma_e}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives a similar result by considering the asymptotic equivalence of matrices in the weak norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
 $$\lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{A - B} = 0.$$
 Therefore, a natural consideration is the difference
 \begin{equation} \label{eq:multipleTesting:asympEq}
-  \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\sm{\Sigma} - \m{C}_{\Sigma}} = \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma}}.
+  \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\sm{\Sigma}_e - \m{C}_{\Sigma_e}} = \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma_e}}.
 \end{equation}
-Before taking the limit, consider
-$$\frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma}} =  \sqrt{ \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} },$$
+Before taking the limit, note
+$$\frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma_e}} =  \sqrt{ \frac{1}{M} \trace{\tr{\m{R}_{\Sigma_e}} \m{R}_{\Sigma_e}} },$$
 which has the square
 \begin{eqnarray}
-    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = &  \frac{1}{M} \trace{\tr{\m{R}_{\Sigma}} \m{R}_{\Sigma}} \nonumber \\
+    \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2 & = &  \frac{1}{M} \trace{\tr{\m{R}_{\Sigma_e}} \m{R}_{\Sigma_e}} \nonumber \\
     & & \nonumber \\
     & = & \frac{1}{M} \sum_{i = 0}^{M-1} \sum_{j = 0}^{M-1} \frac{\abs{i-j}^2}{M^2} \left ( \rho^{2\abs{i-j}} - 2 \rho^{\abs{i-j} + M - \abs{i-j}} + \rho^{2(M - \abs{i-j})} \right ) \nonumber \\
     & & \nonumber \\
@@ -459,146 +463,98 @@ Evaluating this expression for $\rho < 1$ is made easier by considering the gene
 $$\sum_{m = 1}^{M} m^k \rho^m.$$
 \begin{theorem}[Truncated geometric power series] \label{thm:trunkmoment}
   The finite sum
-  $$\sum_{m = 1}^{M} m^k \rho^m$$
-  can be expressed as
-  $$\frac{\rho}{1 - \rho} \left [ (1 - \rho^M) \frac{d^k}{dt^k} G(t) \Big |_{t = 0} - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \frac{d^{k-l}}{dt^{k-l}} G(t) \Big |_{t = 0} \right ]$$
+  $$\sum_{n = 1}^{N} n^k p^n$$
+  with $\abs{p} < 1$ can be expressed as
+  $$\frac{p}{1 - p} \left [ (1 - p^N) G^{(k)}(0) - p^{N} \sum_{l = 1}^k {k \choose l} N^l G^{(k-l)}(0) \right ]$$
   where
-  $$G(t) = E[e^{itX}]$$
-  is the moment generating function for $X \sim Geo(1 - \rho)$.
+  $$G^{(k)}(0) = \frac{d^k}{dt^k} E[e^{tX}] \Big |_{t = 0}$$
+  is the $k^{\text{th}}$ derivative of $G(t) = E[e^{tX}]$ evaluated at zero for $X \sim Geo(1 - p)$.
 \end{theorem}
 \begin{proof}
-Multiplying by $\frac{1 - \rho}{1 - \rho}$, we obtain
-$$\sum_{m = 1}^{M} m^k \rho^m = \frac{\rho}{1 - \rho} \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho).$$
+Multiplying by $\frac{1 - p}{1 - p}$, we obtain
+$$\sum_{n = 1}^{N} n^k p^n = \frac{p}{1 - p} \sum_{n = 1}^{N} n^k p^{n-1} (1 - p).$$
 Now
 \begin{eqnarray}
-    \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho) & = & \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = M + 1}^{\infty} m^k \rho^{m - M - 1} (1 - \rho) \nonumber \\
+    \sum_{n = 1}^{N} n^k p^{n-1} (1 - p) & = & \sum_{n = 1}^{\infty} n^k p^{n-1} (1 - p) - p^{N} \sum_{n = N + 1}^{\infty} n^k p^{n - N - 1} (1 - p) \nonumber \\
     & & \nonumber \\
-    & = & \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M}\sum_{m = 1}^{\infty} (m + M)^k \rho^{m - 1} (1 - \rho) \nonumber \\
+    & = & \sum_{n = 1}^{\infty} n^k p^{n-1} (1 - p) - p^{N} \sum_{n = 1}^{\infty} (n + N)^k p^{n - 1} (1 - p) \nonumber \\
     & & \nonumber \\
-    & = & \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) - \rho^{M} \sum_{m = 1}^{\infty} \sum_{l = 0}^k {k \choose l} m^{k-l} M^l \rho^{m - 1} (1 - \rho) \nonumber \\
+    & = & \sum_{n = 1}^{\infty} n^k p^{n-1} (1 - p) - p^{N} \sum_{n = 1}^{\infty} \sum_{l = 0}^k {k \choose l} n^{k-l} N^l p^{n - 1} (1 - p) \nonumber \\
     & & \nonumber \\
-    & = & (1 - \rho^M) \sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho) \nonumber \\
-    & & \hspace{0.5cm}- \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \sum_{m = 1}^{\infty}  m^{k-l} \rho^{m - 1} (1 - \rho),  \label{eq:decomp1}
+    & = & (1 - p^N) \sum_{n = 1}^{\infty} n^k p^{n-1} (1 - p) \nonumber \\
+    & & \hspace{0.5cm}- p^{N} \sum_{l = 1}^k {k \choose l} N^l \sum_{m = 1}^{\infty}  n^{k-l} p^{n - 1} (1 - p),  \label{eq:decomp1}
 \end{eqnarray}
 but
-$$\sum_{m = 1}^{\infty} m^k \rho^{m-1} (1 - \rho)$$
-is just the $k^{\text{th}}$ moment of a geometric distribution with a probability of sucess of $1 - \rho$. This distribution has a moment-generating function
+$$\sum_{n = 1}^{\infty} n^k p^{n-1} (1 - p)$$
+is just the $k^{\text{th}}$ moment of a geometric distribution with a probability of sucess of $1 - p$. This distribution has a moment-generating function
 \begin{equation} \label{eq:geoMGF}
-G(t) = \frac{1 - \rho}{e^{-t} - \rho}
+G(t) = \frac{1 - p}{1 - e^t p}
 \end{equation}
 which can be used to evaluate the $k^{\text{th}}$ moment by taking the $k^{\text{th}}$ derivative and evaluating it at $t = 0$, denoted
 \begin{equation*} 
-\frac{d^k}{dt^k} G(t) \Big |_{t = 0}
+G^{(k)}(0)
 \end{equation*}
 and substituted into Equation \ref{eq:decomp1} to give the more succinct
 \begin{equation} \label{eq:sumByMoments}
-  \sum_{m = 1}^{M} m^k \rho^{m-1} (1 - \rho) = (1 - \rho^M) \frac{d^k}{dt^k} G(t) \Big |_{t = 0} - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \frac{d^{k-l}}{dt^{k-l}} G(t) \Big |_{t = 0}.
+  \sum_{n = 1}^{N} n^k p^{n-1} (1 - p) = (1 - p^N) G^{(k)}(0) - p^{N} \sum_{l = 1}^k {k \choose l} N^l G^{(k-l)}(0).
 \end{equation}
 This gives the result for the original sum
 \begin{equation} \label{eq:kfirstmoments}
- \sum_{m = 1}^{M} m^k \rho^m = \frac{\rho}{1 - \rho} \left [ (1 - \rho^M) \frac{d^k}{dt^k} G(t) \Big |_{t = 0} - \rho^{M} \sum_{l = 1}^k {k \choose l} M^l \frac{d^{k-l}}{dt^{k-l}} G(t) \Big |_{t = 0} \right ].
+ \sum_{n = 1}^{N} n^k p^n = \frac{p}{1 - p} \left [ (1 - p^N) G^{(k)}(0) - p^{N} \sum_{l = 1}^k {k \choose l} N^l G^{(k-l)}(0) \right ].
 \end{equation}
 \end{proof}
-As expected, taking the limit $M \rightarrow \infty$ reduces this expression to the $k^{\text{th}}$ geometric moment multiplied by $\rho/(1 - \rho)$.
+This result provides a representation of the sum $\sum_{n = 1}^{N} n^k p^n$ in terms of the first $k$ moments of the geometric distribution with parameter $1 - p$. Additionally, taking the limit $N \rightarrow \infty$ reduces this expression to the $k^{\text{th}}$ moment of the geometric distribution with parameter $1 - p$ multiplied by $p/(1 - p)$. As the original sum is the $k^{\text{th}}$ geometric moment truncated at $N$, this result is expected.
 
-and expresses it as a linear combination of the first $k$ moments of the geometric distribution. In particular, for $k = 1$ and $2$ we have
+We can use this theorem immediately by expanding Equation \ref{eq:asymTrace} to give
 \begin{eqnarray}
-  \sum_{m = 1}^{M} m \rho^m & = & \frac{\rho}{(1 - \rho)^2} \Big [ 1 - M\rho^{M-1} + (M-1)\rho^{M+1} \Big ], \label{eq:k1sum} \\
-  & & \nonumber \\
-  \sum_{m = 1}^{M} m^2 \rho^m & = & \frac{\rho}{(1 - \rho)^3} \Big [ 1 + \rho - M^2 \rho^{M-1} + (3M^2 - (M+1)^2) \rho^M \label{eq:k2sum} \\
-  & & \hspace{2cm} - 2(M-1)^2 \rho^{M+1} \Big ]. \nonumber
-\end{eqnarray}
-Critically, Equations \ref{eq:k1sum} and \ref{eq:k2sum} demonstrate that as $M \rightarrow \infty$ Equation \ref{eq:kfirstmoments} approaches a value proportional to the $k^{th}$ moment of the geometric distribution. These moments are finite for $k = 1$ and $k = 2$.
-
-We can expand Equation \ref{eq:asymTrace} to give
-\begin{eqnarray}
-  \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = & \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ) \nonumber \\
+  \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2 & = & \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ), \nonumber \\
   & & \nonumber \\
   & = & \frac{2}{M^2} \left [ \sum_{m = 1}^{M-1} (M^2 - 2Mm + 2m^2) \rho^{2m} - 2 \rho^M \sum_{m = 1}^{M-1} m^2 \right ] \nonumber \\
-  & & - \frac{2}{M^3} \left [ \sum_{m = 1}^{M-1} (M^3 - 3M^2m + 3Mm^2) \rho^{2m} - 2 \rho^M \sum_{m = 1}^{M-1} m^3 \right ] \nonumber 
+  & & - \frac{2}{M^3} \left [ \sum_{m = 1}^{M-1} (M^3 - 3M^2m + 3Mm^2) \rho^{2m} - 2 \rho^M \sum_{m = 1}^{M-1} m^3 \right ], \nonumber \\
+  & & \nonumber \\
+  & = & 2 \left [ \sum_{m = 1}^{M-1} \left ( \frac{m}{M} - \frac{m^2}{M^2} \right ) \rho^{2m} - 2 \rho^M \left ( \sum_{m = 1}^{M-1} \frac{m^2}{M^2} - \frac{m^3}{M^3} \right ) \right ] \label{eq:frobeniussimp}
 \end{eqnarray}
+which has terms proportional to Equation \ref{eq:kfirstmoments} for $k = 1$ and $2$. No further evaluation is necessary to see
+$$ \lim_{M \rightarrow \infty} \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2 = 0,$$
+as these first two moments are finite for the geometric distribution and the final term is strictly less than $4M \rho^M$, which is zero in the limit. As a result we also get
+$$ \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma_e}} = 0$$
+and so $\m{C}_{\Sigma_e}$ is asymptotically equivalent to $\sm{\Sigma}_e$.
 
+The case of $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ is less straightforward, as Equation \ref{eq:asymTrace} becomes
+\begin{equation} \label{eq:nonexponent}
+  \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 = \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho_m^2 - 2 \rho_{M-m} \rho_m + \rho_{M - m}^2 \right ).
+\end{equation}
+This expression will be zero in the limit $M \rightarrow \infty$ if the series $\rho_m$ is absolutely convergent and the partial sums $\sum_{m = 1}^{M-1}m^3 \rho_m$ and $\sum_{m = 1}^{M-1} m^2 \rho_m$ are $O(M^2)$ and $O(M)$, respectively. If these conditions are met, then $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ are asymptotically equivalent.
 
-Each term in this sum can then be considered separately. The final term is the sum of the first $M-1$ squared integers multiplied by a constant and so
-\begin{equation} \label{eq:multipleTesting:traceterm4}
-  2 \rho^M \sum_{m = 1}^{M-1} m^2 = 2 \rho^M \frac{(M-1)M(2M-1)}{6} = \frac{1}{3}\rho^M (M-1)M(2M-1).
-\end{equation}
-Next,
-$$\sum_{m = 1}^{M-1} \left [ 2m^2 + M^2 - 2Mm \right ] \rho^{2m}$$
-can be split into three separate sums. The simplest of these to reduce is
-\begin{equation} \label{eq:multipleTesting:traceterm3}
-  M^2 \sum_{m = 1}^{M-1} \rho^{2m} = M^2 \frac{\rho^2 - \rho^{2M}}{1 - \rho^2} = M^2 r (1 - \rho^{2(M-1)})
-\end{equation}
-when $\rho < 1$, where $r = \frac{\rho^2}{1 - \rho^2}$ is useful shorthand. The restriction $\rho < 1$ corresponds to finite $r$. Considering next
-\begin{equation} \label{eq:multipleTesting:traceterm2}
-  \begin{aligned}
-    2M \sum_{m = 1}^{M-1} m \rho^{2m} & = 2M \rho^2 \frac{d}{d\rho^2} \sum_{m = 0}^{M-1} \rho^{2m}\\
-    & \\
-    & = 2M \rho^2 \frac{d}{d\rho^2} \frac{\rho^2 - \rho^{2M}}{1 - \rho^2}\\
-    & \\
-    & = 2M \rho^2 \left ( \frac{1 - M\rho^{2(M-1)}}{1 - \rho^2} + \frac{\rho^2 - \rho^{2M}}{(1 - \rho^2)^2} \right ) \\
-    & \\
-    & = 2Mr\left (1 - M\rho^{2(M-1)} + r  - \frac{\rho^{2M}}{1 - \rho^2} \right ) \\
-    & \\
-    & = 2Mr\left (1 + r - \rho^{2(M-1)} [ M + r ] \right ). \\
-  \end{aligned}
-\end{equation}
-The same derivative trick can be applied to obtain
-\begin{equation} \label{eq:multipleTesting:traceterm4a}
-  \begin{aligned}
-    \sum_{m = 1}^{M-1} m^2 \rho^{2m} & = \sum_{m = 1}^{M-1} m (m-1) \rho^{2m} + m \rho^{2m} \\
-    & \\
-    & = \rho^4 \frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m} + \rho^2 \frac{d}{d\rho^2} \sum_{m = 1}^{M-1} \rho^{2m}, \\
-  \end{aligned}
-\end{equation}
-the second term of which can be determined easily using Equation (\ref{eq:multipleTesting:traceterm3}) above. With a second differentiation, the first term is
-\begin{equation*}
-  \begin{aligned}
-    \rho^4 \frac{d^2}{(d\rho^2)^2} \sum_{m = 1}^{M-1} \rho^{2m} & = \rho^4 \frac{d}{d\rho^2} \left ( \frac{1 - M\rho^{2(M-1)}}{1 - \rho^2} + \frac{\rho^2 - \rho^{2M}}{(1 - \rho^2)^2} \right ) \\
-    & \\
-    & = \rho^4 \left ( \frac{ - M(M-1) \rho^{2(M-2)}}{1 - \rho^2} + \frac{2(1 - M \rho^{2(M-1)})}{(1 - \rho^2)^2} + \frac{2(\rho^2 - \rho^{2M})}{(1 - \rho^2)^3} \right ). \\
-  \end{aligned}
-\end{equation*}
-Substituting this and Equation (\ref{eq:multipleTesting:traceterm3}) into Equation (\ref{eq:multipleTesting:traceterm4a}) gives
-\begin{equation} \label{eq:multipleTesting:traceterm4}
-  \begin{aligned}
-    \sum_{m = 1}^{M-1} m^2 \rho^{2m} & =  \rho^2 \left ( \frac{1 - M\rho^{2(M-1)}}{1 - \rho^2} + \frac{\rho^2 - \rho^{2M}}{(1 - \rho^2)^2} \right ) \\
-    & ~~~~ + \rho^4 \left ( \frac{ - M(M-1) \rho^{2(M-2)}}{1 - \rho^2} + \frac{2(1 - M \rho^{2(M-1)})}{(1 - \rho^2)^2} + \frac{2(\rho^2 - \rho^{2M})}{(1 - \rho^2)^3} \right ) \\
-    & \\
-    & = \rho^2 \left ( \frac{1 - M^2 \rho^{2(M-1)}}{1 - \rho^2} + \frac{3\rho^2 - (2M + 1) \rho^{2M}}{(1 - \rho^2)^2} + \frac{2\rho^2(\rho^2 - \rho^{2M})}{(1 - \rho^2)^3} \right ) \\
-    & \\
-    & = r \left ( 1 - M^2 \rho^{2(M-1)} + 3r - (2M + 1)r \rho^{2(M-1)} + 2r^2 - 2r^2 \rho^{2(M-1)} \right ) \\
-    & \\
-    & = r \left ( 1 + 3r + 2r^2 - [M^2 + (2M + 1)r + 2r^2] \rho^{2(M-1)} \right ) \\
-    & \\
-    & = r \left [ (1 + r)(1 + 2r) - \{ (M + r)^2 + r(1 + r) \} \rho^{M-1} \right ] \\
-  \end{aligned}
-\end{equation}
-So that Equation (\ref{eq:multipleTesting:asymTrace}) becomes
-\begin{equation} \label{eq:multipleTesting:traceSimplified}
-  \begin{aligned}
-    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 & = \frac{2}{M^3} \bigg ( 2r  \Big [ (1 + r)(1 + 2r) - \{ (M + r)^2 + r(1 + r) \} \rho^{M-1} \Big ] \\
-    & ~~~~ + M^2 r \Big [ 1 - \rho^{2(M-1)} \Big ] - 2Mr\Big [ 1 + r - \rho^{2(M-1)} ( M + r ) \Big ]  \\
-    & ~~~~ + \frac{1}{3}\rho^M (M-1)M(2M-1) \bigg ) \\
-    & \\
-    & = \frac{2}{M^3} \bigg ( r \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 \\
-    & ~~~~~~~~~~~~~ - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
-    & ~~~~ - \frac{1}{3} \rho^M M(M-1)(2M-1) \bigg ) \\
-    & \\
-    & = \frac{2r}{M^3} \Big [ 2(1 + r)(1 + 2r - 2M) + M^2 - \big \{ (M+r)^2 + r(2r+3) \big \} \rho^{2(M-1)} \Big ] \\
-    & ~~~~ - \frac{2 \rho^M}{3 M^2} (M-1)(2M-1) \\
-    & \\
-    & = 2 \Big ( r [ 1 - \rho^{2(M-1)} ] + \rho^M \Big ) \frac{1}{M} - \Big ( 4r [ 2 + 2r - r\rho^{2(M-1)} ] - \frac{2}{3} \rho^M \Big ) \frac{1}{M^2} \\
-    & ~~~~ + 2r \Big ( 1 + r \Big ) \Big ( 1 + 2r - 3r \rho^{2(M-1)} \Big ) \frac{1}{M^3} - \frac{4}{3} \rho^M \\
-  \end{aligned}
-\end{equation}
-when $\rho < 1 \iff r < \infty$. Under these constraints, the coefficients of Equation (\ref{eq:multipleTesting:traceSimplified}) are finite for all $M > 0$, and so
-\begin{equation*}
-  \lim_{M \rightarrow \infty} \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 = 0 \implies \lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma}} = 0.
-\end{equation*}
-Therefore, $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ are asymptotically equivalent in the weak norm.
-
-\section{Rate of Convergence} \label{c:multipleTesting:rateConverge}
+\section{Convergence} \label{c:multipleTesting:rateConverge}
+  
+$\m{R}_{\Sigma_e}$ can be evaluated further by considering Equation \ref{eq:kfirstmoments} for $k = 1$ and $2$ with $p = \rho^2$ and $N = M-1$:
+\begin{eqnarray}
+  \sum_{m = 1}^{M-1} m \rho^{2m} & = & \frac{\rho^2}{1 - \rho^2} \Bigg [ \frac{1 - \rho^{2(M-1)}}{1 - \rho^2} - \rho^{2(M-1)} (M - 1) \Bigg ], \label{eq:k1sum} \\
+  & & \nonumber \\
+  \sum_{m = 1}^{M-1} m^2 \rho^{2m} & = & \frac{\rho^2}{1 - \rho^2} \Bigg [ \frac{(1 - \rho^{2(M-1)})(1 + \rho^2)}{(1 - \rho^2)^2} - \frac{2 \rho^{2(M-1)}}{1 - \rho^2}(M - 1) \nonumber \\
+  & & \hspace{1.8cm} - \rho^{2(M-1)} (M-1)^2 \Bigg ]. \label{eq:k2sum}
+\end{eqnarray}
+Substituting Equations \ref{eq:k1sum} and \ref{eq:k2sum} into Equation \ref{eq:frobeniussimp} gives
+\begin{eqnarray}
+  \sum_{m = 1}^{M-1} \left ( \frac{m}{M} - \frac{m^2}{M^2} \right ) \rho^{2m} & = & \frac{\rho^2}{M(1 - \rho^2)} \Bigg [ \frac{1 + \rho^{2(M-1)}}{1 - \rho^2} - \frac{1 + \rho^2 + \rho^{2(M-1)} - 3\rho^{2M}}{(1 - \rho^2)^2}\frac{1}{M} \nonumber \\
+  & & \hspace{2.2cm} - \rho^{2(M-1)} \left ( 1 - \frac{1}{M} \right )\Bigg ]. \label{eq:mm2rhosum}
+\end{eqnarray}
+Simplifying
+$$2 \rho^M \left ( \sum_{m = 1}^{M-1} \frac{m^2}{M^2} - \frac{m^3}{M^3} \right )$$
+comes by substituting the equations for the sums of squares and cubes of the first $M-1$ integers:
+\begin{eqnarray}
+  2 \rho^M \left ( \sum_{m = 1}^{M-1} \frac{m^2}{M^2} - \frac{m^3}{M^3} \right ) & = & 2 \rho^M \left ( \frac{(M-1)M(2M-1)}{6M^2} - \frac{((M-1)M)^2}{4M^3} \right ) \nonumber \\
+  & & \nonumber \\
+  & = & 2 \rho^M  \left ( \frac{2M^3 - 3M^2 + M}{6M^2} - \frac{M^4 - 2M^3 + M^2}{4M^3} \right ) \nonumber \\
+  & & \nonumber \\
+  & = & \frac{1}{6} \rho^M  \left ( M - \frac{1}{M} \right ) \label{eq:diffSqNCube}
+\end{eqnarray}
+Taking the difference of Equations \ref{eq:mm2rhosum} and \ref{eq:diffSqNCube} gives an expression for the squared Frobenius norm of $\m{R}_{\Sigma_e}$:
+\begin{eqnarray}
+  \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2 & = &  \frac{2\rho^2}{M(1 - \rho^2)} \Bigg [ \frac{1 + \rho^{2(M-1)}}{1 - \rho^2} - \frac{1 + \rho^2 + \rho^{2(M-1)} - 3\rho^{2M}}{M(1 - \rho^2)^2} - \rho^{2(M-1)}  \frac{M - 1}{M}\Bigg ] \nonumber \\
+  & & - \frac{1}{3} \rho^M \left ( M - \frac{1}{M} \right ) \label{eq:frobNormSigE}
+\end{eqnarray}
 
 \cite{gray2006toeplitz} suggests a slightly different approximation. Following \cite{grenanderszego1958}, the sum
 $$f(x) = \sum_{k = -\infty}^{\infty} \rho_k e^{ikx} = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{ikx}$$
@@ -634,7 +590,7 @@ as the second sum is the sum of the squared $M^{\text{th}}$ roots of unity, whic
     & = \frac{1}{1 - \rho^M} \big ( \rho^m + \rho^{M-m} \big ) \\
   \end{aligned}
 \end{equation*}
-when $\rho < 1$. Therefore, Equation (\ref{eq:multipleTesting:grayEq}) becomes
+when $\rho < 1$. Therefore, Equation \ref{eq:multipleTesting:grayEq} becomes
 \begin{equation} \label{eq:multipleTesting:grayApprox}
   c_m = \begin{cases}
     \rho_0 & \text{for } m = 0, \\
@@ -642,32 +598,45 @@ when $\rho < 1$. Therefore, Equation (\ref{eq:multipleTesting:grayEq}) becomes
     \frac{1}{1 - \rho^M} \big ( \rho^m + \rho^{M-m} \big )  & \text{otherwise},\\
   \end{cases}
 \end{equation}
-in the particular case of $\rho_m = \rho^m$. So, while $\m{C}_{\Sigma}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a simple sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma} - \m{C}_{GS}$. Then
-\begin{equation} \label{eq:multipleTesting:rateEqgren}
-    \frac{1}{M} \frob{\m{R}_{GS}}^2 = \frac{2}{(1 - \rho^M)^2} \left [ \frac{2}{M(1 - \rho^2)} + 2 \left ( 1 - \frac{1}{M} \right ) \rho^{2M} - \frac{1}{M(1 - \rho^2)} \rho^{4M} \right ]
+in the particular case of $\rho_m = \rho^m$. So, while $\m{C}_{\Sigma_e}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma} - \m{C}_{GS}$. Then
+\begin{equation} \label{eq:frobNormGren}
+    \frac{1}{M} \frob{\m{R}_{GS}}^2 = \frac{2}{(1 - \rho^M)^2} \left [ \frac{\rho^2 (1 - \rho^{2M})^2}{(1 - \rho^2)^2} \frac{1}{M} + (M - 2) \rho^{2M} \right ].
 \end{equation}
-while an evaluation of Equation (\ref{eq:multipleTesting:traceSimplified}) gives
-\begin{equation} \label{eq:multipleTesting:rateEqCsig}
-  \begin{aligned}
-    \frac{1}{M} \frob{\m{R}_{\Sigma}}^2 = & \frac{2 \rho^2}{M^3} \bigg [ \frac{M^2}{1 - \rho^2} + \frac{1 - 2M - \rho^{2M}}{(1 - \rho^2)^2} + \frac{2 \rho^2 ( 1 - \rho^M )}{(1 - \rho^2)^3} \\
-    & \\
-    & - 2 \rho^M M(M-1)(2M-1) \bigg ]
-  \end{aligned}
+As $\rho^M = O(1/M^k)$ for $0 \leq \rho < 1$ and $k < \infty$, Equation \ref{eq:frobNormGren} gives
+\begin{equation} \label{eq:GrenLeading}
+  \frac{1}{\sqrt{M}} \frob{\m{R}_{GS}} = \frac{\sqrt{2} \rho}{(1 - \rho^2) (1 - \rho^M)} \frac{1}{\sqrt{M}} + O\left(\frac{1}{M}\right)
 \end{equation}
-Both of these have a leading term approximately equal to
-$$ \frac{2}{M(1-\rho^2)}$$
-for large $M$, and so their asymptotic behaviour is identical for all $\rho$. For small $M$, however, it is helpful to plot these values and compare these squared distances.
+while the same logic applied to Equation \ref{eq:frobNormSigE} gives
+\begin{equation} \label{eq:nearLeading}
+  \frac{1}{\sqrt{M}} \frob{\m{R}_{\Sigma_e}} = \frac{\sqrt{2} \rho}{1 - \rho^2} \frac{1}{\sqrt{M}} + O\left(\frac{1}{M}\right)
+\end{equation}
+The leading terms of which give the relationship for large $M$
+\begin{equation*}
+ \frac{1}{\sqrt{M}}\frob{\m{R}_{\Sigma_e}} \approx (1 - \rho^M) \frac{1}{\sqrt{M}} \frob{\m{R}_{GS}}.
+\end{equation*}
+As $1 - \rho^M < 1$, $\m{R}_{\Sigma_e}$ converges to zero faster than $\m{R}_{GS}$ with a greater difference in convergence for $\rho$ values close to 1. A comparison of the values of Equations \ref{eq:frobNormSigE} and \ref{eq:frobNormGren} is shown in Figure \ref{fig:rhoPlots}.
+\begin{figure}
+  \centering
+  \begin{tabular}{cc}
+    \includegraphics[scale = 0.45]{rho10.png} & \includegraphics[scale = 0.45]{rho50.png} \\
+    \includegraphics[scale = 0.45]{rho90.png} & \includegraphics[scale = 0.45]{rho95.png}
+  \end{tabular}
+  \caption{Log-log plots of the log squared Frobenius norms of the residuals $\m{R}_{\Sigma_e}$ and $\m{R}_{GS}$ divided by $M$ for a selection of $\rho$ values over $M = 3$ to 400. The blue line corresponds to $\log \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2$, the red line to  $\log \frac{1}{M} \frob{\m{R}_{GS}}^2$, and the black dashed line to the log of the leading term given by Equation \ref{eq:nearLeading}} \label{fig:rhoPlots}
+\end{figure}
 
+The nearest circulant approximation performs considerably better than the approximation suggested by \cite{gray2006toeplitz}. Using the leading term line as a guide, the nearest circulant matrix is uniformly less than this leading term, while the other is greater than the leading term. Moreover, while the nearest circulant improves in quality for small $M$ as $\rho$ nears 1, the approximation of \cite{gray2006toeplitz} performs poorer relative to the leading term. This makes sense, as for $\rho$ close to one, the absolute difference between $\rho^m$ and $\rho^{(M-m)}$ decreases, making the weighted average entries of $\m{C}_{\Sigma_e}$ closer to the true values. In contrast, the other approximation adds these values and scales them, and so generally has residual terms with larger magnitude. The nearest circulant is orders of magnitude closer in the Frobenius norm for small $M$ in these cases.
+
+\section{Conclusion} \label{sec:conc}
+
+We have derived here a circulant approximation of $\sm{\Sigma}$, $\m{C}_{\Sigma}$, which is optimal in the sense of the Frobenius norm. $\m{C}_{\Sigma}$ is also symmetric, and so is guaranteed to have real eigenvalues. For applications such as multiple test adjustment, this is a highly desirable quality. Additionally, it was proven that only symmetric real circulants are guaranteed to have this property. Beyond multiple test adjustment, any application requiring the eigenvalues of a Toeplitz matrix can use $\m{C}_{\Sigma}$ for its optimality and guaranteed real eigenvalues.
+
+$\m{C}_{\Sigma}$ is also much better than classic approximation provided in \cite{grenanderszego1958} in the case of $\sm{\Sigma}_e$, where $\rho_m = \rho^m$. In particular, as $\rho$ approaches one, $\m{C}_{\Sigma_e}$ performs orders of magnitude better. In the limit of large $M$, both approximations have the same behaviour.
+
+In demonstrating this improved behaviour, another general result was demonstrated. It was proven that the sum $\sum_{n = 1}^{N} n^k p^n$ can be expressed as a linear combination of the first $k$ geometric moments. This expression was provided explicitly for interested researchers.
 
 %% BIBLIOGRAPHY
-\bibliographystyle{plainnat}
-\cleardoublepage % This is needed if the "book" class is used to place the anchor correctly
-                 % Use \clearpage instead if the document class uses the "oneside" argument
-\phantomsection  % enables hyperlinking from the table of contents to bibliography             
-
+\bibliographystyle{plain}
 \renewcommand*{\bibname}{References} % use title "References" for bibliography
 \bibliography{../Bibliography/fullbib}
-\addcontentsline{toc}{chapter}{\textbf{References}} % add to table of contents
-
 
 \end{document}

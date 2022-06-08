@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  3 JUN 2022 08:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (MiKTeX 21.8) (preloaded format=pdflatex 2021.9.24)  8 JUN 2022 16:52
 entering extended mode
 **\input shortened.tex
  (shortened.tex
@@ -383,11 +383,7 @@ tex.def
 File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count293
 \l__pdf_internal_box=\box56
-) (shortened.aux
-
-LaTeX Warning: Label `eq:multipleTesting:traceterm4' multiply defined.
-
-)
+) (shortened.aux)
 \openout1 = `shortened.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 177.
@@ -475,120 +471,145 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/Chris/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] [2] [3]
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 294--296
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 296--298
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 298--300
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 300--302
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 302--304
 
  []
 
 [5]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 317.
+(hyperref)                removing `math shift' on input line 321.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\Sigma' on input line 317.
+(hyperref)                removing `\Sigma' on input line 321.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 317.
+(hyperref)                removing `math shift' on input line 321.
 
-[6] [7] [8]
-Overfull \hbox (0.38875pt too wide) in paragraph at lines 442--443
+[6] [7] [8] [9]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\Sigma' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `\Sigma' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 444.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 444.
+
+
+Overfull \hbox (19.5389pt too wide) in paragraph at lines 446--447
 \OT1/cmr/m/n/12 The ap-prox-i-ma-tion ma-trix $\OT1/cmr/bx/n/12 C[]$ \OT1/cmr/m
 /n/12 has been de-rived here based purely on min-i-miz-ing $\OMS/cmsy/m/n/12 jj
 []jj[]$
  []
 
-[9]
+[10]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 464.
+(amsmath)                 on input line 468.
 
-[10] [11] [12]pdfTeX warning (ext4): destination with the same identifier (name
-{equation.3.26}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.522 \begin{equation}
-                       \label{eq:multipleTesting:traceterm4}pdfTeX warning (ext
-4): destination with the same identifier (name{equation.3.26}) has been already
- used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.522 \begin{equation}
-                       \label{eq:multipleTesting:traceterm4}pdfTeX warning (ext
-4): destination with the same identifier (name{equation.3.26}) has been already
- used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.522 \begin{equation}
-                       \label{eq:multipleTesting:traceterm4}pdfTeX warning (ext
-4): destination with the same identifier (name{equation.3.26}) has been already
- used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.522 \begin{equation}
-                       \label{eq:multipleTesting:traceterm4} [13]
-
-LaTeX Warning: Reference `eq:multipleTesting:asymTrace' on page 14 undefined on
- input line 576.
-
-[14] [15] [16] [17] (shortened.bbl) [18
-
-] (shortened.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
+[11] [12] [13] [14] [15]
+<rho10.png, id=201, 481.8pt x 481.8pt>
+File: rho10.png Graphic file (type png)
+<use rho10.png>
+Package pdftex.def Info: rho10.png  used on input line 621.
+(pdftex.def)             Requested size: 216.80798pt x 216.80798pt.
+<rho50.png, id=202, 481.8pt x 481.8pt>
+File: rho50.png Graphic file (type png)
+<use rho50.png>
+Package pdftex.def Info: rho50.png  used on input line 621.
+(pdftex.def)             Requested size: 216.80798pt x 216.80798pt.
+<rho90.png, id=203, 481.8pt x 481.8pt>
+File: rho90.png Graphic file (type png)
+<use rho90.png>
+Package pdftex.def Info: rho90.png  used on input line 622.
+(pdftex.def)             Requested size: 216.80798pt x 216.80798pt.
+<rho95.png, id=204, 481.8pt x 481.8pt>
+File: rho95.png Graphic file (type png)
+<use rho95.png>
+Package pdftex.def Info: rho95.png  used on input line 622.
+(pdftex.def)             Requested size: 216.80798pt x 216.80798pt.
+ [16] (shortened.bbl [17] [18 <./rho10.png> <./rho50.png> <./rho90.png> <./rho9
+5.png>]) [19] (shortened.aux)
 Package rerunfilecheck Info: File `shortened.out' has not changed.
-(rerunfilecheck)             Checksum: F6A699A73EE252567D581BE5065D105C;270.
+(rerunfilecheck)             Checksum: 964A672C59FB8ECF0B38622F3E16BB31;273.
  ) 
 Here is how much of TeX's memory you used:
- 11738 strings out of 478927
- 177551 string characters out of 2852535
- 491054 words of memory out of 3000000
- 29347 multiletter control sequences out of 15000+600000
- 421171 words of font info for 92 fonts, out of 8000000 for 9000
+ 11787 strings out of 478927
+ 178132 string characters out of 2852535
+ 486534 words of memory out of 3000000
+ 29388 multiletter control sequences out of 15000+600000
+ 424172 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,18n,66p,814b,415s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,18n,66p,947b,440s stack positions out of 5000i,500n,10000p,200000b,80000s
 <C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
-cmbx12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
-fonts/cm/cmbx8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/pu
-blic/amsfonts/cm/cmex10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts
-/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Chris/AppData/Local/Programs/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Chris/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Chris/AppData/Lo
-cal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><C:/Users/Chris/
-AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/User
-s/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-<C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
-r17.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
-ts/cm/cmr6.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/cm/cmr8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmss8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Chris/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Chris/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/Chris/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/Chris
-/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Us
-ers/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.p
-fb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/sy
-mbols/msbm10.pfb>
-Output written on shortened.pdf (18 pages, 306475 bytes).
+cmbx10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmbx12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmbx8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Chris/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Chris/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/Chris/AppData/
+Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/Chris/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/User
+s/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pf
+b><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmr10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/cm/cmr12.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr17.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cm/cmr6.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Chris/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmss8.pfb><C:/Users/Chris/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Chris/AppDat
+a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/Chri
+s/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Us
+ers/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.p
+fb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmti8.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmtt10.pfb><C:/Users/Chris/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/symbols/msbm10.pfb>
+Output written on shortened.pdf (19 pages, 350470 bytes).
 PDF statistics:
- 329 PDF objects out of 1000 (max. 8388607)
- 69 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 71 named destinations out of 1000 (max. 500000)
+ 61 words of extra memory for PDF output out of 10000 (max. 10000000)
 

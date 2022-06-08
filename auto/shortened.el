@@ -4,13 +4,13 @@
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
-                     '(("graphicx" "pdftex") ("natbib" "round") ("hyperref" "pdftex" "pagebackref=false")))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+                     '(("graphicx" "pdftex") ("hyperref" "pdftex" "pagebackref=false")))
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
@@ -93,6 +93,11 @@
     "mutInf"
     "Had"
     "measureAssociation"
+    "lmin"
+    "argmin"
+    "argmax"
+    "arginf"
+    "argsup"
     "intersect"
     "union"
     "Reals"
@@ -132,18 +137,21 @@
     "eq:geoMGF"
     "eq:sumByMoments"
     "eq:kfirstmoments"
+    "eq:frobeniussimp"
+    "eq:nonexponent"
+    "c:multipleTesting:rateConverge"
     "eq:k1sum"
     "eq:k2sum"
-    "eq:multipleTesting:traceterm4"
-    "eq:multipleTesting:traceterm3"
-    "eq:multipleTesting:traceterm2"
-    "eq:multipleTesting:traceterm4a"
-    "eq:multipleTesting:traceSimplified"
-    "c:multipleTesting:rateConverge"
+    "eq:mm2rhosum"
+    "eq:diffSqNCube"
+    "eq:frobNormSigE"
     "eq:multipleTesting:grayEq"
     "eq:multipleTesting:grayApprox"
-    "eq:multipleTesting:rateEqgren"
-    "eq:multipleTesting:rateEqCsig")
+    "eq:frobNormGren"
+    "eq:GrenLeading"
+    "eq:nearLeading"
+    "fig:rhoPlots"
+    "sec:conc")
    (LaTeX-add-bibliographies
     "../Bibliography/fullbib")
    (LaTeX-add-amsthm-newtheorems
