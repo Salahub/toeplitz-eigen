@@ -1,0 +1,94 @@
+\begin{thebibliography}{10}
+
+\bibitem{cheverud2001}
+James~M Cheverud.
+\newblock A simple correction for multiple comparisons in interval mapping
+  genome scans.
+\newblock {\em Heredity}, 87(1):52--58, 2001.
+
+\bibitem{cinarviechtbauer2022poolr}
+Ozan Cinar and Wolfgang Viechtbauer.
+\newblock The poolr package for combining independent and dependent p values.
+\newblock {\em Journal of Statistical Software}, 101:1--42, 2022.
+
+\bibitem{cousins2008pooling}
+Robert~D. Cousins.
+\newblock Annotated bibliograpy of some papers on combining significances or
+  $p$-values, 2008.
+
+\bibitem{Galwey2009}
+Nicholas~W Galwey.
+\newblock A new measure of the effective number of tests, a practical tool for
+  comparing families of non-independent significance tests.
+\newblock {\em Genetic Epidemiology}, 33(7):559--568, 2009.
+
+\bibitem{gray2006toeplitz}
+Robert~M Gray.
+\newblock {\em Toeplitz and circulant matrices: A review}.
+\newblock now Publishers Inc., 2006.
+
+\bibitem{grenanderszego1958}
+Ulf Grenander and Gabor Szeg{\"o}.
+\newblock {\em Toeplitz forms and their applications}.
+\newblock University of California Press, 1958.
+
+\bibitem{haldane1919}
+JBS Haldane.
+\newblock The combination of linkage values and the calculation of distances
+  between the loci of linked factors.
+\newblock {\em Journal of Genetics}, 8(29):299--309, 1919.
+
+\bibitem{laframboise2009}
+Thomas LaFramboise.
+\newblock Single nucleotide polymorphism arrays: a decade of biological,
+  computational and technological advances.
+\newblock {\em Nucleic acids research}, 37(13):4181--4193, 2009.
+
+\bibitem{LanderBotstein1989}
+Eric~S Lander and David Botstein.
+\newblock {Mapping mendelian factors underlying quantitative traits using RFLP
+  linkage maps}.
+\newblock {\em Genetics}, 121(1):185--199, 1989.
+
+\bibitem{LiJi2005}
+J~Li and L~Ji.
+\newblock Adjusting multiple testing in multilocus analyses using the
+  eigenvalues of a correlation matrix.
+\newblock {\em Heredity}, 95(3):221--227, 2005.
+
+\bibitem{liuetal2018kernel}
+Ying Liu, Victor de~la Pena, and Tian Zheng.
+\newblock Kernel-based measures of association.
+\newblock {\em WIREs Computational Statistics}, 10(2), 2018.
+
+\bibitem{nyholt2004}
+Dale~R Nyholt.
+\newblock A simple correction for multiple testing for single-nucleotide
+  polymorphisms in linkage disequilibrium with each other.
+\newblock {\em The American Journal of Human Genetics}, 74(4):765--769, 2004.
+
+\bibitem{oldford1987n}
+R.W. Oldford.
+\newblock On the n-dimensional geometry of regression diagnostics.
+\newblock {\em Communications in Statistics-Theory and Methods},
+  16(9):2517--2540, 1987.
+
+\bibitem{reshef2011MIC}
+David~N Reshef, Yakir~A Reshef, Hilary~K Finucane, Sharon~R Grossman, Gilean
+  McVean, Peter~J Turnbaugh, Eric~S Lander, Michael Mitzenmacher, and Pardis~C
+  Sabeti.
+\newblock Detecting novel associations in large data sets.
+\newblock {\em Science}, 334(6062):1518--1524, 2011.
+
+\bibitem{salahub2022correlation}
+Christopher Salahub.
+\newblock A structural model of genome-wide association studies, 2022.
+
+\bibitem{uffelmannetal2021gwas}
+Emil Uffelmann, Qin~Qin Huang, Nchangwi~Syntia Munung, Jantina de~Vries,
+  Yukinori Okada, Alicia~R Martin, Hilary~C Martin, Tuuli Lappalainen, and
+  Danielle Posthuma.
+\newblock Genome-wide association studies.
+\newblock {\em Nature Reviews Methods Primers}, 1(1):1--21, 2021.
+
+\end{thebibliography}
