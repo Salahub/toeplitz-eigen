@@ -24,7 +24,7 @@
 \usepackage{bm}% bold math
 \usepackage{float}
 \usepackage{multirow}
-\usepackage{natbib}   % omit 'round' option for square brackets
+%\usepackage{natbib}   % omit 'round' option for square brackets
 
 \usepackage{algorithm} % For counting chapters
 \usepackage{algorithmicx, algpseudocode}
@@ -179,8 +179,10 @@
 \maketitle
 
 \begin{abstract}
-  An approximation of a real Toeplitz matrix $\sm{\Sigma}$ based on the nearest circulant matrix is derived. This matrix, $\m{C}_{\Sigma}$, is symmetric as well as circulant. A proof that symmetric circulant matrices are the only real circulant matrices with all real eigenvalues is presented. The Frobenius norm of the difference $\sm{\Sigma} - \m{C}_{\Sigma}$ for the case of $\sm{\Sigma}$ displaying exponential decay is evaluated using an expression of the sum $\sum_{n=1}^{N} n^k p^n$ in terms of the first $k$ geometric moments. This is compared to a classic approximation based on \cite{grenanderszego1958}. Despite similar leading terms for large $M$, the nearest circulant is a dramatically closer approximation in many finite cases.
+  The nearest circulant approximation of the real Toeplitz matrix $\sm{\Sigma}$ in the Frobenius norm is derived. This matrix, $\m{C}_{\Sigma}$, is symmetric. It is proven that symmetric circulant matrices are the only real circulant matrices with all real eigenvalues. The Frobenius norm of the difference $\sm{\Sigma} - \m{C}_{\Sigma}$ for the case of $\sm{\Sigma}$ displaying exponential decay is evaluated using an expression of $\sum_{n=1}^{N} n^k p^n$ in terms of the first $k$ geometric moments. Compared to a classic approximation based on \cite{grenanderszego1958}, $\m{C}_{\Sigma}$ displays dramatically better behaviour in many finite cases, though both share the same leading term for large $M$.
 \end{abstract}
+
+\section{Introduction}
 
 A number of methods exist to approximate the symmetric Toeplitz matrix
 \begin{equation} \label{eq:multipleTesting:genEigCov}
@@ -204,19 +206,21 @@ where $\rho_0, \dots, \rho_{M-1} \in \Reals$. $\sm{\Sigma}$ appears regularly in
 \end{equation}
 where $\rho \in [0, 1]$ is a real constant.
 
-Of interest are the eigenvalues and eigenvectors of $\sm{\Sigma}$, call them $\ve{V}_1, \ve{V}_2, \dots, \ve{V}_M$ and $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_M$ respectively. For brevity, the combination of these vectors and values is here referred to as the \emph{eigensystem} of $\sm{\Sigma}$. \cite{gray2006toeplitz} demonstrates the application of this particular eigensystem in signal processing, while \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the eigenvalues to adjust for dependent multiple tests in the genomic context.
+Of interest in many applications are the eigenvalues and eigenvectors of $\sm{\Sigma}$, call them $\ve{V}_1, \ve{V}_2, \dots, \ve{V}_M$ and $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_M$ respectively. For brevity, the combination of these vectors and values is here referred to as the \emph{eigensystem} of $\sm{\Sigma}$. \cite{gray2006toeplitz} demonstrates the application of this particular eigensystem in signal processing, while \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} use the eigenvalues to adjust for dependent multiple tests in the genomic context.
 
-A number of approximations for this eigensystem exist. \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} present different approximations based on the matrix
+The typical approach to obtain is eigensystem is to approximate $\sm{\Sigma}$ with a matrix with a solved eigensystem. \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} present different approximations based on the matrix
 \begin{equation} \label{eq:multipleTesting:commonCor}
   \m{A}(\rho) = \rho \ve{1} \tr{\ve{1}} + (1 - \rho) \m{I}_M.
 \end{equation}
-$\m{A}(\rho)$ has a known eigensystem for any $\rho$ and matches the eigensystem of $\sm{\Sigma}$ for the edge cases where $\rho_1 = \rho_2 = \dots = 0$ or $\rho_1 = \rho_2 = \dots = 0$ and $\rho_0 = 1$. 
+$\m{A}(\rho)$ has a known eigensystem for any $\rho$ and matches the eigensystem of $\sm{\Sigma}$ for the edge cases where $\rho_1 = \rho_2 = \dots = 0$ or $\rho_1 = \rho_2 = \dots = 0$ and $\rho_0 = 1$.
 
 \cite{gray2006toeplitz} and \cite{grenanderszego1958} instead utilize circulant matrices to approximate the eigensystem of $\sm{\Sigma}$. Asymptotically, $\sm{\Sigma}$ has the same eigensystem as certain circulant matrices and the eigensystem of any circulant matrix is known.
 
-Absent from the symptotic approach of \cite{gray2006toeplitz} or the myriad approaches of \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} is a consideration of the finite, non-edge cases of $\sm{\Sigma}$ and how it might be best approximated. This work derives $\m{C}_{\Sigma}$, the nearest circulant matrix to $\sm{\Sigma}$ in the weak norm. $\m{C}_{\Sigma}$ is symmetric circulant, and so has only real eigenvalues. Indeed, it is proven that a real circulant matrix has real eigenvalues if and only if it is a symmetric circulant. $\m{C}_{\Sigma}$ is additionally shown to be asymptotically equivalent to $\sm{\Sigma}$ by considering the limit of the remainder $\sm{\Sigma} - \m{C}_{\Sigma}$. Finally, the eigensystem of $\m{C}_{\Sigma}$ is stated expicitly.
+Absent from the asymptotic approach of \cite{gray2006toeplitz} or the myriad approaches of \cite{cheverud2001}, \cite{LiJi2005}, and \cite{Galwey2009} is a consideration of the finite, non-edge cases of $\sm{\Sigma}$ and how it might be best approximated. This work derives $\m{C}_{\Sigma}$, the nearest circulant matrix to $\sm{\Sigma}$ in the weak, or Frobenius, norm. $\m{C}_{\Sigma}$ is symmetric circulant, and so has only real eigenvalues. Indeed, it is proven that a real circulant matrix has real eigenvalues if and only if it is a symmetric circulant. $\m{C}_{\Sigma_e}$ is additionally shown to be asymptotically equivalent to $\sm{\Sigma}_e$ by considering the limit of the remainder $\sm{\Sigma_e} - \m{C}_{\Sigma_e}$. The approximation of $\sm{C}_{\Sigma}$ and the classic approximation of \cite{gray2006toeplitz} are compared, with the nearest circulant provided a much better approximation in the cases of $\rho$ close to 1 and small $M$.
 
-\section{Circulant Matrices} \label{c:multipleTesting:circDecom}
+Section \ref{c:multipleTesting:circDecom} presents an introduction to circulant matrices and the proof that the only real circulants with all real eigenvalues are symmetric. Section \ref{c:multipleTesting:nearestCirc} derives $\m{C}_{\Sigma}$ and $\m{C}_{\Sigma}$ and states their eigensystems. The asymptotic equivalence of $\sm{\Sigma}_e$ and $\m{C}_{\Sigma}$ are then present in Section \ref{c:multipleTesting:asympEquiv} before a comparison of the approximations is present in Section \ref{c:multipleTesting:rateConverge}.
+
+\section{Circulant matrices} \label{c:multipleTesting:circDecom}
 
 For clarity working with different matrices, let the function $\lambda_k(\m{C})$ return the $k^{\text{th}}$ eigenvalue of $\m{C}$, which may not be ordered by magnitude.
 
@@ -318,7 +322,7 @@ This circulant is symmetric, and any symmetric circulant matrix will have an ana
   the definition of a symmetric circulant.
 \end{proof}
 
-\section{The Nearest Circulant to $\m{\Sigma}$} \label{c:multipleTesting:nearestCirc}
+\section{The nearest circulant to $\m{\Sigma}$} \label{c:multipleTesting:nearestCirc}
 
 Now consider the decomposition
 \begin{equation} \label{eq:circDecomp}
@@ -441,7 +445,7 @@ and $\m{R}_{\Sigma_e}$ is $\frac{m}{M} (\rho^m - \rho^{M-m})$ for the $m^{\text{
 \end{equation*}
 
 
-\section{Asymptotic Equivalence of $\m{C}_{\Sigma_e}$ and $\m{\Sigma}_e$} \label{c:multipleTesting:asympEquiv}
+\section{Asymptotic equivalence of $\m{C}_{\Sigma_e}$ and $\m{\Sigma}_e$} \label{c:multipleTesting:asympEquiv}
 
 The approximation matrix $\m{C}_{\Sigma_e}$ has been derived here based purely on minimizing $\frob{\sm{\Sigma}_e - \m{C}_{\Sigma_e}}$ without any of the asymptotic guarantees of \cite{grenanderszego1958}. \cite{gray2006toeplitz} derives a similar result by considering the asymptotic equivalence of matrices in the weak norm. Matrices $\m{A}$ and $\m{B}$ in $\Complex^{M \times M}$ are said to be asymptotically equivalent in the weak norm if
 $$\lim_{M \rightarrow \infty} \frac{1}{\sqrt{M}} \frob{A - B} = 0.$$
@@ -503,9 +507,9 @@ This gives the result for the original sum
  \sum_{n = 1}^{N} n^k p^n = \frac{p}{1 - p} \left [ (1 - p^N) G^{(k)}(0) - p^{N} \sum_{l = 1}^k {k \choose l} N^l G^{(k-l)}(0) \right ].
 \end{equation}
 \end{proof}
-This result provides a representation of the sum $\sum_{n = 1}^{N} n^k p^n$ in terms of the first $k$ moments of the geometric distribution with parameter $1 - p$. Additionally, taking the limit $N \rightarrow \infty$ reduces this expression to the $k^{\text{th}}$ moment of the geometric distribution with parameter $1 - p$ multiplied by $p/(1 - p)$. As the original sum is the $k^{\text{th}}$ geometric moment truncated at $N$, this result is expected.
+This result provides a representation of the sum $\sum_{n = 1}^{N} n^k p^n$ in terms of the first $k$ moments of the geometric distribution with parameter $1 - p$. Additionally, taking the limit $N \rightarrow \infty$ reduces this expression to the $k^{\text{th}}$ moment of the geometric distribution with parameter $1 - p$ multiplied by $p/(1 - p)$. As the original sum is the $k^{\text{th}}$ geometric moment truncated at $N$ and scaled in the same way, this result is expected.
 
-We can use this theorem immediately by expanding Equation \ref{eq:asymTrace} to give
+We can use this theorem by expanding Equation \ref{eq:asymTrace} to give
 \begin{eqnarray}
   \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2 & = & \frac{2}{M^3} \sum_{m = 1}^{M-1} (M-m) m^2 \left ( \rho^{2m} - 2 \rho^{M} + \rho^{2(M - m)} \right ), \nonumber \\
   & & \nonumber \\
@@ -526,7 +530,7 @@ The case of $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ is less straightforward, as Equat
 \end{equation}
 This expression will be zero in the limit $M \rightarrow \infty$ if the series $\rho_m$ is absolutely convergent and the partial sums $\sum_{m = 1}^{M-1}m^3 \rho_m$ and $\sum_{m = 1}^{M-1} m^2 \rho_m$ are $O(M^2)$ and $O(M)$, respectively. If these conditions are met, then $\m{C}_{\Sigma}$ and $\sm{\Sigma}$ are asymptotically equivalent.
 
-\section{Convergence} \label{c:multipleTesting:rateConverge}
+\section{Comparing approximations} \label{c:multipleTesting:rateConverge}
   
 $\m{R}_{\Sigma_e}$ can be evaluated further by considering Equation \ref{eq:kfirstmoments} for $k = 1$ and $2$ with $p = \rho^2$ and $N = M-1$:
 \begin{eqnarray}
@@ -571,8 +575,6 @@ the second case can be expressed
   \begin{aligned}
     \frac{1}{M} \sum_{j = 0}^{M-1} f\left ( \frac{2\pi j}{M} \right ) e^{\frac{2 \pi i j m}{M}} & = \frac{1}{M} \sum_{j = 0}^{M-1} \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{ik \frac{2\pi j}{M}} e^{\frac{2 \pi i j m}{M}} \\
     & \\
-    & = \frac{1}{M} \sum_{j = 0}^{M-1} \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} e^{\frac{2 \pi i j}{M}(m+k)} \\
-    & \\
     & = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} \frac{1}{M} \sum_{j = 0}^{M-1} e^{\frac{2 \pi i j}{M}(m+k)} \\
     & \\
     & = \sum_{k = -\infty}^{\infty} \rho^{\abs{k}} \ind{0}{(m+k)\text{mod} M} \\
@@ -598,7 +600,7 @@ when $\rho < 1$. Therefore, Equation \ref{eq:multipleTesting:grayEq} becomes
     \frac{1}{1 - \rho^M} \big ( \rho^m + \rho^{M-m} \big )  & \text{otherwise},\\
   \end{cases}
 \end{equation}
-in the particular case of $\rho_m = \rho^m$. So, while $\m{C}_{\Sigma_e}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma} - \m{C}_{GS}$. Then
+in the particular case of $\rho_m = \rho^m$. So, while $\m{C}_{\Sigma_e}$ has entries which are a weighted average of $\rho^m$ and $\rho^{M-m}$, this approximation instead takes a sum scaled by $1 - \rho^M$. Define $\m{C}_{GS}$ as the circulant matrix with these entries, and let $\m{R}_{GS}$ be $\sm{\Sigma_e} - \m{C}_{GS}$. Then
 \begin{equation} \label{eq:frobNormGren}
     \frac{1}{M} \frob{\m{R}_{GS}}^2 = \frac{2}{(1 - \rho^M)^2} \left [ \frac{\rho^2 (1 - \rho^{2M})^2}{(1 - \rho^2)^2} \frac{1}{M} + (M - 2) \rho^{2M} \right ].
 \end{equation}
@@ -614,15 +616,16 @@ The leading terms of which give the relationship for large $M$
 \begin{equation*}
  \frac{1}{\sqrt{M}}\frob{\m{R}_{\Sigma_e}} \approx (1 - \rho^M) \frac{1}{\sqrt{M}} \frob{\m{R}_{GS}}.
 \end{equation*}
-As $1 - \rho^M < 1$, $\m{R}_{\Sigma_e}$ converges to zero faster than $\m{R}_{GS}$ with a greater difference in convergence for $\rho$ values close to 1. A comparison of the values of Equations \ref{eq:frobNormSigE} and \ref{eq:frobNormGren} is shown in Figure \ref{fig:rhoPlots}.
+
 \begin{figure}
   \centering
   \begin{tabular}{cc}
     \includegraphics[scale = 0.45]{rho10.png} & \includegraphics[scale = 0.45]{rho50.png} \\
     \includegraphics[scale = 0.45]{rho90.png} & \includegraphics[scale = 0.45]{rho95.png}
   \end{tabular}
-  \caption{Log-log plots of the log squared Frobenius norms of the residuals $\m{R}_{\Sigma_e}$ and $\m{R}_{GS}$ divided by $M$ for a selection of $\rho$ values over $M = 3$ to 400. The blue line corresponds to $\log \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2$, the red line to  $\log \frac{1}{M} \frob{\m{R}_{GS}}^2$, and the black dashed line to the log of the leading term given by Equation \ref{eq:nearLeading}} \label{fig:rhoPlots}
+  \caption{Log-scale plots of the squared Frobenius norms of the residuals $\m{R}_{\Sigma_e}$ and $\m{R}_{GS}$ divided by $M$ for a selection of $\rho$ values over $M = 3$ to 400. The blue dotted line corresponds to $\log \frac{1}{M} \frob{\m{R}_{\Sigma_e}}^2$, the red dot-dashed line to  $\log \frac{1}{M} \frob{\m{R}_{GS}}^2$, and the black dashed line to the log of the leading term given by Equation \ref{eq:nearLeading}} \label{fig:rhoPlots}
 \end{figure}
+As $1 - \rho^M < 1$, $\m{R}_{\Sigma_e}$ converges to zero faster than $\m{R}_{GS}$ with a greater difference in convergence for $\rho$ values close to 1. A comparison of the values of Equations \ref{eq:frobNormSigE} and \ref{eq:frobNormGren} is shown in Figure \ref{fig:rhoPlots}.
 
 The nearest circulant approximation performs considerably better than the approximation suggested by \cite{gray2006toeplitz}. Using the leading term line as a guide, the nearest circulant matrix is uniformly less than this leading term, while the other is greater than the leading term. Moreover, while the nearest circulant improves in quality for small $M$ as $\rho$ nears 1, the approximation of \cite{gray2006toeplitz} performs poorer relative to the leading term. This makes sense, as for $\rho$ close to one, the absolute difference between $\rho^m$ and $\rho^{(M-m)}$ decreases, making the weighted average entries of $\m{C}_{\Sigma_e}$ closer to the true values. In contrast, the other approximation adds these values and scales them, and so generally has residual terms with larger magnitude. The nearest circulant is orders of magnitude closer in the Frobenius norm for small $M$ in these cases.
 
@@ -632,11 +635,11 @@ We have derived here a circulant approximation of $\sm{\Sigma}$, $\m{C}_{\Sigma}
 
 $\m{C}_{\Sigma}$ is also much better than classic approximation provided in \cite{grenanderszego1958} in the case of $\sm{\Sigma}_e$, where $\rho_m = \rho^m$. In particular, as $\rho$ approaches one, $\m{C}_{\Sigma_e}$ performs orders of magnitude better. In the limit of large $M$, both approximations have the same behaviour.
 
-In demonstrating this improved behaviour, another general result was demonstrated. It was proven that the sum $\sum_{n = 1}^{N} n^k p^n$ can be expressed as a linear combination of the first $k$ geometric moments. This expression was provided explicitly for interested researchers.
+In demonstrating this improved behaviour, another general result was demonstrated. It was proven that the sum $\sum_{n = 1}^{N} n^k p^n$ can be expressed as a linear combination of the first $k$ geometric moments. This expression was provided explicitly for interested readers.
 
 %% BIBLIOGRAPHY
 \bibliographystyle{plain}
-\renewcommand*{\bibname}{References} % use title "References" for bibliography
+%\renewcommand*{\bibname}{References} % use title "References" for bibliography
 \bibliography{../Bibliography/fullbib}
 
 \end{document}

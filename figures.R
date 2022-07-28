@@ -24,15 +24,18 @@ Ms <- 3:maxM
 rhos <- c(0.1, 0.25, 0.5, 0.75, 0.9, 0.95)
 
 ## plot the curves
-currRho <- rhos[6]
-png(paste0("rho", currRho*100, ".png"))
-near <- nearestRes(currRho, Ms)
-grensz <- grenszRes(currRho, Ms)
-lead <- leading(currRho, Ms)
-title <- substitute(rho==currRho, list(currRho = currRho))
-plot(NA, xlim = range(Ms), ylim = range(c(near, grensz, lead)), xlab = expression(log~italic(M)),
-     ylab = "Log squared Frobenius norm", log = "xy", main = title)
-lines(Ms, near, col = "steelblue")
-lines(Ms, grensz, col = "firebrick")
-lines(Ms, lead, lty = 2)
-dev.off()
+for (ii in seq_along(rhos)) {
+    currRho <- rhos[ii]
+    png(paste0("rho", currRho*100, ".png"))
+    near <- nearestRes(currRho, Ms)
+    grensz <- grenszRes(currRho, Ms)
+    lead <- leading(currRho, Ms)
+    title <- substitute(rho==currRho, list(currRho = currRho))
+    plot(NA, xlim = range(Ms), ylim = range(c(near, grensz, lead)), xlab = expression(italic(M)),
+         ylab = "Squared weak norm of residual", log = "xy", main = title)
+    lines(Ms, near, col = "steelblue", lty = 4, lwd = 2)
+    lines(Ms, grensz, col = "firebrick", lty = 3, lwd = 2)
+    lines(Ms, lead, lty = 2, lwd = 2)
+    dev.off()
+}
+

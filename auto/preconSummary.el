@@ -1,16 +1,16 @@
 (TeX-add-style-hook
- "shortened"
+ "preconSummary"
  (lambda ()
    (TeX-add-to-alist 'LaTeX-provided-class-options
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("graphicx" "pdftex") ("hyperref" "pdftex" "pagebackref=false")))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
@@ -102,10 +102,41 @@
     "oldemptyset"
     "emptyset")
    (LaTeX-add-labels
-    "eq:multipleTesting:genEigCov"
-    "eq:multipleTesting:specEigCov"
     "eq:multipleTesting:commonCor"
+    "eq:multipleTesting:mvnconf"
+    "eq:multipleTesting:uniconf"
+    "eq:multipleTesting:alphaExperiment"
+    "eq:multipleTesting:adjIndep"
+    "eq:multipleTesting:adjIndepApprox"
+    "fig:multipleTesting:confIntervalsCorrectedRho"
+    "tab:multipleTesting:coverage"
+    "eq:multipleTesting:adjIndepEff"
+    "eq:multipleTesting:adjIndepEffApprox"
+    "eq:multipleTesting:meff_var"
+    "tab:multipleTesting:coverageMvar"
+    "eq:multipleTesting:meffeigen"
+    "eq:multipleTesting:meffeigenSpecialRho"
+    "eq:multipleTesting:Meff_varIndepTestCopies"
+    "eq:multipleTesting:meff_frac"
+    "tab:multipleTesting:coverageMfrac"
+    "eq:multipleTesting:meff_fracstep"
+    "fig:multipleTesting:ellipseAxes"
+    "eq:multipleTesting:meff-ED"
+    "eq:multipleTesting:block-diagonal"
+    "eq:multipleTesting:EDblockIndep"
+    "eq:multipleTesting:galwey"
+    "c:multipleTesting:eigen"
+    "eq:multipleTesting:zcorr"
+    "eq:multipleTesting:specEigCov"
+    "eq:multipleTesting:fourier"
+    "eq:multipleTesting:eigLim"
+    "eq:multipleTesting:orderEigen"
+    "eq:multipleTesting:eigenBounds"
+    "fig:multipleTesting:eigBounds"
+    "fig:multipleTesting:eigBoundsZoom"
+    "fig:multipleTesting:MeffBounds"
     "c:multipleTesting:circDecom"
+    "eq:multipleTesting:genEigCov"
     "eq:explicitCirculant"
     "eq:pDef"
     "eq:powerPDef"
@@ -114,7 +145,6 @@
     "eq:multipleTesting:circEigenVals"
     "def:symmCirc"
     "thm:symmEigen"
-    "c:multipleTesting:nearestCirc"
     "eq:circDecomp"
     "eq:argMinDef"
     "eq:argMinState"
@@ -123,6 +153,9 @@
     "eq:closestCirc"
     "eq:sigmaCirculantDecomp"
     "eq:multipleTesting:circApproxEig"
+    "fig:multipleTesting:circEigenComp"
+    "fig:multipleTesting:circEigDiff"
+    "c:multipleTesting:nearestCirc"
     "c:multipleTesting:asympEquiv"
     "eq:multipleTesting:asympEq"
     "eq:asymTrace"
