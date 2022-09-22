@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{chan1988optimal}
+Tony~F Chan.
+\newblock An optimal circulant preconditioner for toeplitz systems.
+\newblock {\em SIAM Journal on Scientific and Statistical Computing},
+  9(4):766--771, 1988.
+
+\bibitem{gray2006toeplitz}
+Robert~M Gray.
+\newblock {\em Toeplitz and circulant matrices: A review}.
+\newblock now Publishers Inc., 2006.
+
+\bibitem{grenanderszego1958}
+Ulf Grenander and Gabor Szeg{\"o}.
+\newblock {\em Toeplitz forms and their applications}.
+\newblock University of California Press, 1958.
+
+\end{thebibliography}

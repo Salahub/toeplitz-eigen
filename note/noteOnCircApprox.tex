@@ -1,0 +1,376 @@
+%======================================================================
+%   D O C U M E N T   P R E A M B L E
+% Specify the document class, default style attributes, and page dimensions, etc.
+% For hyperlinked PDF, suitable for viewing on a computer, use this:
+\documentclass[letterpaper,12pt,oneside,final]{article}
+
+\newcommand{\package}[1]{\textbf{#1}} % package names in bold text
+\newcommand{\cmmd}[1]{\textbackslash\texttt{#1}} % command name in tt font 
+\usepackage{amsmath,amssymb,amstext} % Lots of math symbols and environments
+\usepackage[pdftex]{graphicx} % For including graphics N.B. pdftex graphics driver
+\usepackage{amsmath,amssymb,amstext,amsthm,amsfonts}
+\usepackage{dsfont}
+\usepackage[pdftex]{graphicx}
+\usepackage{caption}
+\usepackage{color}% Include colors for document elements
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{algorithm} % For counting chapters
+\usepackage{algorithmicx, algpseudocode}
+\usepackage[pdftex,pagebackref=false]{hyperref} % with basic options
+
+\definecolor{background-color}{gray}{0.98}
+\definecolor{steelblue}{rgb}{0.27, 0.51, 0.71}
+\definecolor{brickred}{rgb}{0.8, 0.25, 0.33}
+\definecolor{bluegray}{rgb}{0.4, 0.6, 0.8}
+\definecolor{amethyst}{rgb}{0.6, 0.4, 0.8}
+
+\hypersetup{
+    plainpages=false,       % needed if Roman numbers in frontpages
+    unicode=false,          % non-Latin characters in Acrobat's bookmarks
+    pdftoolbar=true,        % show Acrobats toolbar?
+    pdfmenubar=true,        % show Acrobat's menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Structured\ approximation},    % title
+    pdfauthor={C. Salahub, J. Uhlmann},    % author
+    pdfsubject={Statistics},  % subject
+%    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,        % false: boxed links; true: colored links
+    linkcolor=steelblue,         % color of internal links
+    citecolor=brickred,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Page margins
+\setlength{\marginparwidth}{0pt} % width of margin notes
+\setlength{\marginparsep}{0pt} % width of space between body text and margin notes
+\setlength{\evensidemargin}{0.125in} % Adds 1/8 in. to binding side of all even pages when "twoside" is selected
+\setlength{\oddsidemargin}{0.125in} % Adds 1/8 in. to the left of all pages when "oneside" is selected,
+                                    % and to the left of all odd pages when "twoside" is selected
+\setlength{\textwidth}{6.375in} % assuming US letter paper (8.5 in. x 11 in.) and margins as above
+\raggedbottom
+
+\setlength{\parskip}{\medskipamount} % space between paragraphs
+\renewcommand{\baselinestretch}{1} % line space setting
+
+% Commands
+% Code
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand*{\Rnsp}{\textsf{R}}
+\newcommand*{\R}{\textsf{R}$~$}
+\newcommand*{\Pythonnsp}{\textsf{Python}}
+\newcommand*{\Python}{\textsf{Python}$~$}
+\newcommand{\pkg}[1]{\textsf{#1}}
+\newcommand{\pkgsp}[1]{\textsf{#1}$~$}
+\algblock{Input}{EndInput}
+\algnotext{EndInput}
+\newcommand{\Desc}[2]{\State \makebox[2em][l]{#1}#2}
+
+% Theorem styles
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+
+% vectors
+\newcommand{\ve}[1]{\mathbf{#1}}           % for vectors
+\newcommand{\sv}[1]{\boldsymbol{#1}}   % for greek letters
+\newcommand{\m}[1]{\mathbf{#1}}               % for matrices
+\newcommand{\sm}[1]{\boldsymbol{#1}}   % for greek letters
+\newcommand{\tr}[1]{{#1}^{\mkern-1.5mu\mathsf{T}}}              % for transpose
+\newcommand{\conj}[1]{{#1}^{\ast}}
+\newcommand{\norm}[1]{||{#1}||}              % norm
+\newcommand{\frob}[1]{\norm{#1}_F}
+\newcommand{\abs}[1]{\lvert{#1}\rvert}              % norm
+\newcommand*{\mvec}{\operatorname{vec}}
+\newcommand*{\trace}{\operatorname{trace}}
+\newcommand*{\rank}{\operatorname{rank}}
+\newcommand*{\diag}{\operatorname{diag}}
+\newcommand*{\vspan}{\operatorname{span}}
+\newcommand*{\rowsp}{\operatorname{rowsp}}
+\newcommand*{\colsp}{\operatorname{colsp}}
+\newcommand*{\svd}{\operatorname{svd}}
+\newcommand*{\edm}{\operatorname{edm}}  % euclidean distance matrix (D * D)
+\newcommand{\oneblock}[3]{\m{B}_{#1:#2:#3}}
+\newcommand{\stripe}[2]{\m{S}_{#1,#2}}
+
+% contingency tables
+\newcommand{\abdiff}{\delta_{AB}}
+
+% statistical
+\newcommand{\widebar}[1]{\overline{#1}}  
+\newcommand{\wig}[1]{\tilde{#1}}  
+\newcommand{\bigwig}[1]{\widetilde{#1}}  
+\newcommand{\follows}{\sim}  
+\newcommand{\leftgiven}{~\left\lvert~}
+\newcommand{\given}{~\vert~}
+\newcommand{\biggiven}{~\vline~}
+\newcommand{\indep}{\bot\hspace{-.6em}\bot}
+\newcommand{\notindep}{\bot\hspace{-.6em}\bot\hspace{-0.75em}/\hspace{.4em}}
+\newcommand{\depend}{\Join}
+\newcommand{\notdepend}{\Join\hspace{-0.9 em}/\hspace{.4em}}
+\newcommand{\imply}{\Longrightarrow}
+\newcommand{\notimply}{\Longrightarrow \hspace{-1.5em}/ \hspace{0.8em}}
+\newcommand{\xyAssociation}{g}
+\newcommand{\xDomain}{\mathcal{X}}
+\newcommand{\yDomain}{\mathcal{Y}}
+\newcommand{\measureRange}{\mathcal{R}}
+\newcommand{\bigChi}{\mathcal{D}}
+\newcommand{\ind}[2]{I_{#2} \left( #1 \right)}
+%\newcommand{\ind}[1]{\mathds{1} \hspace{-0.1cm}\left( #1 \right)}
+\newcommand{\mutInf}{\mathcal{I}}
+ 
+% operators
+\newcommand{\Had}{\circ}
+\newcommand{\measureAssociation}{G}
+\DeclareMathOperator*{\lmin}{Minimize}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\arginf}{arg\,inf}
+\DeclareMathOperator*{\argsup}{arg\,sup}
+
+% Sets
+\newcommand*{\intersect}{\cap}
+\newcommand*{\union}{\cup}
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+% Fields, Reals, etc. etc
+\newcommand{\field}[1]{\mathbb{#1}}
+\newcommand{\Reals}{\field{R}}
+\newcommand{\Integers}{\field{Z}}
+\newcommand{\Naturals}{\field{N}}
+\newcommand{\Complex}{\field{C}}
+\newcommand{\Rationals}{\field{Q}}
+
+% Editorial
+\newcommand{\needtocite}[1]{{\color{red} [Need to cite {#1} here]}}
+\newcommand{\comment}[1]{{\color{steelblue} COMMENT:  {#1}}}
+\newcommand{\TODO}[1]{{\color{brickred} TODO:  {#1}}}
+
+\title{Optimizing the Frobenius norm under structural constraints.}
+\author{Chris Salahub \\ {\footnotesize University of Waterloo,
+    \texttt{csalahub@uwaterloo.ca}} \\
+Jeffrey Uhlmann \\ {\footnotesize University of Missouri, \texttt{uhlmannj@missouri.edu}}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract} \TODO{Rewrite this to be more general}
+  The approximation of a general matrix $\m{M}$ by a circulant matrix $\m{C}$ is explored. Using the discrete Fourier transform matrix $\m{F}$, the circulant with eigenvalues given by the diagonals of $\m{F} \m{M} \conj{\m{F}}$ is shown to be equivalent to the nearest circulant in the Frobenius norm, $\m{C}_M$. An intuitive interpretation of this matrix in terms of means and variances of its values is presented.
+\end{abstract}
+
+\section{Introduction}
+
+\TODO{Preamble, justification}
+
+Circulant matrices are matrices of the form
+\begin{equation} \label{eq:circdefn}
+  \m{C} = \begin{bmatrix}
+    c_{0} & c_{1} & c_{2} & \dots & c_{n-2} & c_{n-1} \\
+    c_{n-1} & c_{0} & c_{1} & \dots & c_{n-3} & c_{n-2} \\
+    c_{n-2} & c_{n-1} & c_{0} & \dots & c_{n-4} & c_{n-3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    c_{2} & c_{3} & c_{4} & \dots & c_{0} & c_{1} \\
+    c_{1} & c_{2} & c_{3} & \dots & c_{n-1} & c_{0}
+  \end{bmatrix}
+\end{equation}
+with $c_0, c_1, \dots, c_{n-1} \in \Complex$. They see widespread use in signal processing, computation, and physical modelling as matrices with known eigensystems \cite{chan1988optimal,gray2006toeplitz}. For $\m{C}$ as in Equation \ref{eq:Mdefn}, the ordered eigenvalues for $k = 0, 1, \dots, n-1$ are given by
+\begin{equation} \label{eq:circevals}
+  \lambda_k = c_0 + \sum_{l = 1}^{n-1} c_l \omega^{lk}
+\end{equation}
+and the corresponding $k^{\text{th}}$ eigenvector is given by
+\begin{equation} \label{eq:circevecs}
+  \ve{x}_k = \begin{bmatrix}
+  1 \\
+  \omega^k \\
+  \omega^{2k} \\
+  \vdots \\
+  \omega^{(M-1)k}
+\end{bmatrix}
+\end{equation}
+where $\omega = \exp (\frac{2 \pi i}{n})$ is the complex $n^{\text{th}}$ root of unity and $i = \sqrt{-1}$.
+
+Much of the utility of circulant matrices arises from this eigensystem. The $n \times n$ matrix of eigenvectors of $\m{C}$ scaled to be unitary,
+\begin{equation} \label{eq:DFT}
+  \m{F} = \frac{1}{\sqrt{n}} [\ve{x}_0 | \ve{x}_1 | \ve{x}_2 | \dots | \ve{x}_{n-1} ] = \tr{\m{F}},
+\end{equation}
+is simply the discrete Fourier transform (DFT). Circulant matrices therefore have a deep relationship with real and complex analysis \cite{grenanderszego1958}.
+
+Suppose we would like to take advantage of this depth of theory and practice to approximate the $n \times n$ matrix
+\begin{equation} \label{eq:Mdefn}
+  \m{M} = \begin{bmatrix}
+    m_{11} & m_{12} & \dots & m_{1n} \\
+    m_{21} & m_{22} & \dots & m_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    m_{n1} & m_{n2} & \dots & m_{nn}
+  \end{bmatrix}
+\end{equation}
+by some circulant matrix. This note outlines some results.
+
+\section{Approximating $\m{M}$ using $\m{F}$} \label{sec:approximatingM}
+
+Consider the simple approximation algorithm:
+\begin{enumerate}
+\item construct the diagonal matrix $\m{D}$ where $d_{jj} = (\m{F} \m{M} \conj{\m{F}})_{jj}$ and $\conj{\m{F}}$ is the complex conjugate of $\m{F}$,
+\item compute $\m{C}_{D} = \conj{\m{F}} \m{D} \m{F}$.
+\end{enumerate}
+As $\m{D}$ is diagonal and $\m{F}$ is the matrix of eigenvectors for any circulant matrix, $\m{C}_{D}$ is a circulant matrix with eigenvalues given by $d_{jj}$. To determine the elements $(\m{C}_{D})_{ij}$ in terms of $\omega$, $\ve{x}$, and $\m{M}$, first note
+\begin{equation} \label{eq:Dexplicit}
+  d_{jj} = \frac{1}{n} \sum_{k = 1}^n \sum_{l = 1}^n \omega^{(k - l)(j - 1)} m_{lk}.
+\end{equation}
+Analogously, taking $\conj{\m{F}} \m{D} \m{F}$ gives an $i,j$ element
+\begin{eqnarray}
+  (\m{C}_D)_{ij} & = & \conj{\m{F}} \m{D} \m{F} \nonumber \\
+                 & = & \frac{1}{n^2} \sum_{l = 1}^n \sum_{k = 1}^n m_{lk} \conj{\ve{x}}_{k-l} \ve{x}_{i - j} \nonumber \\
+                 & = & \frac{1}{n}  \sum_{l = 1}^n \sum_{k = 1}^n m_{lk} \delta_{(i - j)\bmod n, (k - l)\bmod n} \label{eq:diagonalMeans}
+\end{eqnarray}
+where $\delta_{ij}$ is the Kronecker delta defined by
+\begin{equation}
+  \delta_{ij} = \begin{cases} 0 \text{ if } i \neq j \\ 1 \text{ if } i = j. \end{cases}
+\end{equation}
+Equation \ref{eq:diagonalMeans} indicates that $\m{C}_D$ is generated by replacing the values of $M$ along each circulant diagonal by the corresponding diagonal mean. Expressed as in Equation \ref{eq:circdefn}, $\m{C}_D$ is the circulant matrix with
+\begin{equation} \label{eq:circDiagonalMeans}
+  c_{k} = \frac{1}{n} \sum_{\{i,j| (i-j) \bmod n = k \}} m_{ij} := \widebar{m}_k
+\end{equation}
+Remarkably, though this was not the original motivation, $\m{C}_{D}$ is also optimal in the sense of \cite{chan1988optimal}: it minimizes the Frobenius norm.
+
+\begin{theorem}[$\m{C}_D$ is Frobenius optimal] \label{thm:optimal}
+$\m{C}_D$ minimizes $\frob{\m{C} - \m{M}}$ for circulant $\m{C}$, where $\frob{\m{A}}$ is the Frobenius norm of $\m{A}$.
+\end{theorem}
+\begin{proof}
+  We can write $\frob{\m{C} - \m{M}}$ as
+  \begin{equation} \label{eq:frobnorm}
+    \sqrt{\trace \left ( \conj{(\m{C} - \m{M})}(\m{C} - \m{M}) \right )}.
+  \end{equation}
+  Any $\m{C}$ which minimizes Equation \ref{eq:frobnorm} will also minimize $\frob{\m{C} - \m{M}}^2$. Therefore we seek to minimize
+  \begin{equation} \label{eq:ToBeOptimized}
+    \trace \left ( \conj{(\m{C} - \m{M})}(\m{C} - \m{M}) \right ) = \trace \conj{\m{M}} \m{M} - \trace \conj{\m{M}} \m{C} - \trace \conj{\m{C}} \m{M} + \trace \conj{\m{C}} \m{C}.
+  \end{equation}
+  $\conj{\m{M}} \m{M}$ is constant in $\m{C}$, so this term can be ignored in the optimization. The latter three terms can be considered individually to express them as terms of the $c_i$. $\trace \conj{\m{C}} \m{C}$ is the simplest, as
+  \begin{equation} \label{eq:csquared}
+    \trace \conj{\m{C}} \m{C} = n \sum_{i = 0}^{n-1} \conj{c}_i c_i.
+  \end{equation}
+  The negative terms can be expressed
+  \begin{eqnarray} 
+    \trace \conj{\m{M}} \m{C} & = & \sum_{i = 1}^n \sum_{j = 1}^n \conj{m}_{ji} c_{(i-j) \bmod n} \nonumber \\
+    & = & \sum_{i = 0}^{n-1} c_i \left ( \sum_{j = 1}^{n - i} \conj{m}_{j,j+i} + \sum_{j = 1}^i \conj{m}_{n - i + j,j} \right ) \nonumber \\
+    & = & n \sum_{i = 0}^{n-1} c_i \conj{ \widebar{m} }_i \label{eq:conjMC}
+  \end{eqnarray}
+  and
+  \begin{equation} \label{eq:conjCM}
+    \trace \conj{\m{C}} \m{M} = n \sum_{i = 0}^{n-1} \conj{c}_i \widebar{m}_i.
+  \end{equation}
+  So we seek to minimize
+  \begin{eqnarray}
+    F(\ve{c}) & = & n \sum_{i = 0}^{n-1} \conj{c}_i c_i - n \sum_{i = 0}^{n-1} \conj{c}_i \widebar{m}_i - n \sum_{i = 0}^{n-1} c_i \conj{ \widebar{m} }_i \nonumber \\
+     & = & n \left ( \langle \ve{c}, \ve{c} \rangle - \langle \widebar{\ve{m}}, \ve{c} \rangle - \langle \ve{c}, \widebar{\ve{m}} \rangle \right ) \label{eq:innerproducts}
+  \end{eqnarray}
+  where $\langle \ve{x}, \ve{y} \rangle \geq 0$ is the Hermitian inner product of $\ve{x}, \ve{y} \in \Complex$, $\ve{c} = \tr{(c_0, c_1, \dots, c_{n-1})}$ is the first row of $\m{C}$, and $\widebar{\ve{m}} = \tr{(\widebar{m}_0, \widebar{m}_1, \dots, \widebar{m}_{n-1} )}$ is the vector of diagonal means of $\m{M}$.
+
+  $\langle \widebar{\ve{m}}, \ve{c} \rangle$ and $\langle \ve{c}, \widebar{\ve{m}} \rangle$ are maximized when $\ve{c} = t \widebar{\ve{m}}$ for $t \in \Reals$ and $\langle \ve{c}, \ve{c} \rangle$ simply gives the squared magnitude of $\ve{c}$. Therefore, the minimizer of Equation \ref{eq:innerproducts} must be $\ve{c} = t \widebar{\ve{m}}$ for some $t \in \Reals$. Substituting this into Equation \ref{eq:innerproducts}:
+  \begin{eqnarray}
+    F(t \widebar{\ve{m}}) & = & n \left ( t^2 \langle \widebar{\ve{m}}, \widebar{\ve{m}} \rangle - t \langle \widebar{\ve{m}}, \widebar{\ve{m}} \rangle - t \langle \widebar{\ve{m}}, \widebar{\ve{m}} \rangle \right ) \nonumber \\
+    & = & n \norm{ \widebar{ \ve{m} } }^2 (t^2 - 2t),
+  \end{eqnarray}
+  which has a minimum of $-n \norm{ \widebar{ \ve{m} } }^2$ when $t = 1$. Therefore, $\ve{c} = \widebar{\ve{m}}$ minimizes $F(\ve{c})$ and so the optimal circulant matrix $\m{C}$ to approximate $\m{M}$ in the Frobenius norm satisfies Equation \ref{eq:circDiagonalMeans}.
+\end{proof}
+
+Recognizing that the value of the squared Frobenius norm is
+$$\frob{\m{C} - \m{M}}^2 = \trace \conj{\m{M}} \m{M} + F(\ve{c}) = \sum_{i = 1}^n \sum_{j = 1}^n \norm{m_{ij}}^2 + F(\ve{c}),$$
+substituting $\ve{c} = \widebar{ \ve{m} }$ gives a minimum
+\begin{eqnarray} 
+  \frob{\m{C}_D - \m{M}}^2 & = & \sum_{i = 1}^n \sum_{j = 1}^n \norm{m_{ij}}^2 - n \norm{ \widebar { \ve{m} } }^2 \nonumber \\
+  & = & n \left ( \sum_{k = 0}^{n-1} \sum_{\{1 \leq i,j \leq n|(i-j) \bmod n = k\}} \frac{\norm{m_{ij}}^2}{n} - \sum_{k = 0}^{n-1} \norm{ \widebar{ m }_k }^2 \right ) \nonumber \\
+  & = & n \sum_{k = 0}^{n-1} \sigma^2_k \label{eq:varianceMinimum}
+\end{eqnarray}
+where $\sigma^2_k$ is the variance of values along the $k^{\text{th}}$ diagonal of $\m{M}$. Therefore the value of the Frobenius norm $\frob{\m{C}_D - \m{M}}$ is given by the total standard deviation of the values of $\m{M}$ from their respective circulant diagonals!
+
+\section{Other structured matrices}
+
+The proof provided for Theorem \ref{thm:optimal} does not apply to circulant matrices alone, as the grouping of terms in the sums is arbitrary. Suppose we have some structured matrix $\m{A}$ with entries $a_{ij}$ which have constant values following a regular pattern in $i$ and $j$. That is,
+\begin{equation} \label{eq:generalStruc}
+  a_{ij} = a_{f(i,j)}
+\end{equation}
+where $f:\{0,1, \dots, n-1\}^2 \mapsto \{0, 1, 2, \dots, K\}$ indicates the membership of the index pair $i,j$ to a constant index set indexed by $k$. Define
+$$\mathcal{A}_k = \{(i,j) | f(i,j) = k\}$$
+with cardinality $\lvert A_k \rvert = n_k > 0$,
+then Equations \ref{eq:conjMC} and \ref{eq:conjCM} can be generalized to
+\begin{eqnarray}
+  \trace \conj{\m{M}} \m{A} & = & \sum_{i = 1}^n \sum_{j = 1}^n \conj{m}_{ji} a_{ij} \nonumber \\
+                            & = & \sum_{k = 0}^K a_k \sum_{\mathcal{A}_k} \conj{m}_{ji} \label{eq:conjMA}
+\end{eqnarray}
+and
+\begin{equation} \label{eq:conjAM}
+  \trace \conj{\m{A}} \m{M} = \sum_{k = 0}^K \conj{a}_k \sum_{\mathcal{A}_k} m_{ji},
+\end{equation}
+respectively. Define the mean of entries in $\m{M}$ for the $k^{\text{th}}$ index set,
+\begin{equation} \label{eq:ADiagonalSums}
+  \widebar{m}_k := \frac{1}{n_k} \sum_{\mathcal{A}_k} m_{ij};
+\end{equation}
+the vector of all such means,
+\begin{equation} \label{eq:ASumVec}
+  \widebar{ \ve{m} } = \tr{ (\widebar{m}_0, \widebar{m}_1, \dots, \widebar{m}_K) }
+\end{equation}
+the vector of unique $a_k$,
+\begin{equation} \label{eq:Svec}
+ \ve{a} = \tr{ ( a_0, a_1, \dots, a_K ) };
+\end{equation}
+and the diagonal matrix of $n_k$,
+\begin{equation} \label{eq:diagnk}
+ \m{N} = \diag (n_0, n_1, \dots, n_K)
+\end{equation}
+Then Equation \ref{eq:innerproducts} becomes
+\begin{eqnarray}
+  F(\ve{a}) & = & \conj{ \ve{a} } \m{N} \ve{a} - \conj{ \widebar { \ve{m} } } \m{N} \ve{a} - \conj{ \ve{a} } \m{N} \widebar{ \ve{m} } \\
+  & = & \conj{ \left ( \ve{a} - \widebar{ \ve{m} } \right ) } \m{N}  \left ( \ve{a} - \widebar{ \ve{m} } \right ) - \conj{ \widebar{ \ve{m} } } \m{N} \widebar{ \ve{m} }.
+\end{eqnarray}
+As $n_k > 0$ for all $k = 0, 1, \dots, K$, $\m{N}$ is positive definite, and so the quadratic form $\conj{ \ve{x} } \m{N} \ve{x}$ has a minimum of zero when $\ve{x} = \ve{0}$. Therefore $F(\ve{a})$ is minimized for $\ve{a} = \widebar{ \ve{ m } }$ and has a minimum of
+\begin{equation} \label{eq:Fmin}
+  F(\widebar{ \ve{m} }) = - \conj{ \widebar{ \ve{m} } } \m{N} \widebar{ \ve{m} } = - \sum_{k = 0}^K n_k \norm{\widebar{m}_k}^2.
+\end{equation}
+Letting $\m{A}_M$ be the Frobenius-optimal structural matrix $\m{A}$ to approximate $\m{M}$, this gives
+\begin{eqnarray}
+  \frob{\m{A}_M - \m{M}}^2 & = & \sum_{k = 0}^K \sum_{\mathcal{A}_k} \norm{m_{ij}}^2 - \sum_{k = 0}^K n_k \norm{\widebar{m}_k}^2 \nonumber \\
+  & = & \sum_{k = 0}^K n_k \left ( \sum_{\mathcal{A}_k} \frac{\norm{m_{ij}}^2}{n_k} - \norm{\widebar{m}_k}^2  \right )\\
+  & = & \sum_{k = 0}^K n_k \sigma_k^2 \label{eq:AMmin}
+\end{eqnarray}
+where
+$$\sigma_k^2 = \frac{1}{n_k} \sum_{\mathcal{A}_k} \left ( m_{ij} - \widebar{m}_k \right ) ^2$$
+is the variance of the $m_{ij}$ for the index set $\mathcal{A}_k$.
+
+
+Toeplitz matrices are matrices of the form
+\begin{equation} \label{eq:toepdefn}
+  \m{T} = \begin{bmatrix}
+    t_0 & t_1 & t_2 & \dots & t_{n-2} & t_{n-1} \\
+    t_{-1} & t_0 & t_1 & \dots & t_{n-3} & t_{n-2} \\
+    t_{-2} & t_{-1} & t_0 & \dots & t_{n-4} & t_{n-3} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    t_{2-n} & t_{3-n} & t_{4-n} & \dots & t_0 & t_1 \\
+    t_{1-n} & t_{2-n} & t_{3-n} & \dots & t_{-1} & t_0
+  \end{bmatrix}
+\end{equation}
+
+Hankel matrices are matrices of the form
+\begin{equation} \label{eq:toepdefn}
+  \m{H} = \begin{bmatrix}
+    h_0 & h_1 & h_2 & \dots & h_{n-2} & h_{n-1} \\
+    h_1 & h_2 & h_3 & \dots & h_{n-1} & h_n \\
+    h_2 & h_3 & h_4 & \dots & h_n & h_{n+1} \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    h_{n-2} & h_{n-1} & h_{n} & \dots & h_{2n-4} & h_{2n-3} \\
+    h_{n-1} & h_{n} & h_{n+1} & \dots & h_{2n-3} & h_{2n-2}
+  \end{bmatrix}
+\end{equation}
+
+%% BIBLIOGRAPHY
+\bibliographystyle{plain}
+%\renewcommand*{\bibname}{References} % use title "References" for bibliography
+\bibliography{../../Core/Bibliography/fullbib}
+
+\end{document}
