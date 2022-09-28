@@ -5,12 +5,12 @@
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("graphicx" "pdftex") ("hyperref" "pdftex" "pagebackref=false")))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
@@ -118,13 +118,11 @@
     "eq:conjCM"
     "eq:innerproducts"
     "eq:varianceMinimum"
+    "def:strucMat"
     "eq:generalStruc"
-    "eq:conjMA"
-    "eq:conjAM"
-    "eq:ADiagonalSums"
-    "eq:ASumVec"
-    "eq:Svec"
-    "eq:diagnk"
+    "thm:genOptimal"
+    "eq:meanStrucMat"
+    "eq:strucMeans"
     "eq:Fmin"
     "eq:AMmin"
     "eq:toepdefn")
