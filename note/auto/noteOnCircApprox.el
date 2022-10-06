@@ -5,12 +5,12 @@
                      '(("article" "letterpaper" "12pt" "oneside" "final")))
    (TeX-add-to-alist 'LaTeX-provided-package-options
                      '(("graphicx" "pdftex") ("hyperref" "pdftex" "pagebackref=false")))
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
-   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
    (add-to-list 'LaTeX-verbatim-macros-with-braces-local "path")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "url")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "nolinkurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperbaseurl")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperimage")
+   (add-to-list 'LaTeX-verbatim-macros-with-braces-local "hyperref")
    (add-to-list 'LaTeX-verbatim-macros-with-delims-local "path")
    (TeX-run-style-hooks
     "latex2e"
@@ -101,31 +101,30 @@
     "oldemptyset"
     "emptyset")
    (LaTeX-add-labels
+    "eq:Mdefn"
+    "eq:frobnorm"
+    "sec:struc"
+    "def:strucMat"
+    "eq:generalStruc"
+    "tab:indexfuns"
+    "sec:approx"
+    "thm:genOptimal"
+    "eq:meanStrucMat"
+    "eq:strucMeans"
+    "eq:ToBeOptimized"
+    "eq:Tsquared"
+    "eq:conjMT"
+    "eq:conjTM"
+    "eq:Fmin"
+    "eq:TMmin"
+    "sec:examples"
     "eq:circdefn"
     "eq:circevals"
     "eq:circevecs"
     "eq:DFT"
-    "eq:Mdefn"
-    "sec:approximatingM"
+    "algo:circ"
     "eq:Dexplicit"
-    "eq:diagonalMeans"
-    "eq:circDiagonalMeans"
-    "thm:optimal"
-    "eq:frobnorm"
-    "eq:ToBeOptimized"
-    "eq:csquared"
-    "eq:conjMC"
-    "eq:conjCM"
-    "eq:innerproducts"
-    "eq:varianceMinimum"
-    "def:strucMat"
-    "eq:generalStruc"
-    "thm:genOptimal"
-    "eq:meanStrucMat"
-    "eq:strucMeans"
-    "eq:Fmin"
-    "eq:AMmin"
-    "eq:toepdefn")
+    "eq:diagonalMeans")
    (LaTeX-add-bibliographies
     "../../Core/Bibliography/fullbib")
    (LaTeX-add-amsthm-newtheorems

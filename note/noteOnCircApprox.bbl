@@ -16,4 +16,29 @@ Ulf Grenander and Gabor Szeg{\"o}.
 \newblock {\em Toeplitz forms and their applications}.
 \newblock University of California Press, 1958.
 
+\bibitem{narayanshastry2021toeplitz}
+Onuttom Narayan and B~Sriram Shastry.
+\newblock Generalized toeplitz--hankel matrices and their application to a
+  layered electron gas.
+\newblock {\em Journal of Physics A: Mathematical and Theoretical},
+  54(17):175201, 2021.
+
+\bibitem{salahub2022structural}
+Christopher Salahub.
+\newblock A structural model of genome-wide association studies.
+\newblock {\em arXiv preprint arXiv:2205.10391}, 2022.
+
+\bibitem{venkatapathi2021circulant}
+Murugesan Venkatapathi et~al.
+\newblock Circulant decomposition of a matrix and the eigenvalues of toeplitz
+  type matrices.
+\newblock {\em arXiv preprint arXiv:2105.14805}, 2022.
+
+\bibitem{yelim2016algorithms}
+Ke~Ye and Lek-Heng Lim.
+\newblock Algorithms for structured matrix-vector product of optimal bilinear
+  complexity.
+\newblock In {\em 2016 IEEE Information Theory Workshop (ITW)}, pages 310--314.
+  IEEE, 2016.
+
 \end{thebibliography}
